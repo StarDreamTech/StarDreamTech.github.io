@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星匣 StarVault · AI 对话档案 · 星梦科技</title>
+  <meta name="description" content="星匣 StarVault：本地优先的 AI 对话档案。增量备份、附件与 Skill 迁移，提供桌面端、CLI 和 MCP。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starvault/">
+  <meta property="og:title" content="星匣 StarVault">
+  <meta property="og:description" content="你的 AI 记忆，始终属于你。本地优先的 AI 对话档案。">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../index.html#projects">项目</a>
+      <a href="#install">安装</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#f5cf7a;--accent2:#8fb4ff">
+    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starvault.png" alt="星匣 StarVault 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星匣</span><span class="en">StarVault</span></h1>
+        <p class="role">AI 对话档案</p>
+      </div>
+      <span class="badge">v0.1.4</span>
+    </header>
+    <p class="one-liner reveal">你的 AI 记忆，始终属于你。</p>
+    <p class="prose reveal">星匣是本地优先的 AI 对话档案：增量备份、附件与 Skill 迁移，提供桌面端、CLI 和 MCP。它把分散的对话、附件与 Skill 收进自己的长期档案，方便检索、回溯和换机迁移。</p>
+    <p class="prose reveal">产品原名 Chat History Vault（会话档案）。<code>starvault</code> 与 <code>chat-history-vault</code> 命令都可以使用。软件代码在公开仓库；聊天备份使用你自己配置的私有仓库。最新正式 Release 为 <a href="https://github.com/StarDreamTech/starvault/releases/tag/v0.1.4">v0.1.4</a>。</p>
+    <div class="chips reveal"><span>Python</span><span>Rust · egui</span><span>CLI</span><span>MCP</span><span>MIT</span></div>
+
+    <section class="doc-section reveal">
+      <h2>主要功能</h2>
+      <ul class="features">
+        <li>收集 Codex、Claude Code、Claude Desktop、WorkBuddy、OpenClaw、DeepSeek Harness 的本地会话，也可以导入 ChatGPT 对话。Claude Desktop 包括已经保存在本地的云端聊天导入副本，以及 Code Projects 的本地缓存消息；不会登录云端去抓取新聊天。</li>
+        <li>私有 GitHub 仓库只同步对话正文与分类索引。原始消息记录、附件、命令和日志留在本地。公开的软件仓库不存放聊天内容，备份同步会校验目标是私有仓库。</li>
+        <li>桌面阅读器使用 Rust + egui，直接读取同一份本地备份，不启动网页服务器。可以按来源筛选、全文搜索、按项目查看时间线，并阅读 Markdown 与本地原图。</li>
+        <li>命令行统一做备份、查询、附件复制和 Skill 迁移。查询已有档案不需要先 init，也不需要登录 GitHub。</li>
+        <li>MCP 与桌面端读取同一份档案，通过标准输入输出通信，不打开网络端口。默认提供状态、检索、分页阅读、附件与 Skill 列表，以及空间估算；配置里加入 <code>--allow-write</code> 后才提供备份和恢复。</li>
+        <li>图片按内容 SHA-256 去重，保存在本地，不压缩、不上传。Skill 以完整目录的 ZIP 快照留在本地，可以恢复到指定文件夹。复制整个备份文件夹才能带走原文、图片和 Skill；只克隆 GitHub 上的文字分支不够。</li>
+      </ul>
+      <p class="callout">依赖：Python 3.9 及以上；备份需要 Git，向私有仓库同步需要 GitHub 登录。运行时没有必装的第三方 Python 包。这是阅读与检索归档，README 写明不保证能导回原来的应用、继续同一个会话。</p>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>当前版本 v0.1.4</h2>
+      <p class="prose">以下摘自已发布的 <a href="https://github.com/StarDreamTech/starvault/releases/tag/v0.1.4">StarVault v0.1.4</a> 说明。这一版改进阅读和筛选，不修改原始会话，也不改后端导出或导入格式。</p>
+      <ul class="features">
+        <li>筛选、项目 / 会话列表和正文使用独立三栏。来源显示会话数量，常用条件可以直接点选，已选条件可以单独去掉。</li>
+        <li>浅色工具栏与居中限宽的正文。真实提问使用浅灰气泡，助手回复连续排版，并保留来源、时间和原文复制。</li>
+        <li>根据本地原始消息的元数据，折叠已经确认的 Skill、Agent 协作与辅助上下文；关联的工具图片和完整原文仍然保留。</li>
+        <li>软件仓库根目录提供 <code>npm run preview</code> 和 <code>npm run preview:timeline</code>，用来启动源码预览和时间线视图。</li>
+      </ul>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>支持平台</h2>
+      <ul class="plat-list">
+        <li><strong>桌面安装包：Apple Silicon macOS</strong>当前 Release 提供 StarVault-0.1.4-macos-arm64.zip。应用使用本机临时签名，尚未通过 Apple 开发者签名和公证。</li>
+        <li><strong>桌面端的其他系统</strong>README 写明 Intel macOS、Windows、Linux 的桌面端目前从源码构建，不要把它们称为已有可下载的原生安装包。macOS 构建在本机验证过；Windows / Linux 打包尚未验证。</li>
+        <li><strong>CLI / MCP：macOS 与 Linux</strong>组织首页对应的命令是下面的 formula。Windows 可以按 README，在源码的虚拟环境里安装命令行，没有单独的 Windows 安装包。</li>
+      </ul>
+      <p class="callout">Python 后端已通过 macOS / Windows / Linux 的 CI 临时数据回归。README 写明：源应用的真实数据读取，目前只在 macOS 本机核验。Windows / Linux 上的 MCP 客户端真机接入尚未验证。</p>
+    </section>
+
+    <section id="install" class="doc-section reveal">
+      <h2>安装</h2>
+      <p class="prose">与组织首页相同。桌面 Cask 会同时带上 CLI 和 Python 后端：</p>
+      <div class="install multi">
+        <code>brew install --cask stardreamtech/tap/starvault</code>
+        <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starvault" aria-label="复制桌面端安装命令">复制</button>
+        <code class="sub"><span class="c"># 仅 CLI / MCP</span> brew install stardreamtech/tap/starvault</code>
+      </div>
+      <p class="callout">项目 README 还记录了个人 Tap 的写法：先 <code>brew tap cpython666/tap</code>，再 <code>brew install starvault</code>（CLI / MCP，macOS / Linux）或 <code>brew install --cask starvault</code>（桌面应用，Apple Silicon macOS）。本页的可复制命令与组织首页一致，使用 stardreamtech/tap。</p>
+      <p class="prose">v0.1.4 Release 里的文件：</p>
+      <ul class="file-list">
+        <li><a href="https://github.com/StarDreamTech/starvault/releases/download/v0.1.4/StarVault-0.1.4-macos-arm64.zip">StarVault-0.1.4-macos-arm64.zip <span>Apple Silicon macOS 桌面端</span></a></li>
+        <li><a href="https://github.com/StarDreamTech/starvault/releases/download/v0.1.4/StarVault-0.1.4-source.tar.gz">StarVault-0.1.4-source.tar.gz <span>源码包，不是各平台桌面安装包</span></a></li>
+      </ul>
+      <p class="callout">若 macOS 阻止打开，README 建议先核对下载来源和 SHA256，再按「系统设置 → 隐私与安全性」的提示允许打开。发布包只包含软件与固定素材，不包含聊天数据或本机配置。</p>
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/starvault" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starvault/releases/latest" target="_blank" rel="noopener">查看 Release</a>
+      </div>
+      <p class="back"><a href="../../index.html">← 返回星梦科技首页</a></p>
+      <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/starvault/blob/main/README.md">starvault README</a>、<a href="https://github.com/StarDreamTech/starvault/releases/tag/v0.1.4">v0.1.4 Release</a> 与组织首页卡片。本页不补充这些来源里没有写明的功能或平台。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

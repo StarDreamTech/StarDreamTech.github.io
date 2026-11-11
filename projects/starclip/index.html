@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星笺 Starclip · 剪贴板管理器 · 星梦科技</title>
+  <meta name="description" content="星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starclip/">
+  <meta property="og:title" content="星笺 Starclip">
+  <meta property="og:description" content="Rust 驱动的本地优先剪贴板管理器，让每一次复制都有迹可循。">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../index.html#projects">项目</a>
+      <a href="#install">安装</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#f2c879;--accent2:#7fd8c9">
+    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starclip.png" alt="星笺 Starclip 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星笺</span><span class="en">Starclip</span></h1>
+        <p class="role">剪贴板管理器</p>
+      </div>
+      <span class="badge">v0.2.5</span>
+    </header>
+    <p class="one-liner reveal">Rust 驱动的本地优先剪贴板管理器，让每一次复制都有迹可循。</p>
+    <p class="prose reveal">本地剪贴板管理工具，让剪贴板不止记住上一次。星笺使用 Rust 构建，把复制过的文字、链接和代码收进历史，整理成星标与分组，再通过星绘坊做成代码卡片或手写纸笺。</p>
+    <p class="prose reveal">技术栈是 <strong>Rust + Tauri 2 + SQLite + Vue 3 + TypeScript + Vite</strong>。无需账户，剪贴内容保存在本机。最新正式 Release 为 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">v0.2.5</a>。</p>
+    <div class="chips reveal"><span>Rust</span><span>Tauri 2</span><span>SQLite</span><span>Vue 3</span><span>MIT</span></div>
+
+    <section class="doc-section reveal">
+      <h2>主要功能</h2>
+      <ul class="features">
+        <li>剪贴历史：记录系统剪贴板中的文本、图片与文件路径引用，SQLite 本地持久化，支持去重、搜索与分类筛选。图片可看缩略图和原图；文件只保存路径，不读取文件内容。</li>
+        <li>自己的星系：星标收藏、永久保留、彩色分组，以及卡片、列表、流星栏。星尘整理会先预览再清理，星标和永久保留的记录始终跳过。</li>
+        <li>星码集：收藏、编辑代码片段，带语法高亮、行号和 JSON 格式化，可导出 Markdown 与 PNG 卡片。</li>
+        <li>星绘坊：星码卡把代码排成分享图，月光笺把文字排成手写纸笺。月光笺使用内置手写引擎，选中的字体下载后可离线导出 PNG。0.2.5 起可在主界面制作 Markdown 图片。</li>
+        <li>外观与语言：星夜、月白、素白、青苔、暮樱五套主题，可跟随系统；也能改强调色、渐变，并导入一张本地 PNG 贴纸。界面可选跟随系统、简体中文或 English。</li>
+        <li>随用随取：默认呼出键为 ⌘/Ctrl + Shift + V，可在偏好设置里修改；提供菜单栏 / 托盘。应用内可检查更新，安装前做 Tauri 签名校验。</li>
+        <li>星伴：可选的原创桌面角色「星芽」，默认关闭，不读取剪贴内容。这是星笺里的陪伴功能，不是首页上尚未推出的星伴 StarBuddy。</li>
+        <li>隐私与本机 AI：支持本地敏感检测、关键词和精确域名规则。MCP、数据 CLI 与 Skill 默认关闭，历史读取只返回明确选中的记录和字段。</li>
+      </ul>
+      <p class="callout">README 的产品范围写明：GIF 动画、OCR、跨设备同步、公开分享链接、多片段分享页、备注、自动粘贴、在线运行和 AI 解释尚未实现。剪贴内容以明文、未加密的形式保存在本机。检查更新会连接 GitHub 获取更新信息，不上传剪贴内容。0.2.4 起可选使用统计有三种模式：不发送、每次运行随机编号（缺省）、本机固定随机编号；统计不含剪贴内容。</p>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>当前版本 v0.2.5</h2>
+      <p class="prose">以下摘自已发布的 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">星笺 v0.2.5</a> 说明。GitHub 记录的发布时间是 2026-11-10 16:42 UTC。</p>
+      <ul class="features">
+        <li>新增 Markdown 图片：素纸、星紫、深夜三款本地主题，可调宽度和字号，并导出 2 倍 PNG。</li>
+        <li>一条记录可以保存配文和多张静态图片；图片去重会比较字节或像素，避免只凭摘要误判。</li>
+        <li>图片支持多选、复制为独立 PNG 文件列表、导出到目录，以及原生拖出入口。</li>
+        <li>图片查看增加缩放、平移、全窗口预览；历史页增加数字页码，并记住分类、分组和设置页位置。</li>
+        <li>星标收藏可按最近更新、最近收录、复制次数或自定义顺序排列；分享素材可以直接加入收藏。</li>
+        <li>数据结构与 JSON 备份升级为 5，可导入 JSON v1–v5。旧版不能直接打开新结构数据库。</li>
+      </ul>
+      <p class="callout">同一份发布说明写明：macOS WebKit / Windows WebView 的原生 PNG 导出尚未专项验收；Windows 多图粘贴，以及两个平台的最终拖放收件，尚未完整验收。</p>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>支持平台</h2>
+      <ul class="plat-list">
+        <li><strong>Apple Silicon Mac（M 系列，macOS 11+）</strong>Homebrew Cask 与 Release 中的 DMG。Cask 只提供 arm64。</li>
+        <li><strong>Windows x64</strong>Release 中的安装程序。没有单独的 Homebrew 命令。</li>
+      </ul>
+      <p class="callout">README 没有把 Intel Mac 或 Linux 列为当前可下载的安装包。macOS 应用使用 ad-hoc 签名，尚无 Apple Developer 公证；Windows 尚无发行者证书。更新包另有 Tauri 签名校验。</p>
+    </section>
+
+    <section id="install" class="doc-section reveal">
+      <h2>安装</h2>
+      <p class="prose">与组织首页相同，使用星梦科技的 Homebrew Tap：</p>
+      <div class="install">
+        <code>brew install --cask stardreamtech/tap/starclip</code>
+        <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starclip" aria-label="复制安装命令">复制</button>
+      </div>
+      <p class="callout">项目 README 还记录了同一份 Cask 的个人 Tap：<code>brew install --cask cpython666/tap/starclip</code>。若 Homebrew 提示这份 Cask 未受信任，README 写明可按安装来源执行 <code>brew trust --cask stardreamtech/tap/starclip</code> 后重试。</p>
+      <p class="prose">也可以从 GitHub Release 下载安装包：</p>
+      <ul class="file-list">
+        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.5/Starclip_0.2.5_aarch64.dmg">Starclip_0.2.5_aarch64.dmg <span>Apple Silicon macOS</span></a></li>
+        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.5/Starclip_0.2.5_x64-setup.exe">Starclip_0.2.5_x64-setup.exe <span>Windows x64</span></a></li>
+      </ul>
+      <p class="callout">首次打开时 macOS 可能会拦截尚未公证的应用。安装前请先阅读该版本的发布说明，并用 Release 页面上的 SHA256SUMS 核对文件。</p>
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/starclip" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starclip/releases/latest" target="_blank" rel="noopener">查看 Release</a>
+      </div>
+      <p class="back"><a href="../../index.html">← 返回星梦科技首页</a></p>
+      <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/starclip/blob/main/README.md">starclip README</a>、<a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">v0.2.5 Release</a> 与组织首页卡片。本页不补充这些来源里没有写明的功能或平台。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
