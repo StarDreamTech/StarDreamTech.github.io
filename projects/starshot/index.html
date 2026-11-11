@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星镜 Starshot · 截图、标注与贴图 · 星梦科技</title>
+  <meta name="description" content="星镜 Starshot：本地优先的桌面截图、标注、置顶贴图与图片美化工具。支持 Apple Silicon macOS 与 Windows x64。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starshot/">
+  <meta property="og:title" content="星镜 Starshot">
+  <meta property="og:description" content="本地优先的桌面截图、标注、贴图与图片美化工具。把灵感，定格成星。">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../index.html#projects">项目</a>
+      <a href="#install">安装</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#a993ff;--accent2:#6fb6ff">
+    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starshot.png" alt="星镜 Starshot 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星镜</span><span class="en">Starshot</span></h1>
+        <p class="role">截图 · 标注 · 贴图</p>
+      </div>
+      <span class="badge">v0.3.2</span>
+    </header>
+    <p class="one-liner reveal">本地优先的桌面截图、标注、贴图与图片美化工具。把灵感，定格成星。</p>
+    <p class="prose reveal">星镜使用 <strong>Rust / Tauri 2 / Vue 3 / TypeScript</strong>，中文界面和五套外观沿用星空系列，作为独立产品开发，不包含桌面宠物。当前版本 <strong>0.3.2</strong>，已进入应用内更新通道，macOS 与 Windows 同为目标平台。</p>
+    <p class="prose reveal">浏览器可以体验导入图片、标注、美化与下载；浏览器里的截图是标明的原创示例。真正的桌面截图和置顶贴图只在原生版提供。</p>
+    <div class="chips reveal"><span>Rust</span><span>Tauri 2</span><span>Vue 3</span><span>macOS 12+</span><span>Windows x64</span></div>
+
+    <section class="doc-section reveal">
+      <h2>主要功能</h2>
+      <ul class="features">
+        <li>截图：按需冻结多显示器画面，吸附系统窗口边界，支持手动框选、八向调整、拖动、1px / 10px 键盘微调、放大镜和 HEX 读数。可延时 3 / 5 / 10 秒，也能导入 PNG / JPEG / WebP。</li>
+        <li>标注：截图后在选区下方直接使用箭头、矩形、椭圆、画笔、荧光笔、文字、序号、马赛克和实心遮盖，可撤销、重做、复制、保存和贴图。主动选择「更多编辑」才进入完整页面。</li>
+        <li>敏感信息：主动在本地识别手机号、邮箱、证件、银行卡和常见凭据，预览勾选后再实心打码。macOS 支持中英文；Windows 主要支持拉丁文字和数字。扫描不含装饰背景，仍需复核漏检。</li>
+        <li>美化与导出：渐变、纯色、透明或本地图片背景，以及留白、圆角、边框、阴影。画布可选自适应、1:1、4:3、16:9、9:16。同一 Canvas 预览并导出 PNG / JPEG，可选 1× / 2×。</li>
+        <li>置顶贴图：拖动、缩放、旋转、翻转、调整透明度，并可隐藏工具条。贴图可双击关闭，右键复制、另存或送到编辑器。</li>
+        <li>长截图：竖向向下或横向向右拼接，可主动开始自动滚动，也可用 Esc / 空格暂停并手动补采。页面不稳定或拼接失败时停止自动模式，并保留已有结果。</li>
+        <li>外观与驻留：星夜、月白、素白、青苔、暮樱和自定义配色。可配置全局热键、可选开机启动和启动到托盘。设置内可手动检查更新，下载并校验签名后再安装重启。</li>
+      </ul>
+      <p class="callout">README 中的快捷键：⌘/Ctrl + Shift + 2 开始截图，⌘/Ctrl + Alt + 3 贴出最近截图原图。编辑器支持 ⌘/Ctrl + S 导出、⌘/Ctrl + Z 撤销、⌘/Ctrl + Shift + Z 重做。macOS 首次截图需要允许屏幕录制权限。星镜不规划持久截图历史，长期剪贴板历史由星笺负责。</p>
+      <p class="callout">README 同时写明仍待补齐或待验收的范围：系统控件识别的真实跨应用命中、复杂页面的长截图、独立全文 OCR 与 Windows 中文模型、跨屏连续选区、贴图分组、GIF。长截图尚不支持向上或向左反向拼接。星镜不是已达到参考产品全部功能的成品。</p>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>当前版本 v0.3.2</h2>
+      <p class="prose">以下摘自已发布的 <a href="https://github.com/StarDreamTech/starshot/releases/tag/v0.3.2">星镜 v0.3.2</a> 说明。GitHub 记录的发布时间是 2026-11-10 16:26 UTC。旧版需要下载更新并确认「安装并重启」才会换成新交互。</p>
+      <ul class="features">
+        <li>新增长截图：竖向向下、横向向右拼接；用户主动开始自动滚动，也可手动逐屏补采。可暂停后复制、保存、贴图或继续编辑。</li>
+        <li>截图操作：右键先重选、再退出；Tab / Shift+Tab 沿候选层级扩大或返回；H 切换辅助线；C 复制原像素色值。</li>
+        <li>macOS 在已有辅助功能授权时只查询控件角色与几何，不读取界面文字。macOS 27 及以上的截图覆盖层加入系统热角保护，旧系统保守回退。</li>
+        <li>设置重整为五个标签，主题入口独立。快捷键支持按键录入和占用检测。托盘增加分组、贴图显隐与计数，以及本次运行的快捷键暂停。</li>
+        <li>分享文案和原创产品图先预览，确认后再复制。macOS 仍为 ad-hoc 签名且未 Apple 公证，Windows 未配置发行者证书。</li>
+      </ul>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>支持平台</h2>
+      <ul class="plat-list">
+        <li><strong>Apple Silicon Mac，macOS 12+</strong>Homebrew Cask 与 Release 中的 DMG。macOS 使用系统 Vision 做本地识别，无需另下模型。</li>
+        <li><strong>Windows x64</strong>Release 中的 NSIS 安装包。离线 OCR 模型约 12.2 MB，随安装包内置，主要识别拉丁文字和数字。</li>
+      </ul>
+      <p class="callout">两平台更新包都有独立的 Tauri 更新签名。这不等于 Apple 公证或 Windows 发行者签名。README 没有提供 Intel Mac 或 Linux 安装包。</p>
+    </section>
+
+    <section id="install" class="doc-section reveal">
+      <h2>安装</h2>
+      <p class="prose">与组织首页相同，使用星梦科技的 Homebrew Tap：</p>
+      <div class="install">
+        <code>brew install --cask stardreamtech/tap/starshot</code>
+        <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starshot" aria-label="复制安装命令">复制</button>
+      </div>
+      <p class="callout">项目 README 的安装节目前写的是个人 Tap：<code>brew install --cask cpython666/tap/starshot</code>。组织首页与本页使用上面的组织 Tap 命令。</p>
+      <p class="prose">Windows x64 安装包和 macOS DMG 见 0.3.2 Release：</p>
+      <ul class="file-list">
+        <li><a href="https://github.com/StarDreamTech/starshot/releases/download/v0.3.2/Starshot_0.3.2_aarch64.dmg">Starshot_0.3.2_aarch64.dmg <span>Apple Silicon macOS</span></a></li>
+        <li><a href="https://github.com/StarDreamTech/starshot/releases/download/v0.3.2/Starshot_0.3.2_x64-setup.exe">Starshot_0.3.2_x64-setup.exe <span>Windows x64</span></a></li>
+      </ul>
+      <p class="callout">macOS 尚未 Apple 公证，首次打开可能会被拦截。请先阅读发布说明，并用 Release 页面上的 SHA256SUMS 核对文件。0.1.0 没有应用内更新，需要手动升级后才能使用更新通道。</p>
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/starshot" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starshot/releases/latest" target="_blank" rel="noopener">查看 Release</a>
+      </div>
+      <p class="back"><a href="../../index.html">← 返回星梦科技首页</a></p>
+      <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/starshot/blob/main/README.md">starshot README</a>、<a href="https://github.com/StarDreamTech/starshot/releases/tag/v0.3.2">v0.3.2 Release</a> 与组织首页卡片。本页不补充这些来源里没有写明的功能或平台。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

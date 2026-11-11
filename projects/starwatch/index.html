@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星哨 StarWatch · 筹备中 · 星梦科技</title>
+  <meta name="description" content="星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starwatch/">
+  <meta property="og:title" content="星哨 StarWatch">
+  <meta property="og:description" content="筹备中的网页变化监控与接口探活 / 压测调度平台。">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../index.html#projects">项目</a>
+      <a href="#install">安装</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#7fe6cf;--accent2:#4bb3d6">
+    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starwatch.svg" alt="星哨 StarWatch 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星哨</span><span class="en">StarWatch</span></h1>
+        <p class="role">网页监控 · 接口探活</p>
+      </div>
+      <span class="badge badge-soft">筹备中</span>
+    </header>
+    <p class="one-liner reveal">可自定义 cron 的网页变化监控与接口探活 / 压测调度平台。</p>
+    <p class="prose reveal">这是规划，不是已经能安装使用的产品。仓库已经建立，代码还在准备，GitHub 上还没有 Release。欢迎 Watch 仓库，关注后面的进展。</p>
+    <div class="callout callout-plan reveal"><strong>还不能当作可用软件。</strong>下面的功能、技术栈和许可，都来自仓库 README 与组织首页已经写明的句子，不代表这些能力已经做好。</div>
+    <div class="chips reveal"><span>规划技术栈 · Vue + FastAPI + MongoDB</span><span>MIT</span><span>尚无 Release</span></div>
+
+    <section class="doc-section reveal">
+      <h2>主要功能</h2>
+      <p class="prose">仓库 README 目前的全文是：标题 StarSentinel，以及「星哨 StarSentinel：可自定义 cron 的网页变化监控与接口探活/压测调度平台（Vue + FastAPI + MongoDB）」。组织首页和仓库名使用星哨 StarWatch，描述与这句规划相同。README 没有再展开界面、告警或部署步骤，所以这里也不增补。</p>
+      <ul class="features">
+        <li>可自定义 cron 的调度。</li>
+        <li>网页变化监控。</li>
+        <li>接口探活。</li>
+        <li>接口压测调度。</li>
+        <li>规划中的技术栈：Vue、FastAPI、MongoDB。</li>
+      </ul>
+      <p class="callout">仓库公开许可为 MIT，与首页芯片一致。除 README、许可文件和 .gitignore 外，仓库里还没有实现代码。</p>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>支持平台</h2>
+      <ul class="plat-list">
+        <li><strong>尚未公布</strong>README 和首页都没有列出操作系统。目前没有安装包，不能从技术栈名称推断它已经能在某台电脑上运行。</li>
+      </ul>
+    </section>
+
+    <section id="install" class="doc-section reveal">
+      <h2>安装</h2>
+      <p class="prose">没有 Homebrew 配方，也没有已发布的安装包，因此这里不提供安装命令或下载文件。</p>
+      <p class="callout">Release 页面可以打开，但现在没有任何已发布版本。不要把它理解成可以下载的软件。</p>
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/StarWatch" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/StarWatch/releases" target="_blank" rel="noopener">查看 Release</a>
+      </div>
+      <p class="back"><a href="../../index.html">← 返回星梦科技首页</a></p>
+      <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/StarWatch/blob/main/README.md">StarWatch README</a>、<a href="https://github.com/StarDreamTech/StarWatch/releases">Release 页面（目前为空）</a> 与组织首页卡片。仓库名大小写为 StarWatch。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
