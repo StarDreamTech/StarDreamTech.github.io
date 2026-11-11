@@ -20,3 +20,7 @@
 - 星哨 StarWatch：https://stardreamtech.github.io/projects/starwatch/ （`projects/starwatch/index.html`）
 
 星伴 StarBuddy 仍是即将推出，没有介绍页，首页也不链接其仓库。介绍页文案只整理自各仓库公开 README、已发布 Release 与首页卡片，不另写未公布的功能。
+
+## 许可证 / License
+
+本项目采用 [MIT License](LICENSE)。
