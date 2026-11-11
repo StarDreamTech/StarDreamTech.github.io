@@ -9,3 +9,7 @@
 应用图标取自各项目仓库；星哨、星伴图标为本站原创 SVG。
 
 支持明、暗两套主题。首次访问跟随系统 `prefers-color-scheme`，手动切换后写入 `localStorage`（键名 `sdt-theme`）。
+
+## 许可证 / License
+
+本项目采用 [MIT License](LICENSE)。
