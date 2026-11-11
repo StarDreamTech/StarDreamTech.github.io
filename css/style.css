@@ -214,7 +214,9 @@ html.theme-ready .copy,
 html.theme-ready .footer,
 html.theme-ready .callout,
 html.theme-ready .file-list a,
-html.theme-ready .plat-list li{
+html.theme-ready .plat-list li,
+html.theme-ready .services-contact,
+html.theme-ready .svc-mark{
   transition:background .4s ease,background-color .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;
 }
 
@@ -380,6 +382,26 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
 .term-link{display:block;padding:11px 20px;border-top:1px solid var(--term-line);font:12px var(--mono);color:#b9a6ff}
 .term-link:hover{color:#fff}
 
+/* services */
+#services{scroll-margin-top:84px}
+.services{max-width:1240px;margin:0 auto;padding:60px clamp(16px,4vw,40px) 28px}
+.services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.services-grid .card{grid-column:auto;height:100%}
+.services-grid .links{margin-top:auto}
+.svc-mark{width:60px;height:60px;border-radius:16px;flex:none;display:grid;place-items:center;
+  color:var(--accent-fg,var(--accent));
+  background:color-mix(in srgb,var(--accent) 14%,transparent);
+  box-shadow:0 10px 30px -8px color-mix(in srgb,var(--accent) 55%,transparent),0 0 0 1px var(--icon-ring)}
+.svc-mark svg{width:28px;height:28px}
+.services-contact{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 28px;
+  padding:clamp(22px,3vw,36px);border-radius:28px;border:1px solid var(--line);background:var(--install-bg);text-align:left;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.services-contact h2{font-size:clamp(24px,3vw,34px)}
+.services-contact .section-sub{margin:8px 0 0;max-width:40em}
+.services-contact .section-sub a{color:var(--violet);text-decoration:underline;text-underline-offset:3px;font-family:var(--mono);font-size:.92em}
+.services-contact .section-sub a:hover{color:var(--hover)}
+.services-contact .btn{flex:none}
+
 /* footer */
 .footer{max-width:1240px;margin:40px auto 0;padding:34px clamp(16px,4vw,40px) 46px;display:grid;grid-template-columns:1fr auto;gap:14px 30px;align-items:center;
   border-top:1px solid var(--line);color:var(--ink-2);font-size:14px}
@@ -441,6 +463,8 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
   .card{grid-column:span 3}
   .card-wide{grid-column:span 3}
   .grid .card:nth-child(3){grid-column:span 6}
+  .services-grid{grid-template-columns:1fr}
+  .services-grid .card{grid-column:auto}
 }
 @media (max-width:760px){
   .nav{padding:14px 16px}
@@ -451,6 +475,8 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
   .card,.card-wide,.grid .card:nth-child(3){grid-column:auto}
   .card{padding:22px 18px 20px}
   .install-card{grid-template-columns:1fr;gap:26px}
+  .services-grid{grid-template-columns:1fr}
+  .services-grid .card{grid-column:auto}
   .stats{grid-template-columns:1fr 1fr}
   .stats div:nth-child(3){grid-column:1/-1;border-left:0;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
   .footer{grid-template-columns:1fr}
