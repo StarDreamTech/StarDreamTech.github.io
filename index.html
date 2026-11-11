@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星梦科技 StarDreamTech · 开源项目</title>
+  <meta name="description" content="星梦科技 StarDreamTech 的开源项目：星笺 Starclip、星镜 Starshot、星匣 StarVault、星哨 StarWatch。">
+  <meta name="theme-color" content="#05060f">
+  <meta property="og:title" content="星梦科技 StarDreamTech">
+  <meta property="og:description" content="让梦想像星星一样闪亮！本地优先的开源桌面工具。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="星梦科技 StarDreamTech">
+      <img src="assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#projects">项目</a>
+      <a href="#install">安装</a>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow reveal"><span class="dot"></span>Open Source · Local-first · Since 2025</p>
+      <h1 class="reveal">
+        <span class="h-cn">星梦科技</span>
+        <span class="h-en">StarDreamTech</span>
+      </h1>
+      <p class="tagline reveal">让梦想像星星一样闪亮。</p>
+      <p class="lede reveal">
+        我们用 Rust、Tauri 与 Python 打磨一组<strong>本地优先</strong>的桌面工具：剪贴板、截图、AI 对话档案，
+        你的数据始终留在你自己的电脑上。全部开源，欢迎 Star、试用与反馈。
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="#projects">探索项目 <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">github.com/StarDreamTech</a>
+      </div>
+      <dl class="stats reveal">
+        <div><dt>开源项目</dt><dd>4</dd></div>
+        <div><dt>Homebrew 应用</dt><dd>3</dd></div>
+        <div><dt>平台</dt><dd class="small">macOS · Windows · Linux<sup>*</sup></dd></div>
+      </dl>
+      <p class="footnote reveal">* Linux 目前仅星匣 CLI / MCP；各项目支持的平台见下方卡片。</p>
+    </section>
+
+    <section id="projects" class="projects">
+      <header class="section-head reveal">
+        <p class="kicker">Constellation · 星图</p>
+        <h2>开源项目</h2>
+        <p class="section-sub">每一颗星，都是一个认真做完的小工具。</p>
+      </header>
+
+      <div class="grid">
+        <!-- 星笺 Starclip -->
+        <article class="card reveal" style="--accent:#f2c879;--accent2:#7fd8c9">
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-top">
+            <img class="app-icon" src="assets/icons/starclip.png" alt="星笺 Starclip 图标" width="64" height="64">
+            <div class="title">
+              <h3><span class="cn">星笺</span><span class="en">Starclip</span></h3>
+              <p class="role">剪贴板管理器</p>
+            </div>
+            <span class="badge">v0.2.5</span>
+          </div>
+          <p class="desc">Rust 驱动的本地优先剪贴板管理器，让每一次复制都有迹可循。</p>
+          <ul class="features">
+            <li>记录文本、图片与文件路径，SQLite 本地持久化，去重、搜索与分类筛选</li>
+            <li>星码集收藏代码片段；星绘坊把代码和文字做成分享卡片、手写纸笺</li>
+            <li>简体中文 / English 界面，应用内签名校验更新</li>
+          </ul>
+          <div class="chips"><span>Rust</span><span>macOS · Apple Silicon</span><span>Windows x64</span></div>
+          <div class="install">
+            <code>brew install --cask stardreamtech/tap/starclip</code>
+            <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starclip" aria-label="复制安装命令">复制</button>
+          </div>
+          <div class="links">
+            <a href="https://github.com/StarDreamTech/starclip" target="_blank" rel="noopener">仓库 <span>↗</span></a>
+            <a href="https://github.com/StarDreamTech/starclip/releases/latest" target="_blank" rel="noopener">下载 DMG / EXE <span>↗</span></a>
+          </div>
+        </article>
+
+        <!-- 星镜 Starshot -->
+        <article class="card reveal" style="--accent:#a993ff;--accent2:#6fb6ff">
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-top">
+            <img class="app-icon" src="assets/icons/starshot.png" alt="星镜 Starshot 图标" width="64" height="64">
+            <div class="title">
+              <h3><span class="cn">星镜</span><span class="en">Starshot</span></h3>
+              <p class="role">截图 · 标注 · 贴图</p>
+            </div>
+            <span class="badge">v0.3.2</span>
+          </div>
+          <p class="desc">本地优先的桌面截图、标注、贴图与图片美化工具。把灵感，定格成星。</p>
+          <ul class="features">
+            <li>窗口边界吸附选区、多显示器、延时截图，竖向 / 横向长截图</li>
+            <li>箭头、序号、马赛克等标注，本地识别手机号、邮箱等敏感信息一键打码</li>
+            <li>置顶贴图；渐变背景、圆角阴影美化，导出 PNG / JPEG</li>
+          </ul>
+          <div class="chips"><span>Rust · Tauri 2 · Vue 3</span><span>macOS 12+ · Apple Silicon</span><span>Windows x64</span></div>
+          <div class="install">
+            <code>brew install --cask stardreamtech/tap/starshot</code>
+            <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starshot" aria-label="复制安装命令">复制</button>
+          </div>
+          <div class="links">
+            <a href="https://github.com/StarDreamTech/starshot" target="_blank" rel="noopener">仓库 <span>↗</span></a>
+            <a href="https://github.com/StarDreamTech/starshot/releases/latest" target="_blank" rel="noopener">下载 DMG / EXE <span>↗</span></a>
+          </div>
+        </article>
+
+        <!-- 星匣 StarVault -->
+        <article class="card reveal" style="--accent:#f5cf7a;--accent2:#8fb4ff">
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-top">
+            <img class="app-icon" src="assets/icons/starvault.png" alt="星匣 StarVault 图标" width="64" height="64">
+            <div class="title">
+              <h3><span class="cn">星匣</span><span class="en">StarVault</span></h3>
+              <p class="role">AI 对话档案</p>
+            </div>
+            <span class="badge">v0.1.4</span>
+          </div>
+          <p class="desc">你的 AI 记忆，始终属于你。本地优先的 AI 对话档案：增量备份、附件与 Skill 迁移，提供桌面端、CLI 和 MCP。</p>
+          <ul class="features">
+            <li>收集 Codex、Claude Code、Claude Desktop、WorkBuddy、OpenClaw、DeepSeek Harness 会话，可导入 ChatGPT 对话</li>
+            <li>私有 GitHub 仓库只同步对话正文与索引，附件和原始记录留在本地</li>
+            <li>通过 MCP 让助手检索已有档案</li>
+          </ul>
+          <div class="chips"><span>Python</span><span>桌面端 · macOS Apple Silicon</span><span>CLI · macOS / Linux</span></div>
+          <div class="install multi">
+            <code>brew install --cask stardreamtech/tap/starvault</code>
+            <button class="copy" type="button" data-copy="brew install --cask stardreamtech/tap/starvault" aria-label="复制桌面端安装命令">复制</button>
+            <code class="sub"><span class="c"># 仅 CLI / MCP</span> brew install stardreamtech/tap/starvault</code>
+          </div>
+          <div class="links">
+            <a href="https://github.com/StarDreamTech/starvault" target="_blank" rel="noopener">仓库 <span>↗</span></a>
+            <a href="https://github.com/StarDreamTech/starvault/releases/latest" target="_blank" rel="noopener">下载 macOS 包 <span>↗</span></a>
+          </div>
+        </article>
+
+        <!-- 星哨 StarWatch -->
+        <article class="card card-wide reveal" style="--accent:#7fe6cf;--accent2:#4bb3d6">
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-top">
+            <img class="app-icon" src="assets/icons/starwatch.svg" alt="星哨 StarWatch 图标" width="64" height="64">
+            <div class="title">
+              <h3><span class="cn">星哨</span><span class="en">StarWatch</span></h3>
+              <p class="role">网页监控 · 接口探活</p>
+            </div>
+            <span class="badge badge-soft">筹备中</span>
+          </div>
+          <p class="desc">可自定义 cron 的网页变化监控与接口探活 / 压测调度平台。</p>
+          <div class="chips"><span>规划技术栈 · Vue + FastAPI + MongoDB</span><span>MIT</span></div>
+          <p class="note">仓库已建立，代码尚在准备中，欢迎 Watch 关注进展。</p>
+          <div class="links">
+            <a href="https://github.com/StarDreamTech/StarWatch" target="_blank" rel="noopener">仓库 <span>↗</span></a>
+          </div>
+        </article>
+
+        <!-- 星伴 StarBuddy -->
+        <article class="card card-wide card-soon reveal" style="--accent:#e7b6ff;--accent2:#ff9fd2">
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-top">
+            <img class="app-icon" src="assets/icons/starbuddy.svg" alt="星伴 StarBuddy 图标" width="64" height="64">
+            <div class="title">
+              <h3><span class="cn">星伴</span><span class="en">StarBuddy</span></h3>
+              <p class="role">新的星星正在升起</p>
+            </div>
+            <span class="badge badge-soon">即将推出</span>
+          </div>
+          <p class="desc">一位新伙伴正在星云里慢慢成形。</p>
+          <p class="soon-line"><span class="pulse"></span>Coming soon · 敬请期待</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="install" class="install-sec reveal">
+      <div class="install-card">
+        <div>
+          <p class="kicker">Homebrew Tap</p>
+          <h2>一行命令，装上星星</h2>
+          <p class="section-sub">星梦科技维护的 Homebrew 安装源，当前桌面应用支持 Apple Silicon Mac。Windows 安装包请到各项目的 Release 下载。</p>
+          <p class="fine">应用为 ad-hoc 签名，尚未通过 Apple 公证，首次打开时 macOS 可能会拦截，请先阅读各版本的发布说明。</p>
+        </div>
+        <div class="terminal" role="group" aria-label="安装命令示例">
+          <div class="term-bar"><i></i><i></i><i></i><span>zsh</span></div>
+<pre><code><span class="c"># 星笺 · 剪贴板</span>
+<span class="p">$</span> brew install --cask stardreamtech/tap/starclip
+<span class="c"># 星镜 · 截图</span>
+<span class="p">$</span> brew install --cask stardreamtech/tap/starshot
+<span class="c"># 星匣 · AI 对话档案</span>
+<span class="p">$</span> brew install --cask stardreamtech/tap/starvault</code></pre>
+          <a class="term-link" href="https://github.com/StarDreamTech/homebrew-tap" target="_blank" rel="noopener">StarDreamTech/homebrew-tap ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
