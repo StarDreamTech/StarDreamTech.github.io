@@ -21,6 +21,25 @@
 
 星伴 StarBuddy 仍是即将推出，没有介绍页，首页也不链接其仓库。介绍页文案只整理自各仓库公开 README、已发布 Release 与首页卡片，不另写未公布的功能。
 
+## 访问统计
+
+全站共用 `js/analytics.js`。每个 HTML 在 `<head>` 里用 `defer` 引用它：首页是 `js/analytics.js`，`projects/*/` 介绍页是 `../../js/analytics.js`。主题初始化仍是 head 最前面那段内联脚本，统计脚本排在样式表之后，不会挡住首屏设主题。
+
+公开编号写在 `js/analytics.js` 顶部：
+
+- Google Analytics 4 衡量 ID：`G-X4TGP2S2YL`
+- Microsoft Clarity 项目 ID：`zccwljdddd`
+
+只在 `location.hostname === 'stardreamtech.github.io'` 时加载。本地 `python3 -m http.server` 和其他域名不会请求 Google 或 Clarity。GA4 关闭自动 `page_view`、`allow_google_signals` 和 `allow_ad_personalization_signals`，再手动发送一次 `page_view`。`page_location` 只有 origin 和 pathname，不带 query 和 hash；来源页只保留 origin，站内来源再保留 pathname。
+
+百度统计和 51.la 还没接。之后把公开编号加到同一文件顶部，再在 `TRACKERS` 里登记加载函数。编号还没有时不要写空调用。
+
+检查每个页面是否引用了脚本、编号是否正确：
+
+```bash
+node scripts/check-analytics.mjs
+```
+
 ## 许可证 / License
 
 本项目采用 [MIT License](LICENSE)。
