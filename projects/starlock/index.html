@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星锁 StarLock · 人机验证服务 · 星梦科技</title>
+  <meta name="description" content="星锁 StarLock 提供托管验证码 SDK、Vue 3 组件与 FastAPI 验证服务，已实现六种题型、弹窗交互和一次性凭证复核。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starlock/">
+  <meta property="og:title" content="星锁 StarLock">
+  <meta property="og:description" content="面向网站与 Web 应用的验证码组件、挑战 API 与服务端复核。">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../index.html#projects">项目</a>
+      <a href="#integration">接入</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#d8a1ef;--accent2:#a78bfa">
+    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starlock.svg" alt="星锁 StarLock 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星锁</span><span class="en">StarLock</span></h1>
+        <p class="role">人机验证 SDK 与服务</p>
+      </div>
+      <span class="badge badge-soft">v0.7.0 · 开发版</span>
+    </header>
+    <p class="one-liner reveal">面向网站与 Web 应用的验证码组件、挑战 API 与服务端复核。</p>
+    <p class="prose reveal">星锁提供统一的会话、挑战与凭证流程，已实现数字、字符、算术、直线拼图、曲线拼图和圆环旋转六种题型。前端通过托管脚本加载验证码，也可以在 Vue 3 中使用同一份 SDK。</p>
+    <div class="chips reveal"><span>Python · FastAPI</span><span>Redis</span><span>TypeScript · Vue 3</span><span>MIT</span></div>
+    <div class="doc-cta reveal">
+      <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock" target="_blank" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md" target="_blank" rel="noopener">接入文档</a>
+    </div>
+
+    <section class="doc-section reveal">
+      <h2>已实现的验证方式</h2>
+      <ul class="features">
+        <li>传统图片验证支持纯数字、字母数字与算术题，输入答案后由服务端校验。</li>
+        <li>直线拼图和曲线拼图分别控制运动路径与贝塞尔速度缓动，并同步改变图形角度。</li>
+        <li>拼图、五角星、正方形和长方形可生成多个缺口，仅一个位置与角度能够匹配。题面约束行程、边界与缺口间隔。</li>
+        <li>圆环题通过滑块旋转内圈，与固定外圈恢复对齐，交界处采用轻度模糊与羽化处理。</li>
+        <li>验证码默认使用紧凑弹窗，支持关闭按钮、遮罩点击、Esc 与键盘微调，关闭后恢复触发控件焦点。</li>
+      </ul>
+    </section>
+
+    <section id="integration" class="doc-section reveal">
+      <h2>接入你的业务</h2>
+      <ol class="prose">
+        <li>业务后端用站点密钥创建验证会话，绑定本次业务动作与上下文，将短期票据交给浏览器。</li>
+        <li>浏览器加载托管 <code>api.js</code>，调用 <code>StarLock.render()</code>，或使用 Vue 组件展示挑战。</li>
+        <li>验证完成取得 token 后，将其随业务请求交给后端。后端调用 <code>/v1/siteverify</code> 复核并消费一次性凭证，再执行业务。</li>
+      </ol>
+      <p class="prose">挑战与答案校验由 FastAPI 服务负责，Redis 保存短期状态，SQLite 保存本地站点配置。接入来源按站点授权，站点密钥保存在业务后端。</p>
+      <p class="prose">本地运行需要 Python、Node.js 与 Redis。源码提供官网体验页、无框架跨源接入示例，以及完整的启动、配置和测试说明。</p>
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock#本地运行" target="_blank" rel="noopener">本地启动说明 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/examples/VueIntegration.vue" target="_blank" rel="noopener">Vue 接入示例</a>
+      </div>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>开发进度</h2>
+      <p class="prose">当前版本为 0.7.0 本地开发版，前后端核心流程、托管 SDK 和六种挑战已实现。点选、九宫格、行为评分与无感风控列入后续开发计划。</p>
+      <p class="callout">npm 包、正式 CDN 与公共验证 API 尚未发布。生产部署、容量测试、真实触屏设备与其他浏览器的完整验收仍待完成。</p>
+      <p class="sources">功能范围与配置以项目 README、接入文档和验证记录为准。<a href="https://github.com/StarDreamTech/starlock/blob/main/README.md">README</a> · <a href="https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md">接入文档</a> · <a href="https://github.com/StarDreamTech/starlock/blob/main/docs/verification.md">验证记录</a></p>
+      <p class="back"><a href="../../index.html#projects">← 返回星梦科技项目列表</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

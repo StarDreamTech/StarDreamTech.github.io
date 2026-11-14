@@ -6,20 +6,23 @@
 本地预览：`python3 -m http.server` 后打开 http://localhost:8000 。
 
 项目信息来源：各仓库 description / README / 最新 Release 与 StarDreamTech/homebrew-tap 中的 Cask（2026-11-11 核对）。
-应用图标取自各项目仓库；星哨、星伴图标为本站原创 SVG。
+应用图标取自各项目仓库；星哨、星伴图标为本站原创 SVG；星锁使用项目专用紫色锁形 Logo。
 
 支持明、暗两套主题。首次访问跟随系统 `prefers-color-scheme`，手动切换后写入 `localStorage`（键名 `sdt-theme`）。
 
 ## 项目介绍页
 
-首页四张已上线卡片各有独立介绍，路径与页面文件对应，GitHub Pages 可带或不带尾斜杠打开：
+首页五个项目各有独立介绍，路径与页面文件对应，GitHub Pages 可带或不带尾斜杠打开：
 
 - 星笺 Starclip：https://stardreamtech.github.io/projects/starclip/ （`projects/starclip/index.html`）
 - 星镜 Starshot：https://stardreamtech.github.io/projects/starshot/ （`projects/starshot/index.html`）
 - 星匣 StarVault：https://stardreamtech.github.io/projects/starvault/ （`projects/starvault/index.html`）
 - 星哨 StarWatch：https://stardreamtech.github.io/projects/starwatch/ （`projects/starwatch/index.html`）
+- 星锁 StarLock：https://stardreamtech.github.io/projects/starlock/ （`projects/starlock/index.html`）
 
 星伴 StarBuddy 仍是即将推出，没有介绍页，首页也不链接其仓库。介绍页文案只整理自各仓库公开 README、已发布 Release 与首页卡片，不另写未公布的功能。
+
+星锁信息于 2026-11-15 按本次提交的 0.7.0 源码与文档核对，当前为本地开发版。
 
 ## 访问统计
 
