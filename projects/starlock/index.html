@@ -56,8 +56,8 @@
       <span class="badge badge-soft">v0.7.0 · 开发版</span>
     </header>
     <p class="one-liner reveal">面向网站与 Web 应用的验证码组件、挑战 API 与服务端复核。</p>
-    <p class="prose reveal">星锁提供统一的会话、挑战与凭证流程，已实现数字、字符、算术、直线拼图、曲线拼图和圆环旋转六种题型。前端通过托管脚本加载验证码，也可以在 Vue 3 中使用同一份 SDK。</p>
-    <div class="chips reveal"><span>Python · FastAPI</span><span>Redis</span><span>TypeScript · Vue 3</span><span>MIT</span></div>
+    <p class="prose reveal">星锁提供统一的会话、挑战与凭证流程，已实现数字、字符、算术、直线拼图、曲线拼图和圆环旋转六种题型。前端通过托管脚本加载验证码，也可以在 Vue 3 或 React 18/19 中使用同一份 SDK。</p>
+    <div class="chips reveal"><span>Python · FastAPI</span><span>Redis</span><span>TypeScript · Vue 3 · React</span><span>MIT</span></div>
     <div class="doc-cta reveal">
       <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock" target="_blank" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
       <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md" target="_blank" rel="noopener">接入文档</a>
@@ -78,7 +78,7 @@
       <h2>接入你的业务</h2>
       <ol class="prose">
         <li>业务后端用站点密钥创建验证会话，绑定本次业务动作与上下文，将短期票据交给浏览器。</li>
-        <li>浏览器加载托管 <code>api.js</code>，调用 <code>StarLock.render()</code>，或使用 Vue 组件展示挑战。</li>
+        <li>浏览器加载托管 <code>api.js</code>，调用 <code>StarLock.render()</code>，或使用 Vue / React 组件展示挑战。</li>
         <li>验证完成取得 token 后，将其随业务请求交给后端。后端调用 <code>/v1/siteverify</code> 复核并消费一次性凭证，再执行业务。</li>
       </ol>
       <p class="prose">挑战与答案校验由 FastAPI 服务负责，Redis 保存短期状态，SQLite 保存本地站点配置。接入来源按站点授权，站点密钥保存在业务后端。</p>
@@ -86,6 +86,7 @@
       <div class="doc-cta">
         <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock#本地运行" target="_blank" rel="noopener">本地启动说明 <span aria-hidden="true">↗</span></a>
         <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/examples/VueIntegration.vue" target="_blank" rel="noopener">Vue 接入示例</a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/examples/ReactIntegration.tsx" target="_blank" rel="noopener">React 接入示例</a>
       </div>
     </section>
 
