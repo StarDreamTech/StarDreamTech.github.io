@@ -8,12 +8,27 @@
   <title>星笺 Starclip · 剪贴板管理器 · 星梦科技</title>
   <meta name="description" content="星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。">
   <meta name="theme-color" content="#05060f">
-  <link rel="canonical" href="https://stardreamtech.github.io/projects/starclip/">
-  <meta property="og:title" content="星笺 Starclip">
-  <meta property="og:description" content="Rust 驱动的本地优先剪贴板管理器，让每一次复制都有迹可循。">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../css/style.css">
   <script src="../../js/analytics.js" defer></script>
+  <!-- search:start -->
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starclip/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星梦科技 StarDreamTech">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="星笺 Starclip · 剪贴板管理器 · 星梦科技">
+  <meta property="og:description" content="星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。">
+  <meta property="og:url" content="https://stardreamtech.github.io/projects/starclip/">
+  <meta property="og:image" content="https://stardreamtech.github.io/assets/icons/starclip.png">
+  <meta property="og:image:alt" content="星笺 Starclip">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="星笺 Starclip · 剪贴板管理器 · 星梦科技">
+  <meta name="twitter:description" content="星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。">
+  <meta name="twitter:image" content="https://stardreamtech.github.io/assets/icons/starclip.png">
+  <link rel="alternate" type="text/plain" href="https://stardreamtech.github.io/llms.txt" title="项目与文档索引">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://stardreamtech.github.io/#organization","name":"星梦科技","alternateName":"StarDreamTech","url":"https://stardreamtech.github.io/","logo":"https://stardreamtech.github.io/assets/logo.svg","sameAs":["https://github.com/StarDreamTech"]},{"@type":"WebSite","@id":"https://stardreamtech.github.io/#website","url":"https://stardreamtech.github.io/","name":"星梦科技 StarDreamTech","inLanguage":"zh-CN","publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"WebPage","@id":"https://stardreamtech.github.io/projects/starclip/#webpage","url":"https://stardreamtech.github.io/projects/starclip/","name":"星笺 Starclip · 剪贴板管理器 · 星梦科技","description":"星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。","inLanguage":"zh-CN","isPartOf":{"@id":"https://stardreamtech.github.io/#website"},"about":{"@id":"https://stardreamtech.github.io/projects/starclip/#software"},"publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"SoftwareSourceCode","@id":"https://stardreamtech.github.io/projects/starclip/#software","name":"星笺 Starclip","description":"星笺 Starclip：Rust 驱动的本地优先剪贴板管理器。记录文本、图片与文件路径，并提供星码集、星绘坊与应用内签名更新。","url":"https://stardreamtech.github.io/projects/starclip/","codeRepository":"https://github.com/StarDreamTech/starclip","author":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"星梦科技","item":"https://stardreamtech.github.io/"},{"@type":"ListItem","position":2,"name":"星笺 Starclip","item":"https://stardreamtech.github.io/projects/starclip/"}]}]}</script>
+  <!-- search:end -->
 </head>
 <body>
   <canvas id="sky" aria-hidden="true"></canvas>
@@ -21,13 +36,13 @@
   <div class="grain" aria-hidden="true"></div>
 
   <header class="nav">
-    <a class="brand" href="../../index.html" aria-label="星梦科技 StarDreamTech">
+    <a class="brand" href="/" aria-label="星梦科技 StarDreamTech">
       <img src="../../assets/logo.svg" alt="" width="28" height="28">
       <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
     </a>
     <nav class="nav-links">
-      <a href="../../index.html">首页</a>
-      <a href="../../index.html#projects">项目</a>
+      <a href="/">首页</a>
+      <a href="/#projects">项目</a>
       <a href="#install">安装</a>
       <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
@@ -46,7 +61,7 @@
   </header>
 
   <main id="top" class="doc" style="--accent:#f2c879;--accent2:#7fd8c9">
-    <p class="back reveal"><a href="../../index.html#projects">← 返回组织首页</a></p>
+    <p class="back reveal"><a href="/#projects">← 返回组织首页</a></p>
     <header class="doc-hero reveal">
       <img class="app-icon" src="../../assets/icons/starclip.png" alt="星笺 Starclip 图标" width="84" height="84">
       <div class="title">
@@ -116,7 +131,7 @@
         <a class="btn btn-primary" href="https://github.com/StarDreamTech/starclip" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
         <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starclip/releases/latest" target="_blank" rel="noopener">查看 Release</a>
       </div>
-      <p class="back"><a href="../../index.html">← 返回星梦科技首页</a></p>
+      <p class="back"><a href="/">← 返回星梦科技首页</a></p>
       <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/starclip/blob/main/README.md">starclip README</a>、<a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">v0.2.5 Release</a> 与组织首页卡片。本页不补充这些来源里没有写明的功能或平台。</p>
     </section>
   </main>
@@ -127,6 +142,7 @@
       <span>星梦科技 StarDreamTech</span>
     </div>
     <nav class="foot-links">
+      <a href="/llms.txt">项目与文档索引</a>
       <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
       <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
     </nav>

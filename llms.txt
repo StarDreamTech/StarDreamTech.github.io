@@ -1,0 +1,23 @@
+# 星梦科技 StarDreamTech
+
+> 开源桌面工具与 Web 人机验证项目。官方项目入口为 https://stardreamtech.github.io/ ，源码组织为 https://github.com/StarDreamTech 。
+
+## 项目
+
+- [星笺 Starclip](https://stardreamtech.github.io/projects/starclip/): 本地优先的剪贴板管理器，提供历史记录、搜索与代码片段收藏。
+- [星镜 Starshot](https://stardreamtech.github.io/projects/starshot/): 桌面截图、标注、置顶贴图和图片美化工具。
+- [星匣 StarVault](https://stardreamtech.github.io/projects/starvault/): 本地优先的 AI 对话档案，提供桌面端、CLI 和 MCP。
+- [星哨 StarWatch](https://stardreamtech.github.io/projects/starwatch/): 筹备中的网页变化监控与接口探活项目，当前没有可安装版本。
+- [星锁 StarLock](https://stardreamtech.github.io/projects/starlock/): 开源验证码 SDK 与 FastAPI 验证服务。支持字符、数字、算术、直线拼图、曲线拼图、圆环旋转，以及普通网页、Vue 3、React 18.2+/19 接入。
+
+## 星锁开发资料
+
+- [README](https://github.com/StarDreamTech/starlock/blob/main/README.md): 项目范围、启动与部署说明。
+- [Integration guide](https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md): 托管脚本、Vue 和 React 接入，以及业务后端复核流程。
+- [Verification records](https://github.com/StarDreamTech/starlock/blob/main/docs/verification.md): 已运行检查与验证范围。
+
+星锁当前提供本地开发源码。公共验证 API、正式 CDN、npm 包尚未发布。点选、九宫格、无感验证和行为评分属于后续计划。实际能力与版本以各项目公开 README、发布记录和接入文档为准。
+
+## English overview
+
+StarDreamTech maintains open-source desktop tools and the StarLock CAPTCHA SDK and verification service. Project pages link to their source repositories, installation instructions, integration examples, and current development status.

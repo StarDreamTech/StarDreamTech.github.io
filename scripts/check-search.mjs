@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import { readFile, readdir, access } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const origin = 'https://stardreamtech.github.io';
+const folders = await readdir(`${root}projects`);
+const paths = ['', ...folders.map(folder => `projects/${folder}/`)];
+const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
+const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
+const titles = new Set();
+for (const path of paths) {
+  const html = await readFile(`${root}${path}index.html`, 'utf8');
+  const url = `${origin}/${path}`;
+  assert.equal((html.match(/rel="canonical"/g) || []).length, 1, path);
+  assert.ok(html.includes(`<link rel="canonical" href="${url}">`), path);
+  assert.ok(locations.includes(url), path);
+  assert.match(html, /name="robots" content="index, follow/);
+  assert.doesNotMatch(html, /noindex|localhost|127\.0\.0\.1/);
+  assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, path);
+  const title = html.match(/<title>(.*?)<\/title>/s)[1];
+  assert.ok(!titles.has(title), `Repeated title in ${path}`);
+  titles.add(title);
+  const data = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+  const webpage = data['@graph'].find(item => item['@type'] === 'WebPage');
+  assert.equal(webpage.url, url);
+  assert.equal(webpage.name, title);
+  const image = new URL(html.match(/property="og:image" content="([^"]+)"/)[1]);
+  assert.equal(image.origin, origin);
+  await access(`${root}${image.pathname}`);
+  assert.ok(html.includes('href="/llms.txt"'), path);
+}
+const robots = await readFile(`${root}robots.txt`, 'utf8');
+assert.match(robots, /User-agent: \*\s+Allow: \//);
+assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
+const index = await readFile(`${root}llms.txt`, 'utf8');
+for (const path of paths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
+const css = await readFile(`${root}css/style.css`, 'utf8');
+assert.match(css, /\.reveal\{opacity:1;transform:none/);
+console.log(`PASS: ${paths.length} static pages, canonical URLs, JSON-LD, sitemap, crawler access, image assets and document index.`);

@@ -43,6 +43,28 @@
 node scripts/check-analytics.mjs
 ```
 
+## 搜索发现与 AI 检索
+
+六个页面直接提供静态正文、独立标题与摘要、canonical、Open Graph / Twitter 分享信息，以及 Organization、WebSite、WebPage、SoftwareSourceCode 和面包屑结构化资料。星锁页包含可见的常见问题、中英文项目说明和原始文档链接。页面正文在 JavaScript 不执行时也可见。
+
+`robots.txt` 允许公开内容抓取，`sitemap.xml` 列出六个规范页面。`llms.txt` 是项目与文档的简明链接索引，页脚也提供入口。内容更新后运行以下命令同步并检查元信息。
+
+```bash
+node scripts/update-search.mjs
+node scripts/check-search.mjs
+node scripts/check-analytics.mjs
+```
+
+站点发布并确认线上内容后，可通知参与 IndexNow 的搜索引擎。`indexnow.txt` 是按协议公开托管的站点所有权验证文件。
+
+```bash
+node scripts/submit-indexnow.mjs
+```
+
+HTTP 200 表示通知已收到，202 表示通知已收到且所有权验证待处理。实际收录、排序与 AI 引用需要在搜索平台另行观察。Google Search Console 与 Bing Webmaster Tools 的站点验证、收录报告须在相应账户中核验。
+
+实施依据包括 [Google 的 AI 搜索与网站指南](https://developers.google.com/search/docs/appearance/ai-features)、[OpenAI 抓取器说明](https://developers.openai.com/api/docs/bots) 和 [IndexNow 协议](https://www.indexnow.org/documentation)。普通索引可达性、可见内容、准确的结构化资料与来源链接是本次实现的重点。
+
 ## 许可证 / License
 
 本项目采用 [MIT License](LICENSE)。
