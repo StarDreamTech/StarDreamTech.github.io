@@ -74,7 +74,8 @@
     <p class="prose reveal">星锁提供统一的会话、挑战与凭证流程，已实现数字、字符、算术、直线拼图、曲线拼图和圆环旋转六种题型。前端通过托管脚本加载验证码，也可以在 Vue 3 或 React 18/19 中使用同一份 SDK。</p>
     <div class="chips reveal"><span>Python · FastAPI</span><span>Redis</span><span>TypeScript · Vue 3 · React</span><span>MIT</span></div>
     <div class="doc-cta reveal">
-      <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock" target="_blank" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-primary" href="demo/">立即试玩 <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock" target="_blank" rel="noopener">查看源码 <span aria-hidden="true">↗</span></a>
       <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md" target="_blank" rel="noopener">接入文档</a>
     </div>
 
@@ -97,7 +98,7 @@
         <li>验证完成取得 token 后，将其随业务请求交给后端。后端调用 <code>/v1/siteverify</code> 复核并消费一次性凭证，再执行业务。</li>
       </ol>
       <p class="prose">挑战与答案校验由 FastAPI 服务负责，Redis 保存短期状态，SQLite 保存本地站点配置。接入来源按站点授权，站点密钥保存在业务后端。</p>
-      <p class="prose">本地运行需要 Python、Node.js 与 Redis。源码提供官网体验页、无框架跨源接入示例，以及完整的启动、配置和测试说明。</p>
+      <p class="prose">本地运行需要 Python、Node.js 与 Redis。可以直接打开在线 demo，体验六种验证方式、换题与键盘操作。演示在浏览器内判定，应用接入时使用服务端校验。源码也提供完整启动、配置和测试说明。</p>
       <div class="doc-cta">
         <a class="btn btn-primary" href="https://github.com/StarDreamTech/starlock#本地运行" target="_blank" rel="noopener">本地启动说明 <span aria-hidden="true">↗</span></a>
         <a class="btn btn-ghost" href="https://github.com/StarDreamTech/starlock/blob/main/docs/examples/VueIntegration.vue" target="_blank" rel="noopener">Vue 接入示例</a>

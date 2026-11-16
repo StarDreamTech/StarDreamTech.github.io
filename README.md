@@ -22,7 +22,13 @@
 
 星伴 StarBuddy 仍是即将推出，没有介绍页，首页也不链接其仓库。介绍页文案只整理自各仓库公开 README、已发布 Release 与首页卡片，不另写未公布的功能。
 
-星锁信息于 2026-11-15 按 0.7.0 源码与文档核对，包含六种挑战、托管 SDK、Vue 3 和 React 18/19 组件。介绍页提供 README、接入指南与两种框架示例入口，搜索摘要及分享描述同步标明 React 支持。当前为本地开发版，npm 包与公共验证 API 尚未发布。
+星锁信息于 2026-11-16 按 0.7.0 源码与文档核对，包含六种挑战、托管 SDK、Vue 3 和 React 18/19 组件。介绍页提供 README、接入指南与两种框架示例入口，搜索摘要及分享描述同步标明 React 支持。新增可直接访问的在线交互 demo，包含六种题型和浏览器内演示判定。正式业务接入继续使用服务端校验，npm 包与公共验证 API 尚未发布。
+
+## 星锁在线试玩
+
+https://stardreamtech.github.io/projects/starlock/demo/ 提供圆环旋转、曲线拼图、变速滑块、数字、字符、算术六种交互。演示复用项目的验证弹窗和客户端，公开样题在浏览器内判定。主页星锁卡片和项目介绍页均提供试玩入口。
+
+源码位于 StarLock 仓库的 `examples/static-demo/`，通过 `npm run build:demo` 构建，再用 `scripts/export-demo.mjs` 同步到本仓库的 `projects/starlock/demo/`。导出后运行搜索与统计检查，再提交 Pages 仓库。
 
 ## 访问统计
 
@@ -45,9 +51,9 @@ node scripts/check-analytics.mjs
 
 ## 搜索发现与 AI 检索
 
-六个页面直接提供静态正文、独立标题与摘要、canonical、Open Graph / Twitter 分享信息，以及 Organization、WebSite、WebPage、SoftwareSourceCode 和面包屑结构化资料。星锁页包含可见的常见问题、中英文项目说明和原始文档链接。页面正文在 JavaScript 不执行时也可见。
+七个页面直接提供静态正文、独立标题与摘要、canonical、Open Graph / Twitter 分享信息，以及 Organization、WebSite、WebPage、SoftwareSourceCode 和面包屑结构化资料。星锁页包含可见的常见问题、中英文项目说明和原始文档链接。页面正文在 JavaScript 不执行时也可见。
 
-`robots.txt` 允许公开内容抓取，`sitemap.xml` 列出六个规范页面。`llms.txt` 是项目与文档的简明链接索引，页脚也提供入口。内容更新后运行以下命令同步并检查元信息。
+`robots.txt` 允许公开内容抓取，`sitemap.xml` 列出七个规范页面。`llms.txt` 是项目与文档的简明链接索引，页脚也提供入口。内容更新后运行以下命令同步并检查元信息。
 
 ```bash
 node scripts/update-search.mjs

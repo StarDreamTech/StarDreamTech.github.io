@@ -23,6 +23,7 @@ const website = {
 const pages = [
   { path: '', name: '星梦科技 StarDreamTech' },
   ...projects.map(([slug, name]) => ({ path: `projects/${slug}/`, name, slug })),
+  { path: 'projects/starlock/demo/', name: '星锁验证码交互演示', slug: 'starlock' },
 ];
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://stardreamtech.github.io';
 const folders = await readdir(`${root}projects`);
-const paths = ['', ...folders.map(folder => `projects/${folder}/`)];
+const paths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
 const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
