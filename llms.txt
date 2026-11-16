@@ -12,13 +12,13 @@
 
 ## 星锁开发资料
 
-- [在线交互体验](https://stardreamtech.github.io/projects/starlock/demo/): 六种验证码的浏览器演示，支持换题、输入、拖动和键盘操作。正式接入使用服务端校验。
+- [在线交互体验](https://stardreamtech.github.io/projects/starlock/demo/): 八种验证码的浏览器演示，支持换题、输入、拖动和键盘操作。正式接入使用服务端校验。
 
 - [README](https://github.com/StarDreamTech/starlock/blob/main/README.md): 项目范围、启动与部署说明。
 - [Integration guide](https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md): 托管脚本、Vue 和 React 接入，以及业务后端复核流程。
 - [Verification records](https://github.com/StarDreamTech/starlock/blob/main/docs/verification.md): 已运行检查与验证范围。
 
-星锁提供开源代码和在线交互演示。公共验证 API、正式 CDN、npm 包尚未发布。点选、九宫格、无感验证和行为评分属于后续计划。实际能力与版本以各项目公开 README、发布记录和接入文档为准。
+星锁提供开源代码和在线交互演示。公共验证 API、正式 CDN、npm 包尚未发布。文字顺序点选和静态语义九宫格已实现，首版语义题涵盖小汽车、船只与水果。多轮换图、无感验证和行为评分属于后续计划。实际能力与版本以各项目公开 README、发布记录和接入文档为准。
 
 ## English overview
 
