@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>星相 StarPersona · 指纹浏览器 · 多账号环境 · 星梦科技</title>
+  <meta name="description" content="规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。">
+  <meta name="theme-color" content="#05060f">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/analytics.js" defer></script>
+  <!-- search:start -->
+  <link rel="canonical" href="https://stardreamtech.github.io/projects/starpersona/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="星梦科技 StarDreamTech">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="星相 StarPersona · 指纹浏览器 · 多账号环境 · 星梦科技">
+  <meta property="og:description" content="规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。">
+  <meta property="og:url" content="https://stardreamtech.github.io/projects/starpersona/">
+  <meta property="og:image" content="https://stardreamtech.github.io/assets/social.png">
+  <meta property="og:image:alt" content="星相 StarPersona">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="星相 StarPersona · 指纹浏览器 · 多账号环境 · 星梦科技">
+  <meta name="twitter:description" content="规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。">
+  <meta name="twitter:image" content="https://stardreamtech.github.io/assets/social.png">
+  <link rel="alternate" type="text/plain" href="https://stardreamtech.github.io/llms.txt" title="项目与文档索引">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://stardreamtech.github.io/#organization","name":"星梦科技","alternateName":"StarDreamTech","url":"https://stardreamtech.github.io/","logo":"https://stardreamtech.github.io/assets/logo.svg","sameAs":["https://github.com/StarDreamTech"]},{"@type":"WebSite","@id":"https://stardreamtech.github.io/#website","url":"https://stardreamtech.github.io/","name":"星梦科技 StarDreamTech","inLanguage":"zh-CN","publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"WebPage","@id":"https://stardreamtech.github.io/projects/starpersona/#webpage","url":"https://stardreamtech.github.io/projects/starpersona/","name":"星相 StarPersona · 指纹浏览器 · 多账号环境 · 星梦科技","description":"规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。","inLanguage":"zh-CN","isPartOf":{"@id":"https://stardreamtech.github.io/#website"},"about":{"@id":"https://stardreamtech.github.io/projects/starpersona/#software"},"publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"SoftwareSourceCode","@id":"https://stardreamtech.github.io/projects/starpersona/#software","name":"星相 StarPersona","description":"规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。","url":"https://stardreamtech.github.io/projects/starpersona/","codeRepository":"https://github.com/StarDreamTech/StarPersona","author":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"星梦科技","item":"https://stardreamtech.github.io/"},{"@type":"ListItem","position":2,"name":"星相 StarPersona","item":"https://stardreamtech.github.io/projects/starpersona/"}]}]}</script>
+  <!-- search:end -->
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="/" aria-label="星梦科技 StarDreamTech">
+      <img src="../../assets/logo.svg" alt="" width="28" height="28">
+      <span class="brand-cn">星梦科技</span><span class="brand-en">StarDreamTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">首页</a>
+      <a href="/#projects">项目</a>
+      <a href="#install">安装</a>
+      <button class="theme-toggle" type="button" aria-label="切换到浅色主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21M5.2 5.2l1.15 1.15M17.65 17.65l1.15 1.15M18.8 5.2l-1.15 1.15M6.35 17.65 5.2 18.8"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.6A8.5 8.5 0 1 1 9.4 4 7 7 0 0 0 20 14.6z"></path>
+        </svg>
+      </button>
+      <a class="nav-gh" href="https://github.com/StarDreamTech" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top" class="doc" style="--accent:#a9a1ff;--accent2:#7fb7ff">
+    <p class="back reveal"><a href="/#projects">← 返回组织首页</a></p>
+    <header class="doc-hero reveal">
+      <img class="app-icon" src="../../assets/icons/starpersona.svg" alt="星相 StarPersona 图标" width="84" height="84">
+      <div class="title">
+        <h1><span class="cn">星相</span><span class="en">StarPersona</span></h1>
+        <p class="role">指纹浏览器 · 多账号环境</p>
+      </div>
+      <span class="badge badge-soft">筹备中</span>
+    </header>
+    <p class="one-liner reveal">规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。</p>
+    <p class="prose reveal">仓库目前只有 README 与 MIT 许可证。产品名称和方向已确定，核心代码尚未开始；本页所列为规划方向。</p>
+    <div class="chips reveal"><span>项目筹备</span><span>MIT</span></div>
+    <p class="callout reveal"><strong>当前状态：</strong>目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。</p>
+
+    <section class="doc-section reveal">
+      <h2>规划方向</h2>
+      <ul class="features">
+        <li>规划方向：指纹浏览器</li>
+        <li>规划方向：多账号环境管理</li>
+        <li>目标平台：Windows 与 macOS，尚待实现和验证</li>
+      </ul>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>平台与交付方式</h2>
+      <p class="prose">计划面向 Windows 与 macOS，目前两个平台均无可安装版本。</p>
+    </section>
+
+    <section id="install" class="doc-section reveal">
+      <h2>源码与进度</h2>
+      <p class="prose">关注公开仓库了解开发进展，独立安装包与正式发行以项目后续公告为准。</p>
+
+      <div class="doc-cta">
+        <a class="btn btn-primary" href="https://github.com/StarDreamTech/StarPersona" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/StarPersona/blob/main/README.md" target="_blank" rel="noopener">阅读 README</a>
+      </div>
+      <p class="back"><a href="/#projects">← 返回全部开源项目</a></p>
+      <p class="sources">核对于 2026-11-17，内容来源：<a href="https://github.com/StarDreamTech/StarPersona/blob/main/README.md">StarPersona README</a> 与公开仓库。开发状态与发行情况以项目最新记录为准。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-brand">
+      <img src="../../assets/logo.svg" alt="" width="22" height="22">
+      <span>星梦科技 StarDreamTech</span>
+    </div>
+    <nav class="foot-links">
+      <a href="/llms.txt">项目与文档索引</a>
+      <a href="https://github.com/StarDreamTech" target="_blank" rel="noopener">GitHub 组织 ↗</a>
+      <a href="https://cpython666.github.io" target="_blank" rel="noopener">作者 cpython666 · 星梦启航 ↗</a>
+    </nav>
+    <p class="copy-r">© <span id="year">2026</span> StarDreamTech · Crafted under the stars.</p>
+  </footer>
+
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

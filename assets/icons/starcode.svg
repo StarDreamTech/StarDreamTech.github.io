@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">星码 StarCode</title>
+  <desc id="desc">青绿色代码括号、斜杠与星芒，代表 AI 辅助编程。</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#113a32"/>
+      <stop offset="1" stop-color="#0e1c26"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6ee7b7"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="url(#background)"/>
+  <rect x="9" y="9" width="238" height="238" rx="57" fill="none" stroke="#a7f3d0" stroke-opacity=".16" stroke-width="2"/>
+  <g fill="none" stroke="url(#accent)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m89 91-40 40 40 40m78-80 40 40-40 40"/>
+    <path d="m143 85-30 92"/>
+  </g>
+  <path d="M187 42c3 13 7 17 20 20-13 3-17 7-20 20-3-13-7-17-20-20 13-3 17-7 20-20Z" fill="#d1fae5"/>
+</svg>

@@ -10,6 +10,19 @@ const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
 const titles = new Set();
+const home = await readFile(`${root}index.html`, 'utf8');
+const homeData = JSON.parse(home.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+const catalog = homeData['@graph'].find(item => item['@type'] === 'ItemList').itemListElement;
+const projectSection = home.match(/<section id="projects"[\s\S]*?<\/section>/)[0];
+assert.equal(folders.length, 11, 'The public product catalog must contain 11 projects');
+assert.equal(catalog.length, folders.length, 'Structured catalog must match project pages');
+assert.equal((projectSection.match(/<article\b/g) || []).length, folders.length, 'Every product must have one homepage card');
+assert.ok(home.includes(`<dt>公开产品项目</dt><dd>${folders.length}</dd>`), 'Homepage count must match the catalog');
+assert.doesNotMatch(projectSection + sitemap, /stargate|starscout/i, 'Private projects must stay out of the public catalog');
+for (const folder of folders) {
+  assert.equal(catalog.filter(item => item.url === `${origin}/projects/${folder}/`).length, 1, folder);
+  assert.ok(projectSection.includes(`href="projects/${folder}/"`), `${folder} needs an introduction link`);
+}
 for (const path of paths) {
   const html = await readFile(`${root}${path}index.html`, 'utf8');
   const url = `${origin}/${path}`;
@@ -38,4 +51,4 @@ const index = await readFile(`${root}llms.txt`, 'utf8');
 for (const path of paths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
 const css = await readFile(`${root}css/style.css`, 'utf8');
 assert.match(css, /\.reveal\{opacity:1;transform:none/);
-console.log(`PASS: ${paths.length} static pages, canonical URLs, JSON-LD, sitemap, crawler access, image assets and document index.`);
+console.log(`PASS: ${folders.length} public projects, homepage cards and count, ${paths.length} static pages, canonical URLs, JSON-LD, sitemap, crawler access, image assets and document index.`);

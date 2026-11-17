@@ -7,8 +7,14 @@ const projects = [
   ['starclip', '星笺 Starclip'],
   ['starshot', '星镜 Starshot'],
   ['starvault', '星匣 StarVault'],
-  ['starwatch', '星哨 StarWatch'],
+  ['starwatch', '星哨 StarWatch', 'StarWatch'],
   ['starlock', '星锁 StarLock'],
+  ['starenvoy', '星使 StarEnvoy', 'StarEnvoy'],
+  ['starport', '星口 StarPort'],
+  ['starcode', '星码 StarCode'],
+  ['starbuddy', '星搭子 StarBuddy'],
+  ['starpersona', '星相 StarPersona', 'StarPersona'],
+  ['stardash', '星盘 StarDash', 'StarDash'],
 ];
 const organization = {
   '@type': 'Organization', '@id': `${origin}/#organization`,
@@ -22,7 +28,7 @@ const website = {
 };
 const pages = [
   { path: '', name: '星梦科技 StarDreamTech' },
-  ...projects.map(([slug, name]) => ({ path: `projects/${slug}/`, name, slug })),
+  ...projects.map(([slug, name, repository = slug]) => ({ path: `projects/${slug}/`, name, slug, repository })),
   { path: 'projects/starlock/demo/', name: '星锁验证码交互演示', slug: 'starlock' },
 ];
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
@@ -45,7 +51,7 @@ for (const page of pages) {
     graph.push({
       '@type': 'SoftwareSourceCode', '@id': `${url}#software`,
       name: page.name, description, url,
-      codeRepository: `https://github.com/StarDreamTech/${page.slug}`,
+      codeRepository: `https://github.com/StarDreamTech/${page.repository ?? page.slug}`,
       author: { '@id': organization['@id'] },
       ...(page.slug === 'starlock' ? { license: 'https://github.com/StarDreamTech/starlock/blob/main/LICENSE' } : {}),
     }, {

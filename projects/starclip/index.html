@@ -68,11 +68,11 @@
         <h1><span class="cn">星笺</span><span class="en">Starclip</span></h1>
         <p class="role">剪贴板管理器</p>
       </div>
-      <span class="badge">v0.2.5</span>
+      <span class="badge">v0.2.6</span>
     </header>
     <p class="one-liner reveal">Rust 驱动的本地优先剪贴板管理器，让每一次复制都有迹可循。</p>
     <p class="prose reveal">本地剪贴板管理工具，让剪贴板不止记住上一次。星笺使用 Rust 构建，把复制过的文字、链接和代码收进历史，整理成星标与分组，再通过星绘坊做成代码卡片或手写纸笺。</p>
-    <p class="prose reveal">技术栈是 <strong>Rust + Tauri 2 + SQLite + Vue 3 + TypeScript + Vite</strong>。无需账户，剪贴内容保存在本机。最新正式 Release 为 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">v0.2.5</a>。</p>
+    <p class="prose reveal">技术栈是 <strong>Rust + Tauri 2 + SQLite + Vue 3 + TypeScript + Vite</strong>。无需账户，剪贴内容保存在本机。最新正式 Release 为 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.6">v0.2.6</a>。</p>
     <div class="chips reveal"><span>Rust</span><span>Tauri 2</span><span>SQLite</span><span>Vue 3</span><span>MIT</span></div>
 
     <section class="doc-section reveal">
@@ -84,14 +84,24 @@
         <li>星绘坊：星码卡把代码排成分享图，月光笺把文字排成手写纸笺。月光笺使用内置手写引擎，选中的字体下载后可离线导出 PNG。0.2.5 起可在主界面制作 Markdown 图片。</li>
         <li>外观与语言：星夜、月白、素白、青苔、暮樱五套主题，可跟随系统；也能改强调色、渐变，并导入一张本地 PNG 贴纸。界面可选跟随系统、简体中文或 English。</li>
         <li>随用随取：默认呼出键为 ⌘/Ctrl + Shift + V，可在偏好设置里修改；提供菜单栏 / 托盘。应用内可检查更新，安装前做 Tauri 签名校验。</li>
-        <li>星伴：可选的原创桌面角色「星芽」，默认关闭，不读取剪贴内容。这是星笺里的陪伴功能，不是首页上尚未推出的星伴 StarBuddy。</li>
+        <li>星伴：可选的原创桌面角色「星芽」，默认关闭，不读取剪贴内容。这是星笺里的陪伴功能，与独立筹备的星搭子 StarBuddy 分开开发。</li>
         <li>隐私与本机 AI：支持本地敏感检测、关键词和精确域名规则。MCP、数据 CLI 与 Skill 默认关闭，历史读取只返回明确选中的记录和字段。</li>
       </ul>
       <p class="callout">README 的产品范围写明：GIF 动画、OCR、跨设备同步、公开分享链接、多片段分享页、备注、自动粘贴、在线运行和 AI 解释尚未实现。剪贴内容以明文、未加密的形式保存在本机。检查更新会连接 GitHub 获取更新信息，不上传剪贴内容。0.2.4 起可选使用统计有三种模式：不发送、每次运行随机编号（缺省）、本机固定随机编号；统计不含剪贴内容。</p>
     </section>
 
     <section class="doc-section reveal">
-      <h2>当前版本 v0.2.5</h2>
+      <h2>当前版本 v0.2.6</h2>
+      <p class="prose">星笺 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.6">v0.2.6</a> 已于 2026-11-12 发布，提供 Apple Silicon macOS 与 Windows x64 安装包。</p>
+      <ul class="features">
+        <li>仓库、帮助页、Homebrew 与宣传素材统一使用星梦科技组织地址。</li>
+        <li>本版本起应用内更新从组织仓库获取，旧版本继续通过兼容仓库读取更新。</li>
+        <li>推荐组织 Homebrew Tap，原个人 Tap 的安装仍可按原命令升级。</li>
+      </ul>
+    </section>
+
+    <section class="doc-section reveal">
+      <h2>v0.2.5 功能回顾</h2>
       <p class="prose">以下摘自已发布的 <a href="https://github.com/StarDreamTech/starclip/releases/tag/v0.2.5">星笺 v0.2.5</a> 说明。GitHub 记录的发布时间是 2026-11-10 16:42 UTC。</p>
       <ul class="features">
         <li>新增 Markdown 图片：素纸、星紫、深夜三款本地主题，可调宽度和字号，并导出 2 倍 PNG。</li>
@@ -123,8 +133,8 @@
       <p class="callout">项目 README 还记录了同一份 Cask 的个人 Tap：<code>brew install --cask cpython666/tap/starclip</code>。若 Homebrew 提示这份 Cask 未受信任，README 写明可按安装来源执行 <code>brew trust --cask stardreamtech/tap/starclip</code> 后重试。</p>
       <p class="prose">也可以从 GitHub Release 下载安装包：</p>
       <ul class="file-list">
-        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.5/Starclip_0.2.5_aarch64.dmg">Starclip_0.2.5_aarch64.dmg <span>Apple Silicon macOS</span></a></li>
-        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.5/Starclip_0.2.5_x64-setup.exe">Starclip_0.2.5_x64-setup.exe <span>Windows x64</span></a></li>
+        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.6/Starclip_0.2.6_aarch64.dmg">Starclip_0.2.6_aarch64.dmg <span>Apple Silicon macOS</span></a></li>
+        <li><a href="https://github.com/StarDreamTech/starclip/releases/download/v0.2.6/Starclip_0.2.6_x64-setup.exe">Starclip_0.2.6_x64-setup.exe <span>Windows x64</span></a></li>
       </ul>
       <p class="callout">首次打开时 macOS 可能会拦截尚未公证的应用。安装前请先阅读该版本的发布说明，并用 Release 页面上的 SHA256SUMS 核对文件。</p>
       <div class="doc-cta">

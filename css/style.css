@@ -315,7 +315,8 @@ h2{margin:0;font-family:var(--serif);font-size:clamp(30px,3.6vw,44px);letter-spa
 .card:hover::before{opacity:1}
 .card:hover .card-glow{opacity:1}
 
-.card-top{display:flex;align-items:center;gap:16px}
+.card-top{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:10px 16px}
+.card-top .badge{grid-column:2;justify-self:start}
 .app-icon{width:60px;height:60px;border-radius:16px;flex:none;box-shadow:0 10px 30px -8px color-mix(in srgb,var(--accent) 60%,transparent),0 0 0 1px var(--icon-ring)}
 .title{flex:1;min-width:0}
 h3{margin:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -490,7 +491,7 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
   .h-cn{letter-spacing:.08em;padding-left:.08em}
   .h-en{letter-spacing:.32em;padding-left:.32em}
   .terminal pre{font-size:11.5px;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere}
-  .eyebrow{font-size:10.5px;letter-spacing:.1em;padding:7px 12px;white-space:nowrap}
+  .eyebrow{font-size:10.5px;letter-spacing:.1em;padding:7px 12px;max-width:100%;line-height:1.5}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}

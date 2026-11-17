@@ -5,8 +5,8 @@
   <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
   <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>星哨 StarWatch · 筹备中 · 星梦科技</title>
-  <meta name="description" content="星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。">
+  <title>星哨 StarWatch · 网页监控 · 接口探活 · 星梦科技</title>
+  <meta name="description" content="可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。">
   <meta name="theme-color" content="#05060f">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../css/style.css">
@@ -17,17 +17,17 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="星梦科技 StarDreamTech">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:title" content="星哨 StarWatch · 筹备中 · 星梦科技">
-  <meta property="og:description" content="星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。">
+  <meta property="og:title" content="星哨 StarWatch · 网页监控 · 接口探活 · 星梦科技">
+  <meta property="og:description" content="可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。">
   <meta property="og:url" content="https://stardreamtech.github.io/projects/starwatch/">
   <meta property="og:image" content="https://stardreamtech.github.io/assets/social.png">
   <meta property="og:image:alt" content="星哨 StarWatch">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="星哨 StarWatch · 筹备中 · 星梦科技">
-  <meta name="twitter:description" content="星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。">
+  <meta name="twitter:title" content="星哨 StarWatch · 网页监控 · 接口探活 · 星梦科技">
+  <meta name="twitter:description" content="可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。">
   <meta name="twitter:image" content="https://stardreamtech.github.io/assets/social.png">
   <link rel="alternate" type="text/plain" href="https://stardreamtech.github.io/llms.txt" title="项目与文档索引">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://stardreamtech.github.io/#organization","name":"星梦科技","alternateName":"StarDreamTech","url":"https://stardreamtech.github.io/","logo":"https://stardreamtech.github.io/assets/logo.svg","sameAs":["https://github.com/StarDreamTech"]},{"@type":"WebSite","@id":"https://stardreamtech.github.io/#website","url":"https://stardreamtech.github.io/","name":"星梦科技 StarDreamTech","inLanguage":"zh-CN","publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"WebPage","@id":"https://stardreamtech.github.io/projects/starwatch/#webpage","url":"https://stardreamtech.github.io/projects/starwatch/","name":"星哨 StarWatch · 筹备中 · 星梦科技","description":"星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。","inLanguage":"zh-CN","isPartOf":{"@id":"https://stardreamtech.github.io/#website"},"about":{"@id":"https://stardreamtech.github.io/projects/starwatch/#software"},"publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"SoftwareSourceCode","@id":"https://stardreamtech.github.io/projects/starwatch/#software","name":"星哨 StarWatch","description":"星哨 StarWatch 仍在筹备：计划做可自定义 cron 的网页变化监控，以及接口探活和压测调度。仓库已建立，还没有可安装的版本。","url":"https://stardreamtech.github.io/projects/starwatch/","codeRepository":"https://github.com/StarDreamTech/starwatch","author":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"星梦科技","item":"https://stardreamtech.github.io/"},{"@type":"ListItem","position":2,"name":"星哨 StarWatch","item":"https://stardreamtech.github.io/projects/starwatch/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://stardreamtech.github.io/#organization","name":"星梦科技","alternateName":"StarDreamTech","url":"https://stardreamtech.github.io/","logo":"https://stardreamtech.github.io/assets/logo.svg","sameAs":["https://github.com/StarDreamTech"]},{"@type":"WebSite","@id":"https://stardreamtech.github.io/#website","url":"https://stardreamtech.github.io/","name":"星梦科技 StarDreamTech","inLanguage":"zh-CN","publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"WebPage","@id":"https://stardreamtech.github.io/projects/starwatch/#webpage","url":"https://stardreamtech.github.io/projects/starwatch/","name":"星哨 StarWatch · 网页监控 · 接口探活 · 星梦科技","description":"可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。","inLanguage":"zh-CN","isPartOf":{"@id":"https://stardreamtech.github.io/#website"},"about":{"@id":"https://stardreamtech.github.io/projects/starwatch/#software"},"publisher":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"SoftwareSourceCode","@id":"https://stardreamtech.github.io/projects/starwatch/#software","name":"星哨 StarWatch","description":"可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。","url":"https://stardreamtech.github.io/projects/starwatch/","codeRepository":"https://github.com/StarDreamTech/StarWatch","author":{"@id":"https://stardreamtech.github.io/#organization"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"星梦科技","item":"https://stardreamtech.github.io/"},{"@type":"ListItem","position":2,"name":"星哨 StarWatch","item":"https://stardreamtech.github.io/projects/starwatch/"}]}]}</script>
   <!-- search:end -->
 </head>
 <body>
@@ -68,43 +68,37 @@
         <h1><span class="cn">星哨</span><span class="en">StarWatch</span></h1>
         <p class="role">网页监控 · 接口探活</p>
       </div>
-      <span class="badge badge-soft">筹备中</span>
+      <span class="badge badge-soft">开发中</span>
     </header>
-    <p class="one-liner reveal">可自定义 cron 的网页变化监控与接口探活 / 压测调度平台。</p>
-    <p class="prose reveal">这是规划，不是已经能安装使用的产品。仓库已经建立，代码还在准备，GitHub 上还没有 Release。欢迎 Watch 仓库，关注后面的进展。</p>
-    <div class="callout callout-plan reveal"><strong>还不能当作可用软件。</strong>下面的功能、技术栈和许可，都来自仓库 README 与组织首页已经写明的句子，不代表这些能力已经做好。</div>
-    <div class="chips reveal"><span>规划技术栈 · Vue + FastAPI + MongoDB</span><span>MIT</span><span>尚无 Release</span></div>
+    <p class="one-liner reveal">可自托管的定时监控平台，按指定字段监测网页和接口，并比较历史内容。</p>
+    <p class="prose reveal">已实现任务调度、内容提取、历史版本对比和通知。调度器保存任务与运行记录，抓取器负责发请求，前端查看结果。按单副本调度器部署，完整配置以仓库 README 为准。</p>
+    <div class="chips reveal"><span>Vue · FastAPI · MongoDB</span><span>Docker Compose</span><span>MIT</span></div>
+    <p class="callout reveal"><strong>当前状态：</strong>已提供实现代码与 Docker Compose 启动方式，尚无正式 Release 或独立安装包。</p>
 
     <section class="doc-section reveal">
-      <h2>主要功能</h2>
-      <p class="prose">仓库 README 目前的全文是：标题 StarSentinel，以及「星哨 StarSentinel：可自定义 cron 的网页变化监控与接口探活/压测调度平台（Vue + FastAPI + MongoDB）」。组织首页和仓库名使用星哨 StarWatch，描述与这句规划相同。README 没有再展开界面、告警或部署步骤，所以这里也不增补。</p>
+      <h2>项目能力与进度</h2>
       <ul class="features">
-        <li>可自定义 cron 的调度。</li>
-        <li>网页变化监控。</li>
-        <li>接口探活。</li>
-        <li>接口压测调度。</li>
-        <li>规划中的技术栈：Vue、FastAPI、MongoDB。</li>
+        <li>cron 与时间间隔调度，支持网页监控、接口断言和短时压测</li>
+        <li>HTML、JSON 与文本提取，逐行查看历史版本的新增、删除和修改</li>
+        <li>任务、运行记录、快照与通知，抓取器和调度器分离</li>
       </ul>
-      <p class="callout">仓库公开许可为 MIT，与首页芯片一致。除 README、许可文件和 .gitignore 外，仓库里还没有实现代码。</p>
     </section>
 
     <section class="doc-section reveal">
-      <h2>支持平台</h2>
-      <ul class="plat-list">
-        <li><strong>尚未公布</strong>README 和首页都没有列出操作系统。目前没有安装包，不能从技术栈名称推断它已经能在某台电脑上运行。</li>
-      </ul>
+      <h2>平台与交付方式</h2>
+      <p class="prose">以 Web 服务形式自行部署，通过浏览器使用；目前没有独立桌面安装包。</p>
     </section>
 
     <section id="install" class="doc-section reveal">
-      <h2>安装</h2>
-      <p class="prose">没有 Homebrew 配方，也没有已发布的安装包，因此这里不提供安装命令或下载文件。</p>
-      <p class="callout">Release 页面可以打开，但现在没有任何已发布版本。不要把它理解成可以下载的软件。</p>
+      <h2>从源码开始</h2>
+      <p class="prose">以下为仓库 README 中的启动入口，完整依赖和配置请先阅读原始文档。</p>
+      <div class="install"><code>docker compose up --build</code><button class="copy" type="button" data-copy="docker compose up --build" aria-label="复制源码启动命令">复制</button></div>
       <div class="doc-cta">
         <a class="btn btn-primary" href="https://github.com/StarDreamTech/StarWatch" target="_blank" rel="noopener">GitHub 仓库 <span aria-hidden="true">↗</span></a>
-        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/StarWatch/releases" target="_blank" rel="noopener">查看 Release</a>
+        <a class="btn btn-ghost" href="https://github.com/StarDreamTech/StarWatch/blob/main/README.md" target="_blank" rel="noopener">阅读 README</a>
       </div>
-      <p class="back"><a href="/">← 返回星梦科技首页</a></p>
-      <p class="sources">内容整理自 <a href="https://github.com/StarDreamTech/StarWatch/blob/main/README.md">StarWatch README</a>、<a href="https://github.com/StarDreamTech/StarWatch/releases">Release 页面（目前为空）</a> 与组织首页卡片。仓库名大小写为 StarWatch。</p>
+      <p class="back"><a href="/#projects">← 返回全部开源项目</a></p>
+      <p class="sources">核对于 2026-11-17，内容来源：<a href="https://github.com/StarDreamTech/StarWatch/blob/main/README.md">StarWatch README</a> 与公开仓库。开发状态与发行情况以项目最新记录为准。</p>
     </section>
   </main>
 
