@@ -1,0 +1,32 @@
+# StarDreamTech
+
+> 11 public product projects: desktop tools, AI assistants, monitoring and human verification. Includes released, developing and planned projects. Official site: https://stardreamtech.github.io/en/ . Source organization: https://github.com/StarDreamTech .
+
+English: https://stardreamtech.github.io/en/llms.txt
+中文: https://stardreamtech.github.io/llms.txt
+
+## Projects and demos
+
+- [Starclip](https://stardreamtech.github.io/en/projects/starclip/): Starclip is a Rust-powered local-first clipboard manager for text, images and file paths, with code snippets, visual cards and signed in-app updates.
+- [Starshot](https://stardreamtech.github.io/en/projects/starshot/): Starshot is a local-first desktop tool for screenshots, annotation, pinned images and styling, supporting Apple Silicon macOS and Windows x64.
+- [StarVault](https://stardreamtech.github.io/en/projects/starvault/): StarVault is a local-first AI conversation archive with incremental backups, attachments and Skill migration, available as a desktop app, CLI and MCP server.
+- [StarWatch](https://stardreamtech.github.io/en/projects/starwatch/): A self-hosted scheduled platform for monitoring website and API fields and comparing historical content. Source and Docker Compose setup are available without an official release or installer.
+- [StarLock](https://stardreamtech.github.io/en/projects/starlock/): StarLock provides a hosted CAPTCHA SDK for plain HTML, Vue 3 and React 18/19, a FastAPI verification service and Python / Go backend SDKs, with eight challenge types, dialogs and single-use token verification.
+- [StarEnvoy](https://stardreamtech.github.io/en/projects/starenvoy/): Filter BOSS jobs by location, keywords, salary and experience. Working source code is available without an installer; sign in and complete verification yourself in the browser.
+- [StarPort](https://stardreamtech.github.io/en/projects/starport/): Assign local SOCKS ports to selected nodes from a local Clash configuration and manage them from a web page. An initial implementation is available without an official release; provide your own build, configuration and mihomo.
+- [StarCode](https://stardreamtech.github.io/en/projects/starcode/): An open-source AI agent client derived from OpenCode. StarCode has no independent release yet; retained OpenCode installation channels belong to upstream.
+- [StarBuddy](https://stardreamtech.github.io/en/projects/starbuddy/): A personal assistant built around the original Xingya character. The frontend and growth-system preview use in-memory demo data and cannot yet schedule local agents such as Claude Code or Codex.
+- [StarPersona](https://stardreamtech.github.io/en/projects/starpersona/): A planned open-source fingerprint browser and multi-account environment manager. A public repository exists with a project description and license; core code and installable versions are not available yet.
+- [StarDash](https://stardreamtech.github.io/en/projects/stardash/): A planned cross-platform menu bar and tray status panel with animated SVG icons and themes. Only the project description and license are available; core code and installable versions are pending.
+- [StarLock interactive CAPTCHA demo](https://stardreamtech.github.io/en/projects/starlock/demo/): Try StarLock ring rotation, curved puzzles, variable-speed sliders, ordered text clicks, semantic image grids, digits, characters and arithmetic. A browser demo with refresh, keyboard controls and mobile dialogs.
+
+Project status was checked on November 17, 2026. Released desktop products listed here: Starclip v0.2.6, Starshot v0.3.3 and StarVault v0.1.4. StarLock 0.8.0 is a development version.
+
+## StarLock developer documentation
+
+- [README](https://github.com/StarDreamTech/starlock/blob/main/README.md): scope, setup and deployment.
+- [Integration guide](https://github.com/StarDreamTech/starlock/blob/main/docs/integration.md): hosted script, Vue / React and backend verification.
+- [Python / Go SDKs](https://github.com/StarDreamTech/starlock/blob/main/docs/server-sdks.md): standard-library clients, installation, errors and context binding.
+- [Verification records](https://github.com/StarDreamTech/starlock/blob/main/docs/verification.md): checks performed and verification scope.
+
+The demo checks answers in the browser; real integrations verify tokens on the application backend. Public hosted APIs, a production CDN and npm packages are not yet released. Original character images in text-click challenges remain in Chinese. Product capabilities and availability follow the linked public repositories and release records.

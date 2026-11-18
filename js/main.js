@@ -7,6 +7,7 @@
   const btn = document.querySelector('.theme-toggle');
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   const themeColors = { dark: '#05060f', light: '#f3f0f8' };
+  const english = root.lang === 'en';
 
   function currentTheme() {
     return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
@@ -15,7 +16,9 @@
     const t = theme === 'light' ? 'light' : 'dark';
     root.setAttribute('data-theme', t);
     if (themeMeta) themeMeta.setAttribute('content', themeColors[t]);
-    if (btn) btn.setAttribute('aria-label', t === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+    if (btn) btn.setAttribute('aria-label', english
+      ? (t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme')
+      : (t === 'dark' ? '切换到浅色主题' : '切换到深色主题'));
     if (persist) {
       try { localStorage.setItem(KEY, t); } catch (e) {}
     }
@@ -59,7 +62,7 @@
       const text = btnCopy.dataset.copy;
       try { await navigator.clipboard.writeText(text); }
       catch { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
-      const old = btnCopy.textContent; btnCopy.textContent = '已复制'; btnCopy.classList.add('done');
+      const old = btnCopy.textContent; btnCopy.textContent = english ? 'Copied' : '已复制'; btnCopy.classList.add('done');
       setTimeout(() => { btnCopy.textContent = old; btnCopy.classList.remove('done'); }, 1600);
     });
   });
