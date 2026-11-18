@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://stardreamtech.github.io';
 const folders = await readdir(`${root}projects`);
-const paths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
+const chinesePaths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
+const paths = ['', 'en/'].flatMap(prefix => chinesePaths.map(path => prefix + path));
 const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
@@ -42,13 +43,15 @@ for (const path of paths) {
   const image = new URL(html.match(/property="og:image" content="([^"]+)"/)[1]);
   assert.equal(image.origin, origin);
   await access(`${root}${image.pathname}`);
-  assert.ok(html.includes('href="/llms.txt"'), path);
+  assert.ok(html.includes(`href="/${path.startsWith('en/') ? 'en/' : ''}llms.txt"`), path);
 }
 const robots = await readFile(`${root}robots.txt`, 'utf8');
 assert.match(robots, /User-agent: \*\s+Allow: \//);
 assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
 const index = await readFile(`${root}llms.txt`, 'utf8');
-for (const path of paths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
+for (const path of chinesePaths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
+const englishIndex = await readFile(`${root}en/llms.txt`, 'utf8');
+for (const path of chinesePaths.slice(1)) assert.ok(englishIndex.includes(`${origin}/en/${path}`));
 const css = await readFile(`${root}css/style.css`, 'utf8');
 assert.match(css, /\.reveal\{opacity:1;transform:none/);
 console.log(`PASS: ${folders.length} public projects, homepage cards and count, ${paths.length} static pages, canonical URLs, JSON-LD, sitemap, crawler access, image assets and document index.`);

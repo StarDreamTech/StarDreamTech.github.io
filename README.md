@@ -1,5 +1,7 @@
 # StarDreamTech.github.io
 
+简体中文（默认） | [English](README.en.md)
+
 星梦科技 StarDreamTech 组织主页，发布于 https://stardreamtech.github.io 。
 
 纯静态站点，无需构建：`index.html` + `css/style.css` + `js/main.js` + `assets/`。
@@ -9,6 +11,14 @@
 应用图标优先取自各项目仓库；星哨、星搭子、星口、星相和星盘使用本站 SVG 展示图标；星锁使用项目专用紫色锁形 Logo。
 
 支持明、暗两套主题。首次访问跟随系统 `prefers-color-scheme`，手动切换后写入 `localStorage`（键名 `sdt-theme`）。
+
+## 中英文页面
+
+原有路径默认中文，英文首页为 https://stardreamtech.github.io/en/ 。首页、11 个公开项目介绍页和星锁试玩均提供 English / 中文入口，共 26 个静态 HTML 页面。切换使用普通链接，开启 JavaScript 时保留查询参数与锚点；英文页的站内导航、试玩入口和资料索引始终留在 `/en/`。不按浏览器语言自动跳转，也不改变中文默认入口。
+
+英文正文直接写在 HTML 中，不依赖运行时替换。更新中文页面后，在 `scripts/translations.en.json` 就地维护对应英文，再运行 `node scripts/build-english.mjs`。它会重新生成 `en/`、中英元信息和站点地图；缺少译文时直接报错。共享样式、图片和主要脚本只有一份。英文试玩脚本由原始导出生成，仅将题目读取地址固定到共享的中文路径，不复制题库图片；`js/demo-english.js` 翻译动态提示、无障碍名称和 Shadow DOM 弹窗，不改变挑战答案和校验流程。文字点选题保留原始中文字符图片，英文页有明确说明。
+
+重新导出星锁 demo 后，再运行生成命令；若上游题目加载器结构变化，生成会报错，先复核适配处再更新。第三方许可证、外链文档和产品下载包保留原来源，不承诺它们都已有英文版本。
 
 ## 项目介绍页
 
@@ -57,14 +67,15 @@ node scripts/check-analytics.mjs
 
 ## 搜索发现与 AI 检索
 
-十三个页面（首页、11 个项目介绍和星锁试玩）直接提供静态正文、独立标题与摘要、canonical、Open Graph / Twitter 分享信息，以及 Organization、WebSite、WebPage、SoftwareSourceCode 和面包屑结构化资料。星锁页包含可见的常见问题、中英文项目说明和原始文档链接。页面正文在 JavaScript 不执行时也可见。
+中英文共 26 个页面直接提供静态正文、独立标题与摘要、canonical、双向 `hreflang`（中文为 `x-default`）、Open Graph / Twitter 分享信息，以及 Organization、WebSite、WebPage、SoftwareSourceCode 和面包屑结构化资料。星锁页包含可见的常见问题、中英文项目说明和原始文档链接。页面正文在 JavaScript 不执行时也可见。
 
-`robots.txt` 允许公开内容抓取，`sitemap.xml` 列出十三个规范页面。`llms.txt` 是项目与文档的简明链接索引，页脚也提供入口。内容更新后运行以下命令同步并检查元信息。
+`robots.txt` 允许公开内容抓取，`sitemap.xml` 列出 26 个规范页面。`llms.txt` 与 `en/llms.txt` 是对应语言的项目与文档索引，页脚也提供入口。内容更新后运行以下命令生成英文页并同步、检查元信息。
 
 ```bash
-node scripts/update-search.mjs
+node scripts/build-english.mjs
 node scripts/check-search.mjs
 node scripts/check-analytics.mjs
+node scripts/check-i18n.mjs
 ```
 
 站点发布并确认线上内容后，可通知参与 IndexNow 的搜索引擎。`indexnow.txt` 是按协议公开托管的站点所有权验证文件。
