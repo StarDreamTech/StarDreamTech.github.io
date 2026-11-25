@@ -19,7 +19,8 @@ const projects = [
 const organization = {
   '@type': 'Organization', '@id': `${origin}/#organization`,
   name: '星梦科技', alternateName: 'StarDreamTech', url: `${origin}/`,
-  logo: `${origin}/assets/logo.svg`, sameAs: ['https://github.com/StarDreamTech'],
+  logo: `${origin}/assets/logo.svg`, email: 'mailto:hi@stardreamfly.com',
+  sameAs: ['https://github.com/StarDreamTech'],
 };
 const website = {
   '@type': 'WebSite', '@id': `${origin}/#website`, url: `${origin}/`,
@@ -76,6 +77,7 @@ for (const page of pages) {
     .replace(/^  <link rel="canonical"[^>]*>\n/gm, '')
     .replace(/^  <meta property="og:[^>]*>\n/gm, '');
   const tags = `  <!-- search:start -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="canonical" href="${url}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">

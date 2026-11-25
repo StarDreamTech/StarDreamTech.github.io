@@ -5,7 +5,7 @@
 纯静态站点，无需构建：`index.html` + `css/style.css` + `js/main.js` + `assets/`。
 本地预览：`python3 -m http.server` 后打开 http://localhost:8000 。
 
-项目信息来源：各仓库 description / README / 最新 Release 与 StarDreamTech/homebrew-tap 中的 Cask（2026-11-17 核对）。
+项目信息来源：各仓库 description / README / 最新 Release 与 StarDreamTech/homebrew-tap 中的 Cask（2026-11-25 核对）。联系邮箱：`hi@stardreamfly.com`。
 应用图标优先取自各项目仓库；星哨、星搭子、星口、星相和星盘使用本站 SVG 展示图标；星锁使用项目专用紫色锁形 Logo。
 
 支持明、暗两套主题。首次访问跟随系统 `prefers-color-scheme`，手动切换后写入 `localStorage`（键名 `sdt-theme`）。
@@ -26,7 +26,7 @@
 - 星相 StarPersona：https://stardreamfly.com/projects/starpersona/ （`projects/starpersona/index.html`）
 - 星盘 StarDash：https://stardreamfly.com/projects/stardash/ （`projects/stardash/index.html`）
 
-星笺 v0.2.6、星镜 v0.3.3 与星匣 v0.1.4 已有正式安装包；星锁、星哨、星使和星口已有功能实现，但没有正式 Release；星码为 fork 初始化、星搭子为第 0 期前端预览、星相和星盘为项目筹备。筹备能力明确标为规划，不提供虚构下载入口。私有项目不列入公开目录，官网与 Homebrew 安装源不计作产品。
+星笺 v0.2.7、星镜 v0.3.3 与星匣 v0.1.4 已有正式安装包；星锁、星哨、星使和星口已有功能实现，但没有正式 Release；星码为 fork 初始化、星搭子为第 0 期前端预览、星相和星盘为项目筹备。筹备能力明确标为规划，不提供虚构下载入口。私有项目不列入公开目录，官网与 Homebrew 安装源不计作产品。
 
 星锁按 0.8.0 源码与文档核对，包含八种挑战、托管 SDK、Vue 3 和 React 18/19 组件，以及 Python / Go 服务端 SDK。介绍页提供 README、接入指南与框架示例入口。在线交互 demo 采用浏览器内演示判定；正式业务接入继续使用服务端校验，npm 包与公共验证 API 尚未发布。
 

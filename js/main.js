@@ -64,6 +64,29 @@
     });
   });
 
+  /* project stage filter */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectGrid = document.querySelector('#projects .grid');
+  if (filterBtns.length && projectGrid) {
+    const cards = [...projectGrid.querySelectorAll('.card[data-stage]')];
+    filterBtns.forEach(btnFilter => {
+      btnFilter.addEventListener('click', () => {
+        const stage = btnFilter.dataset.filter || 'all';
+        filterBtns.forEach(b => {
+          const active = b === btnFilter;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        projectGrid.classList.toggle('is-filtered', stage !== 'all');
+        cards.forEach(card => {
+          const visible = stage === 'all' || card.dataset.stage === stage;
+          card.classList.toggle('is-hidden', !visible);
+          if (visible) card.classList.add('in');
+        });
+      });
+    });
+  }
+
   /* starfield */
   const cv = document.getElementById('sky'); if (!cv) return;
   const ctx = cv.getContext('2d');
