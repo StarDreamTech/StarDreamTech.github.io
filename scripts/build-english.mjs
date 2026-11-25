@@ -34,10 +34,37 @@ function translateMailto(value) {
   return `${address}?${serialized}`;
 }
 
+function renderEnglishLangMenu(pagePath) {
+  return `<details class="lang-menu">
+        <summary class="lang-trigger" aria-label="Switch language">
+          <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18"></path>
+          </svg>
+          <span>EN</span>
+          <svg class="lang-caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.5 6.5 8 10l3.5-3.5"></path>
+          </svg>
+        </summary>
+        <div class="lang-dropdown" role="menu">
+          <a class="lang-opt language-switch" role="menuitem" href="/${pagePath}" lang="zh-CN" hreflang="zh-CN">
+            <span>简体中文</span>
+          </a>
+          <a class="lang-opt is-active" role="menuitem" href="/en/${pagePath}" lang="en" hreflang="en" aria-current="page">
+            <span>English</span>
+            <svg class="lang-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 5"></path></svg>
+          </a>
+        </div>
+      </details>`;
+}
+
 for (const page of pages) {
   const source = `${root}/${page.path}index.html`;
   const destination = `${root}/en/${page.path}index.html`;
   let html = (await readFile(source, 'utf8')).replace(/\s*<!-- search:start -->[\s\S]*?<!-- search:end -->/g, '');
+  const langMenuRe = /<details class="lang-menu">[\s\S]*?<\/details>/;
+  assert.match(html, langMenuRe, `Missing language dropdown in ${page.path}index.html`);
+  html = html.replace(langMenuRe, '<!-- lang-menu -->');
   html = html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->|<[^>]+>|[^<]+/g, token => {
     if (/^<style\b|^<!--/i.test(token) || /^<script\b/i.test(token) && !/\bsrc=/.test(token)) return token;
     if (!token.startsWith('<')) return translate(token);
@@ -57,7 +84,7 @@ for (const page of pages) {
       });
   });
   html = html.replace('<html lang="zh-CN">', '<html lang="en">');
-  html = html.replace(/<a class="language-switch"[^>]*>English<\/a>/, `<a class="language-switch" href="/${page.path}" lang="zh-CN" hreflang="zh-CN" aria-label="用中文阅读本页">中文</a>`);
+  html = html.replace('<!-- lang-menu -->', renderEnglishLangMenu(page.path));
   if (page.path.endsWith('/demo/')) {
     const bundlePath = html.match(/<script type="module"[^>]+src="([^"]+)"/)[1];
     const bundle = await readFile(resolve(dirname(destination), bundlePath), 'utf8');

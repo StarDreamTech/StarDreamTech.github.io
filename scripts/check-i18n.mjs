@@ -14,14 +14,15 @@ for (const prefix of ['', 'en/']) {
     documents.set(path, await readFile(`${root}/${path}`, 'utf8'));
   }
 }
-const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星口', '星码', '星搭子', '星相', '星盘', '中文']);
+const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星口', '星码', '星搭子', '星相', '星盘', '中文', '简体中文']);
 for (const [path, html] of documents) {
   const english = path.startsWith('en/');
   const pagePath = path.replace(/^en\//, '').replace(/index\.html$/, '');
   const counterpart = english ? `/${pagePath}` : `/en/${pagePath}`;
   assert.ok(html.includes(`<html lang="${english ? 'en' : 'zh-CN'}">`), path);
-  assert.equal((html.match(/class="language-switch"/g) || []).length, 1, path);
-  assert.match(html, new RegExp(`class="language-switch" href="${counterpart}"`), path);
+  assert.equal((html.match(/class="lang-menu"/g) || []).length, 1, path);
+  assert.equal((html.match(/\blanguage-switch\b/g) || []).length, 1, path);
+  assert.match(html, new RegExp(`class="[^"]*\\blanguage-switch\\b[^"]*"[^>]*href="${counterpart}"`), path);
   for (const [language, prefix] of [['zh-CN', ''], ['en', 'en/'], ['x-default', '']]) {
     assert.ok(html.includes(`hreflang="${language}" href="${origin}/${prefix}${pagePath}"`), path);
   }
@@ -48,7 +49,8 @@ for (const [path, html] of documents) {
     assert.ok(resolve(root, target).startsWith(root + '/'), `${path}: path must stay within site`);
     await access(`${root}/${target}`);
     if (documents.has(target)) {
-      if (kind === 'href' && !body.includes(`class="language-switch" href="${value}"`)) {
+      const isLangSwitch = new RegExp(`class="[^"]*\\blanguage-switch\\b[^"]*"[^>]*href="${value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`).test(body);
+      if (kind === 'href' && !isLangSwitch) {
         // Metadata alternates are deliberately cross-language, navigation is not.
         const navigation = html.slice(html.indexOf('<body>'));
         if (navigation.includes(`href="${value}"`)) assert.equal(target.startsWith('en/'), english, `${path}: navigation leaves current language: ${value}`);
@@ -68,12 +70,33 @@ for (const [targetPath, location] of [
   ['/en/projects/starlock/demo/', { href: `${origin}/projects/starlock/demo/?kind=text#demo-title`, search: '?kind=text', hash: '#demo-title' }],
 ]) {
   const link = { getAttribute: () => targetPath };
+  const docListeners = {};
+  const trigger = { focused: false, focus() { this.focused = true; } };
+  const menu = {
+    open: true,
+    contains: () => false,
+    querySelector: sel => (sel === '.lang-trigger' ? trigger : null),
+  };
   const listeners = {};
-  vm.runInNewContext(languageScript, { URL, location, document: { querySelector: () => link }, addEventListener: (event, callback) => { listeners[event] = callback; } });
+  vm.runInNewContext(languageScript, {
+    URL,
+    location,
+    document: {
+      querySelector: sel => (sel === '.language-switch' ? link : sel === 'details.lang-menu' ? menu : null),
+      addEventListener: (event, callback) => { docListeners[event] = callback; },
+    },
+    addEventListener: (event, callback) => { listeners[event] = callback; },
+  });
   assert.equal(link.href, targetPath + location.search + location.hash);
   location.hash = '#top';
   listeners.hashchange();
   assert.equal(link.href, targetPath + location.search + '#top');
+  docListeners.click({ target: {} });
+  assert.equal(menu.open, false);
+  menu.open = true;
+  docListeners.keydown({ key: 'Escape' });
+  assert.equal(menu.open, false);
+  assert.equal(trigger.focused, true);
 }
 const chineseReadme = await readFile(`${root}/README.md`, 'utf8');
 const englishReadme = await readFile(`${root}/README.en.md`, 'utf8');

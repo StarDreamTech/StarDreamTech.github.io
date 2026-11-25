@@ -106,14 +106,14 @@
   }
   function localize(node) {
     if (node.nodeType === Node.TEXT_NODE) {
-      if (node.parentElement?.closest('script, style, .language-switch')) return;
+      if (node.parentElement?.closest('script, style, .lang-menu, .language-switch')) return;
       const value = translate(node.nodeValue);
       if (value !== node.nodeValue) node.nodeValue = value;
       return;
     }
     if (node.nodeType !== Node.ELEMENT_NODE && node.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) return;
     if (node.nodeType === Node.ELEMENT_NODE) {
-      if (node.matches('script, style, .language-switch')) return;
+      if (node.matches('script, style, .lang-menu, .language-switch')) return;
       for (const name of ['aria-label', 'aria-valuetext', 'alt', 'title', 'placeholder']) {
         if (!node.hasAttribute(name)) continue;
         const value = translate(node.getAttribute(name));
