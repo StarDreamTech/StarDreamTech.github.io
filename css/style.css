@@ -218,7 +218,8 @@ html.theme-ready .plat-list li,
 html.theme-ready .services-contact,
 html.theme-ready .svc-mark,
 html.theme-ready .filter-btn,
-html.theme-ready .contact-email{
+html.theme-ready .contact-email,
+html.theme-ready .language-switch{
   transition:background .4s ease,background-color .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease;
 }
 
@@ -246,6 +247,14 @@ html.theme-ready .contact-email{
 .nav-links a:hover{color:var(--hover)}
 .nav-gh{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass)}
 .nav-gh svg{width:15px;height:15px}
+.language-switch{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);white-space:nowrap}
+.language-switch:hover{border-color:color-mix(in srgb,var(--violet) 45%,var(--line));color:var(--hover)}
+.language-switch:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+html[lang="en"] .brand-cn,html[lang="en"] .title .cn,html[lang="en"] .h-cn{display:none}
+html[lang="en"] .brand-en{display:inline;color:var(--ink);font-size:1em}
+html[lang="en"] .h-en{font-size:clamp(28px,7vw,88px);letter-spacing:.02em;padding-left:0}
+html[lang="en"] .doc h1 .en{font-size:clamp(32px,6vw,60px)}
+html[lang="en"] .tagline,html[lang="en"] .one-liner{font-family:var(--sans);letter-spacing:0}
 
 .theme-toggle{
   position:relative;width:40px;height:40px;padding:0;flex:none;border-radius:50%;
@@ -508,10 +517,13 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
 @media (max-width:760px){
   .nav{padding:14px 16px}
   .nav-links{gap:10px}
-  .nav-links a:not(.nav-gh){display:none}
+  .nav-links a:not(.nav-gh):not(.language-switch){display:none}
   .brand-en{display:none}
-  .filter-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:340px}
-  .filter-btn{justify-content:center;padding:8px 12px;font-size:13px}
+  html[lang="en"] .nav-gh{padding:7px 9px}
+  html[lang="en"] .nav-gh span{display:none}
+  .language-switch{padding:6px 9px}
+  .filter-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:360px}
+  .filter-btn{justify-content:center;padding:8px 12px;font-size:13px;white-space:nowrap}
   .grid{grid-template-columns:1fr;gap:16px}
   .card,.card-wide,.grid:not(.is-filtered) .card:nth-child(3),.grid .card:nth-child(3){grid-column:auto}
   .card{padding:22px 18px 20px}
@@ -534,4 +546,9 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
+}
+@media(max-width:400px){
+  html[lang="en"] .nav .brand{gap:7px}
+  html[lang="en"] .nav .brand img{width:24px;height:24px}
+  html[lang="en"] .nav .brand-en{font-size:14px}
 }

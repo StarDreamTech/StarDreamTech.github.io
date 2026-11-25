@@ -9,7 +9,8 @@ assert.equal(cname, new URL(origin).host, 'CNAME must match canonical site host'
 const folders = (await readdir(`${root}projects`, { withFileTypes: true }))
   .filter(entry => entry.isDirectory() && !entry.name.startsWith('.'))
   .map(entry => entry.name);
-const paths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
+const chinesePaths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
+const paths = ['', 'en/'].flatMap(prefix => chinesePaths.map(path => prefix + path));
 const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
@@ -30,6 +31,7 @@ for (const folder of folders) {
 for (const path of paths) {
   const html = await readFile(`${root}${path}index.html`, 'utf8');
   const url = `${origin}/${path}`;
+  const isEnglish = path.startsWith('en/');
   assert.equal((html.match(/rel="canonical"/g) || []).length, 1, path);
   assert.ok(html.includes(`<link rel="canonical" href="${url}">`), path);
   assert.ok(locations.includes(url), path);
@@ -43,16 +45,19 @@ for (const path of paths) {
   const webpage = data['@graph'].find(item => item['@type'] === 'WebPage');
   assert.equal(webpage.url, url);
   assert.equal(webpage.name, title);
+  assert.equal(webpage.inLanguage, isEnglish ? 'en' : 'zh-CN');
   const image = new URL(html.match(/property="og:image" content="([^"]+)"/)[1]);
   assert.equal(image.origin, origin);
   await access(`${root}${image.pathname}`);
-  assert.ok(html.includes('href="/llms.txt"'), path);
+  assert.ok(html.includes(`href="/${isEnglish ? 'en/' : ''}llms.txt"`), path);
 }
 const robots = await readFile(`${root}robots.txt`, 'utf8');
 assert.match(robots, /User-agent: \*\s+Allow: \//);
 assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
 const index = await readFile(`${root}llms.txt`, 'utf8');
-for (const path of paths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
+for (const path of chinesePaths.slice(1)) assert.ok(index.includes(`${origin}/${path}`));
+const englishIndex = await readFile(`${root}en/llms.txt`, 'utf8');
+for (const path of chinesePaths.slice(1)) assert.ok(englishIndex.includes(`${origin}/en/${path}`));
 const css = await readFile(`${root}css/style.css`, 'utf8');
 assert.match(css, /\.reveal\{opacity:1;transform:none/);
 console.log(`PASS: ${folders.length} public projects, homepage cards and count, ${paths.length} static pages, canonical URLs, JSON-LD, sitemap, crawler access, image assets and document index.`);

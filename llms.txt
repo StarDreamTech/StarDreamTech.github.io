@@ -1,5 +1,8 @@
 # 星梦科技 StarDreamTech
 
+中文: https://stardreamfly.com/llms.txt
+English: https://stardreamfly.com/en/llms.txt
+
 > 11 个公开产品项目，涵盖桌面工具、AI 助手、监控和人机验证；包含已发行、开发中与筹备项目。官方项目入口为 https://stardreamfly.com/ ，联系邮箱为 hi@stardreamfly.com ，源码组织为 https://github.com/StarDreamTech 。
 
 ## 项目
