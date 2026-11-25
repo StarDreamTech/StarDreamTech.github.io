@@ -510,12 +510,16 @@ h3 .en{font-family:var(--display);font-size:16px;font-weight:500;color:var(--acc
   .nav-links{gap:10px}
   .nav-links a:not(.nav-gh){display:none}
   .brand-en{display:none}
+  .filter-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:340px}
+  .filter-btn{justify-content:center;padding:8px 12px;font-size:13px}
   .grid{grid-template-columns:1fr;gap:16px}
-  .card,.card-wide,.grid .card:nth-child(3){grid-column:auto}
+  .card,.card-wide,.grid:not(.is-filtered) .card:nth-child(3),.grid .card:nth-child(3){grid-column:auto}
   .card{padding:22px 18px 20px}
   .install-card{grid-template-columns:1fr;gap:26px}
   .services-grid{grid-template-columns:1fr}
   .services-grid .card{grid-column:auto}
+  .contact-actions{width:100%}
+  .contact-email{max-width:100%;overflow-x:auto}
   .stats{grid-template-columns:1fr 1fr}
   .stats div:nth-child(3){grid-column:1/-1;border-left:0;border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
   .footer{grid-template-columns:1fr}
