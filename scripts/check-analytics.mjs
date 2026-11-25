@@ -7,7 +7,8 @@ import vm from 'node:vm';
 
 const GA_MEASUREMENT_ID = 'G-X4TGP2S2YL';
 const CLARITY_PROJECT_ID = 'zccwljdddd';
-const SITE_HOST = 'stardreamtech.github.io';
+const SITE_HOST = 'stardreamfly.com';
+const ALLOWED_HOSTS = ['stardreamfly.com', 'stardreamtech.github.io'];
 const THEME_SCRIPT = "<script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>";
 
 const root = resolve(import.meta.dirname, '..');
@@ -18,7 +19,8 @@ assert.match(source, new RegExp(`const GA_MEASUREMENT_ID = '${GA_MEASUREMENT_ID}
 assert.match(source, new RegExp(`const CLARITY_PROJECT_ID = '${CLARITY_PROJECT_ID}';`));
 assert.deepEqual([...new Set(source.match(/G-[A-Z0-9]+/g))], [GA_MEASUREMENT_ID]);
 assert.equal([...source.matchAll(new RegExp(CLARITY_PROJECT_ID, 'g'))].length, 1);
-assert.match(source, /location\.hostname !== 'stardreamtech\.github\.io'/);
+assert.match(source, /const SITE_HOSTS = new Set\(\['stardreamfly\.com',\s*'stardreamtech\.github\.io'\]\);/);
+assert.match(source, /!SITE_HOSTS\.has\(location\.hostname\)/);
 assert.match(source, /send_page_view:\s*false/);
 assert.match(source, /allow_google_signals:\s*false/);
 assert.match(source, /allow_ad_personalization_signals:\s*false/);
@@ -44,7 +46,8 @@ assert.ok(pages.length >= 5, '至少应覆盖首页和四个项目介绍页');
 
 for (const file of pages) {
   const html = await readFile(file, 'utf8');
-  const rel = relative(dirname(file), analyticsPath).split(sep).join('/');
+  const isNotFoundPage = relative(root, file) === '404.html';
+  const rel = isNotFoundPage ? '/js/analytics.js' : relative(dirname(file), analyticsPath).split(sep).join('/');
   const tag = `<script src="${rel}" defer></script>`;
   const head = html.match(/<head>([\s\S]*?)<\/head>/);
   assert.ok(head, `${file} 缺少 head`);
@@ -117,7 +120,18 @@ const sameSiteView = sameSite.commands.find((command) => command[0] === 'event' 
 assert.equal(sameSiteView[2].page_referrer, `https://${SITE_HOST}/projects/starclip/`);
 assert.doesNotMatch(JSON.stringify(sameSite.commands), /secret|utm/);
 
-for (const hostname of ['localhost', '127.0.0.1', 'example.com', `${SITE_HOST}.example`]) {
+for (const allowedHost of ALLOWED_HOSTS) {
+  const allowed = runAnalytics({
+    hostname: allowedHost,
+    origin: `https://${allowedHost}`,
+    pathname: '/',
+    search: '',
+    hash: '',
+  }, '');
+  assert.equal(allowed.created.length, 2, `${allowedHost} 应正常加载 GA 与 Clarity`);
+}
+
+for (const hostname of ['localhost', '127.0.0.1', 'example.com', `${SITE_HOST}.example`, `www.${SITE_HOST}`]) {
   const blocked = runAnalytics({
     hostname,
     origin: `http://${hostname}:8000`,
@@ -129,4 +143,4 @@ for (const hostname of ['localhost', '127.0.0.1', 'example.com', `${SITE_HOST}.e
   assert.deepEqual(blocked.created, [], `${hostname} 不应加载统计脚本`);
 }
 
-console.log(`PASS: ${pages.length} 个 HTML 已 defer 引用 analytics.js；GA4 ${GA_MEASUREMENT_ID}、Clarity ${CLARITY_PROJECT_ID}；正式域名才上报，page_location 不含 query/hash。`);
+console.log(`PASS: ${pages.length} 个 HTML 已 defer 引用 analytics.js；GA4 ${GA_MEASUREMENT_ID}、Clarity ${CLARITY_PROJECT_ID}；仅 ${ALLOWED_HOSTS.join(' / ')} 上报，page_location 不含 query/hash。`);

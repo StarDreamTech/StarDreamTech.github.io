@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stardreamtech.github.io/sitemap.xml
+Sitemap: https://stardreamfly.com/sitemap.xml

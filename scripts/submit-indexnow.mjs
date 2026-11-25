@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-const origin = 'https://stardreamtech.github.io';
+const origin = 'https://stardreamfly.com';
 const root = new URL('../', import.meta.url);
 const key = (await readFile(new URL('indexnow.txt', root), 'utf8')).trim();
 const xml = await readFile(new URL('sitemap.xml', root), 'utf8');

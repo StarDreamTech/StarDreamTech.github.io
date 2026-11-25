@@ -3,8 +3,12 @@ import { readFile, readdir, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const origin = 'https://stardreamtech.github.io';
-const folders = await readdir(`${root}projects`);
+const origin = 'https://stardreamfly.com';
+const cname = (await readFile(`${root}CNAME`, 'utf8')).trim();
+assert.equal(cname, new URL(origin).host, 'CNAME must match canonical site host');
+const folders = (await readdir(`${root}projects`, { withFileTypes: true }))
+  .filter(entry => entry.isDirectory() && !entry.name.startsWith('.'))
+  .map(entry => entry.name);
 const paths = ['', ...folders.map(folder => `projects/${folder}/`), 'projects/starlock/demo/'];
 const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);

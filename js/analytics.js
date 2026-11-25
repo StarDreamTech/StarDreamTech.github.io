@@ -5,6 +5,7 @@
  */
 const GA_MEASUREMENT_ID = 'G-X4TGP2S2YL';
 const CLARITY_PROJECT_ID = 'zccwljdddd';
+const SITE_HOSTS = new Set(['stardreamfly.com', 'stardreamtech.github.io']);
 
 function pageFields() {
   const page = {
@@ -66,7 +67,7 @@ const TRACKERS = [
 ];
 
 function start() {
-  if (location.hostname !== 'stardreamtech.github.io') return;
+  if (!SITE_HOSTS.has(location.hostname)) return;
   TRACKERS.forEach(function (tracker) {
     if (tracker.id) tracker.load(tracker.id);
   });

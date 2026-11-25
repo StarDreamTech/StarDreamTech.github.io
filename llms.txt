@@ -1,27 +1,27 @@
 # 星梦科技 StarDreamTech
 
-> 11 个公开产品项目，涵盖桌面工具、AI 助手、监控和人机验证；包含已发行、开发中与筹备项目。官方项目入口为 https://stardreamtech.github.io/ ，源码组织为 https://github.com/StarDreamTech 。
+> 11 个公开产品项目，涵盖桌面工具、AI 助手、监控和人机验证；包含已发行、开发中与筹备项目。官方项目入口为 https://stardreamfly.com/ ，源码组织为 https://github.com/StarDreamTech 。
 
 ## 项目
 
-- [星笺 Starclip](https://stardreamtech.github.io/projects/starclip/): 本地优先的剪贴板管理器，提供历史记录、搜索与代码片段收藏。
-- [星镜 Starshot](https://stardreamtech.github.io/projects/starshot/): 桌面截图、标注、置顶贴图和图片美化工具。
-- [星匣 StarVault](https://stardreamtech.github.io/projects/starvault/): 本地优先的 AI 对话档案，提供桌面端、CLI 和 MCP。
-- [星哨 StarWatch](https://stardreamtech.github.io/projects/starwatch/): 开发中的定时监控平台，已有任务调度、网页/接口监控与历史内容差异实现，可从源码部署，尚无正式 Release。
-- [星锁 StarLock](https://stardreamtech.github.io/projects/starlock/): 开源验证码 SDK 与 FastAPI 验证服务。支持字符、数字、算术、直线拼图、曲线拼图、圆环旋转、文字点选与语义九宫格，以及普通网页、Vue 3、React 18.2+/19 接入。
+- [星笺 Starclip](https://stardreamfly.com/projects/starclip/): 本地优先的剪贴板管理器，提供历史记录、搜索与代码片段收藏。
+- [星镜 Starshot](https://stardreamfly.com/projects/starshot/): 桌面截图、标注、置顶贴图和图片美化工具。
+- [星匣 StarVault](https://stardreamfly.com/projects/starvault/): 本地优先的 AI 对话档案，提供桌面端、CLI 和 MCP。
+- [星哨 StarWatch](https://stardreamfly.com/projects/starwatch/): 开发中的定时监控平台，已有任务调度、网页/接口监控与历史内容差异实现，可从源码部署，尚无正式 Release。
+- [星锁 StarLock](https://stardreamfly.com/projects/starlock/): 开源验证码 SDK 与 FastAPI 验证服务。支持字符、数字、算术、直线拼图、曲线拼图、圆环旋转、文字点选与语义九宫格，以及普通网页、Vue 3、React 18.2+/19 接入。
 
-- [星使 StarEnvoy](https://stardreamtech.github.io/projects/starenvoy/): 按地区、关键词、薪资和经验筛选 BOSS 岗位，集中查看结果与沟通记录。已有功能源码，尚未发布独立安装包；使用时需在浏览器完成自己的登录与验证。
-- [星口 StarPort](https://stardreamtech.github.io/projects/starport/): 从本机 Clash 配置挑选少量节点，每个节点分配一个本地 SOCKS 端口，用页面管理启停。已有首版实现，尚无正式 Release；需自行构建并准备本机配置与 mihomo。
-- [星码 StarCode](https://stardreamtech.github.io/projects/starcode/): 基于 OpenCode 改造的开源 AI Agent 客户端，正在准备星梦自己的产品体验。尚无星码独立发行版；仓库中保留的 OpenCode 安装渠道属于上游。
-- [星搭子 StarBuddy](https://stardreamtech.github.io/projects/starbuddy/): 围绕原创角色星芽构建个人电脑助手，目前已有前端外壳与成长系统预览。当前预览使用内存演示数据，尚不能调度 Claude Code、Codex 等本机 Agent。
-- [星相 StarPersona](https://stardreamtech.github.io/projects/starpersona/): 规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
-- [星盘 StarDash](https://stardreamtech.github.io/projects/stardash/): 规划中的跨平台菜单栏与托盘状态面板，探索动态 SVG 图标和多主题。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
+- [星使 StarEnvoy](https://stardreamfly.com/projects/starenvoy/): 按地区、关键词、薪资和经验筛选 BOSS 岗位，集中查看结果与沟通记录。已有功能源码，尚未发布独立安装包；使用时需在浏览器完成自己的登录与验证。
+- [星口 StarPort](https://stardreamfly.com/projects/starport/): 从本机 Clash 配置挑选少量节点，每个节点分配一个本地 SOCKS 端口，用页面管理启停。已有首版实现，尚无正式 Release；需自行构建并准备本机配置与 mihomo。
+- [星码 StarCode](https://stardreamfly.com/projects/starcode/): 基于 OpenCode 改造的开源 AI Agent 客户端，正在准备星梦自己的产品体验。尚无星码独立发行版；仓库中保留的 OpenCode 安装渠道属于上游。
+- [星搭子 StarBuddy](https://stardreamfly.com/projects/starbuddy/): 围绕原创角色星芽构建个人电脑助手，目前已有前端外壳与成长系统预览。当前预览使用内存演示数据，尚不能调度 Claude Code、Codex 等本机 Agent。
+- [星相 StarPersona](https://stardreamfly.com/projects/starpersona/): 规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
+- [星盘 StarDash](https://stardreamfly.com/projects/stardash/): 规划中的跨平台菜单栏与托盘状态面板，探索动态 SVG 图标和多主题。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
 
 项目状态核对于 2026-11-17。三个已发行桌面产品为星笺 v0.2.6、星镜 v0.3.3、星匣 v0.1.4；星锁 0.8.0 是开发版。
 
 ## 星锁开发资料
 
-- [在线交互体验](https://stardreamtech.github.io/projects/starlock/demo/): 八种验证码的浏览器演示，支持换题、输入、拖动和键盘操作。正式接入使用服务端校验。
+- [在线交互体验](https://stardreamfly.com/projects/starlock/demo/): 八种验证码的浏览器演示，支持换题、输入、拖动和键盘操作。正式接入使用服务端校验。
 - [Python / Go 服务端 SDK](https://github.com/StarDreamTech/starlock/blob/main/docs/server-sdks.md): 标准库客户端、安装示例、错误处理与业务上下文绑定。
 
 - [README](https://github.com/StarDreamTech/starlock/blob/main/README.md): 项目范围、启动与部署说明。

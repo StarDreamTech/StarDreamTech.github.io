@@ -89,8 +89,11 @@
   }
   const mo = new MutationObserver(() => { if (isLight() !== light) resize(); });
   mo.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  let rafId = 0;
   function frame(t) {
-    const dt = Math.min(50, t - last || 16); last = t;
+    rafId = 0;
+    if (document.hidden && !reduce) return;
+    const dt = Math.min(50, last ? t - last : 16); last = t;
     ctx.clearRect(0, 0, W, H);
     for (const s of stars) {
       const tw = reduce ? 1 : .55 + .45 * Math.sin(t / 1000 * s.s + s.p);
@@ -113,8 +116,20 @@
       if (m.life <= 0) meteors.splice(i, 1);
     }
     ctx.globalAlpha = 1;
-    if (!reduce) requestAnimationFrame(frame);
+    if (!reduce && !document.hidden) rafId = requestAnimationFrame(frame);
   }
-  resize(); addEventListener('resize', () => { resize(); if (reduce) requestAnimationFrame(frame); });
-  requestAnimationFrame(frame);
+  function schedule() {
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
+      last = 0;
+    } else if (!reduce) {
+      last = 0;
+      schedule();
+    }
+  });
+  resize(); addEventListener('resize', () => { resize(); if (reduce) schedule(); });
+  schedule();
 })();

@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const origin = 'https://stardreamtech.github.io';
+const origin = 'https://stardreamfly.com';
 const projects = [
   ['starclip', '星笺 Starclip'],
   ['starshot', '星镜 Starshot'],
@@ -39,8 +39,12 @@ for (const page of pages) {
   const title = html.match(/<title>(.*?)<\/title>/s)[1];
   const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
   const url = `${origin}/${page.path}`;
-  const image = page.slug && ['starclip', 'starshot', 'starvault', 'starlock'].includes(page.slug)
+  const isSquareIcon = Boolean(page.slug && ['starclip', 'starshot', 'starvault', 'starlock'].includes(page.slug));
+  const image = isSquareIcon
     ? `${origin}/assets/icons/${page.slug}.png` : `${origin}/assets/social.png`;
+  const imageWidth = isSquareIcon ? 256 : 1200;
+  const imageHeight = isSquareIcon ? 256 : 630;
+  const twitterCard = isSquareIcon ? 'summary' : 'summary_large_image';
   const graph = [organization, website, {
     '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, description,
     inLanguage: 'zh-CN', isPartOf: { '@id': website['@id'] },
@@ -81,8 +85,10 @@ for (const page of pages) {
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${image}">
+  <meta property="og:image:width" content="${imageWidth}">
+  <meta property="og:image:height" content="${imageHeight}">
   <meta property="og:image:alt" content="${page.name}">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="${twitterCard}">
   <meta name="twitter:title" content="${escape(title)}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${image}">
