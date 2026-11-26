@@ -118,7 +118,7 @@ English: ${origin}/en/llms.txt
 
 ${summaries.join('\n')}
 
-Project status was checked on November 25, 2026. Released desktop products listed here: Starclip v0.2.7, Starshot v0.3.3 and StarVault v0.1.4. StarLock 0.8.0 is a development version.
+Project status was checked on November 26, 2026. Released desktop products listed here: Starclip v0.2.7, Starshot v0.3.3 and StarVault v0.1.4. StarLock 0.8.0 is a development version.
 
 ## StarLock developer documentation
 
