@@ -13,7 +13,9 @@ const chinesePaths = ['', ...folders.map(folder => `projects/${folder}/`), 'proj
 const paths = ['', 'en/'].flatMap(prefix => chinesePaths.map(path => prefix + path));
 const sitemap = await readFile(`${root}sitemap.xml`, 'utf8');
 const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+const lastmods = [...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, paths.length, 'Sitemap must list each page once');
+assert.equal(lastmods.length, paths.length, 'Sitemap must include lastmod for each page');
 const titles = new Set();
 const home = await readFile(`${root}index.html`, 'utf8');
 const homeData = JSON.parse(home.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
@@ -46,6 +48,15 @@ for (const path of paths) {
   assert.equal(webpage.url, url);
   assert.equal(webpage.name, title);
   assert.equal(webpage.inLanguage, isEnglish ? 'en' : 'zh-CN');
+  assert.match(webpage.dateModified || '', /^\d{4}-\d{2}-\d{2}$/, `Missing dateModified in ${path}`);
+  if (html.includes('id="faq"')) {
+    const faq = data['@graph'].find(item => item['@type'] === 'FAQPage');
+    assert.ok(faq && Array.isArray(faq.mainEntity) && faq.mainEntity.length >= 3, `Missing FAQPage entries in ${path}`);
+  }
+  if (/^(?:en\/)?projects\/(?:starclip|starshot|starvault|starlock)\/$/.test(path)) {
+    const app = data['@graph'].find(item => item['@type'] === 'SoftwareApplication');
+    assert.ok(app && app.softwareVersion && app.operatingSystem && app.offers?.price === '0', `Missing SoftwareApplication metadata in ${path}`);
+  }
   const image = new URL(html.match(/property="og:image" content="([^"]+)"/)[1]);
   assert.equal(image.origin, origin);
   await access(`${root}${image.pathname}`);

@@ -4,7 +4,60 @@ import { projects, pages } from './site-pages.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://stardreamfly.com';
+const lastModified = '2026-11-26';
 const translations = JSON.parse(await readFile(`${root}scripts/translations.en.json`, 'utf8'));
+const softwareApps = {
+  starclip: {
+    softwareVersion: '0.2.7',
+    operatingSystem: 'macOS 11+ (Apple Silicon), Windows x64',
+    applicationCategory: 'UtilitiesApplication',
+    downloadUrl: 'https://github.com/StarDreamTech/starclip/releases/tag/v0.2.7',
+    license: 'https://github.com/StarDreamTech/starclip/blob/main/LICENSE',
+  },
+  starshot: {
+    softwareVersion: '0.3.3',
+    operatingSystem: 'macOS 12+ (Apple Silicon), Windows x64',
+    applicationCategory: 'UtilitiesApplication',
+    downloadUrl: 'https://github.com/StarDreamTech/starshot/releases/tag/v0.3.3',
+  },
+  starvault: {
+    softwareVersion: '0.1.4',
+    operatingSystem: 'macOS (Apple Silicon), Linux (CLI/MCP), Windows (source)',
+    applicationCategory: 'DeveloperApplication',
+    downloadUrl: 'https://github.com/StarDreamTech/starvault/releases/tag/v0.1.4',
+  },
+  starlock: {
+    softwareVersion: '0.8.0',
+    operatingSystem: 'Web, Linux, macOS, Windows',
+    applicationCategory: 'SecurityApplication',
+    license: 'https://github.com/StarDreamTech/starlock/blob/main/LICENSE',
+  },
+};
+const stripTags = value => value
+  .replace(/<[^>]+>/g, '')
+  .replaceAll('&amp;', '&')
+  .replaceAll('&quot;', '"')
+  .replaceAll('&lt;', '<')
+  .replaceAll('&gt;', '>')
+  .replace(/\s+/g, ' ')
+  .trim();
+function extractFaqEntities(html) {
+  const section = html.match(/<section[^>]*\bid="faq"[^>]*>([\s\S]*?)<\/section>/);
+  if (!section) return [];
+  const items = [];
+  for (const match of section[1].matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>\s*<p\b[^>]*class="[^"]*\bprose\b[^"]*"[^>]*>([\s\S]*?)<\/p>/g)) {
+    const question = stripTags(match[1]);
+    const answer = stripTags(match[2]);
+    if (question && answer) {
+      items.push({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: answer },
+      });
+    }
+  }
+  return items;
+}
 const organization = {
   '@type': 'Organization', '@id': `${origin}/#organization`,
   name: '星梦科技', alternateName: 'StarDreamTech', url: `${origin}/`,
@@ -42,18 +95,34 @@ for (const language of ['zh-CN', 'en']) {
     const twitterCard = isSquareIcon ? 'summary' : 'summary_large_image';
     const graph = [organization, localizedWebsite, {
       '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, description,
-      inLanguage: language, isPartOf: { '@id': localizedWebsite['@id'] },
+      inLanguage: language, dateModified: lastModified, isPartOf: { '@id': localizedWebsite['@id'] },
       about: { '@id': page.slug ? `${url}#software` : organization['@id'] },
       publisher: { '@id': organization['@id'] },
     }];
     if (page.slug) {
+      const appMeta = !page.path.endsWith('/demo/') ? softwareApps[page.slug] : null;
       graph.push({
         '@type': 'SoftwareSourceCode', '@id': `${url}#software`,
         name, description, url,
         codeRepository: `https://github.com/StarDreamTech/${page.repository ?? page.slug}`,
         author: { '@id': organization['@id'] },
-        ...(page.slug === 'starlock' ? { license: 'https://github.com/StarDreamTech/starlock/blob/main/LICENSE' } : {}),
-      }, {
+        ...(appMeta?.license ? { license: appMeta.license } : {}),
+      });
+      if (appMeta) {
+        graph.push({
+          '@type': 'SoftwareApplication', '@id': `${url}#app`,
+          name, description, url,
+          applicationCategory: appMeta.applicationCategory,
+          operatingSystem: appMeta.operatingSystem,
+          softwareVersion: appMeta.softwareVersion,
+          ...(appMeta.downloadUrl ? { downloadUrl: appMeta.downloadUrl } : {}),
+          ...(appMeta.license ? { license: appMeta.license } : {}),
+          isAccessibleForFree: true,
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          author: { '@id': organization['@id'] },
+        });
+      }
+      graph.push({
         '@type': 'BreadcrumbList', itemListElement: [
           { '@type': 'ListItem', position: 1, name: language === 'en' ? 'StarDreamTech' : '星梦科技', item: `${origin}/${prefix}` },
           { '@type': 'ListItem', position: 2, name, item: url },
@@ -69,6 +138,14 @@ for (const language of ['zh-CN', 'en']) {
           name: language === 'en' ? translations[projectName] : projectName,
           url: `${origin}/${prefix}projects/${slug}/`,
         })),
+      });
+    }
+    const faqEntities = extractFaqEntities(html);
+    if (faqEntities.length > 0) {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: faqEntities,
       });
     }
     // Metadata is static in the delivered HTML, including for clients that do not execute JS.
@@ -105,7 +182,7 @@ for (const language of ['zh-CN', 'en']) {
   }
 }
 
-const urls = ['', 'en/'].flatMap(prefix => pages.map(page => `  <url><loc>${origin}/${prefix}${page.path}</loc></url>`));
+const urls = ['', 'en/'].flatMap(prefix => pages.map(page => `  <url><loc>${origin}/${prefix}${page.path}</loc><lastmod>${lastModified}</lastmod></url>`));
 await writeFile(`${root}sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join('\n')}

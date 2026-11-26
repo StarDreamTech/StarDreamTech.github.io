@@ -19,7 +19,7 @@ English: https://stardreamfly.com/en/llms.txt
 - [星相 StarPersona](https://stardreamfly.com/projects/starpersona/): 规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
 - [星盘 StarDash](https://stardreamfly.com/projects/stardash/): 规划中的跨平台菜单栏与托盘状态面板，探索动态 SVG 图标和多主题。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
 
-项目状态核对于 2026-11-25。三个已发行桌面产品为星笺 v0.2.7、星镜 v0.3.3、星匣 v0.1.4；星锁 0.8.0 是开发版。
+项目状态核对于 2026-11-26。三个已发行桌面产品为星笺 v0.2.7、星镜 v0.3.3、星匣 v0.1.4；星锁 0.8.0 是开发版。
 
 ## 星锁开发资料
 
