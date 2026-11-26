@@ -1,0 +1,116 @@
+/* StarDreamTech Account Entry, Login & Profile Modal (Dark + Light Theme Native) */
+.nav-auth-btn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:999px;
+  border:1px solid var(--border);background:var(--glass);color:var(--ink);font:500 13px/1 var(--sans);
+  cursor:pointer;white-space:nowrap;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:border-color .2s,background .2s,transform .2s,box-shadow .2s;
+}
+.nav-auth-btn:hover{border-color:var(--card-hover-border);transform:translateY(-1px)}
+.nav-auth-btn.is-authed{padding:3px 12px 3px 4px}
+.nav-auth-avatar{
+  width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0;
+  background:linear-gradient(135deg,#7c5cff,#38bdf8);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font:600 12px/1 var(--sans);
+  overflow:hidden;border:1px solid rgba(255,255,255,.18);
+}
+.nav-auth-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.nav-auth-name{max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+dialog.sdt-auth-dialog{
+  padding:0;border:1px solid var(--border);border-radius:20px;width:min(440px,calc(100vw - 28px));
+  max-height:calc(100dvh - 32px);overflow:auto;color:var(--ink);
+  background:var(--bg,#0b0d1a);box-shadow:0 30px 90px rgba(0,0,0,.55);
+  font-family:var(--sans);
+}
+[data-theme="light"] dialog.sdt-auth-dialog{
+  background:#ffffff;box-shadow:0 24px 70px rgba(48,36,90,.22);
+}
+dialog.sdt-auth-dialog::backdrop{
+  background:rgba(5,6,15,.68);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.sdt-modal-head{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 22px 14px;
+  border-bottom:1px solid var(--border);
+}
+.sdt-modal-title{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.sdt-modal-close{
+  width:32px;height:32px;border-radius:999px;border:1px solid transparent;background:transparent;
+  color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:18px;
+}
+.sdt-modal-close:hover{background:var(--chip-bg);color:var(--ink)}
+.sdt-modal-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px}
+.sdt-modal-sub{margin:0;font-size:13px;color:var(--ink-2);line-height:1.55}
+
+.sdt-field{display:flex;flex-direction:column;gap:6px}
+.sdt-field label{font-size:12.5px;font-weight:500;color:var(--ink-2);display:flex;align-items:center;justify-content:space-between}
+.sdt-input,.sdt-textarea{
+  width:100%;border-radius:11px;border:1px solid var(--border);background:var(--chip-bg);
+  color:var(--ink);font:400 14px/1.4 var(--sans);padding:10px 12px;outline:none;
+  transition:border-color .18s,box-shadow .18s;
+}
+.sdt-textarea{resize:vertical;min-height:68px}
+.sdt-input:focus,.sdt-textarea:focus{border-color:var(--accent-global,#8b73ff);box-shadow:0 0 0 3px rgba(139,115,255,.16)}
+.sdt-row{display:flex;gap:8px;align-items:stretch}
+.sdt-row .sdt-input{flex:1;min-width:0}
+
+.sdt-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;padding:0 16px;
+  border-radius:11px;border:1px solid var(--border);background:var(--chip-bg);color:var(--ink);
+  font:500 13.5px/1 var(--sans);cursor:pointer;white-space:nowrap;transition:opacity .18s,background .18s,border-color .18s;
+}
+.sdt-btn:hover:not(:disabled){border-color:var(--card-hover-border);background:var(--copy-hover-bg)}
+.sdt-btn:disabled{opacity:.52;cursor:not-allowed}
+.sdt-btn-primary{
+  border-color:transparent;color:#fff;
+  background:linear-gradient(135deg,#6f56e8,#4c8bf5);
+}
+.sdt-btn-primary:hover:not(:disabled){opacity:.92;background:linear-gradient(135deg,#6f56e8,#4c8bf5)}
+.sdt-btn-danger{color:#f87171;border-color:rgba(248,113,113,.28)}
+.sdt-btn-danger:hover:not(:disabled){background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.45)}
+.sdt-btn-sm{height:32px;padding:0 11px;font-size:12.5px;border-radius:9px}
+
+.sdt-msg{
+  font-size:12.5px;line-height:1.5;padding:9px 12px;border-radius:10px;display:none;
+}
+.sdt-msg.is-show{display:block}
+.sdt-msg.is-err{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.sdt-msg.is-ok{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+[data-theme="light"] .sdt-msg.is-err{color:#b91c1c}
+[data-theme="light"] .sdt-msg.is-ok{color:#15803d}
+
+.sdt-handle-hint{font-size:12px;min-height:16px}
+.sdt-handle-hint.is-ok{color:#4ade80}
+.sdt-handle-hint.is-err{color:#f87171}
+[data-theme="light"] .sdt-handle-hint.is-ok{color:#15803d}
+[data-theme="light"] .sdt-handle-hint.is-err{color:#b91c1c}
+
+.sdt-profile-hero{
+  display:flex;align-items:center;gap:14px;padding:12px;border-radius:14px;
+  border:1px solid var(--border);background:var(--chip-bg);
+}
+.sdt-avatar-lg{
+  width:64px;height:64px;border-radius:50%;flex-shrink:0;overflow:hidden;
+  background:linear-gradient(135deg,#7c5cff,#38bdf8);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font:600 24px/1 var(--sans);
+  border:2px solid var(--border);
+}
+.sdt-avatar-lg img{width:100%;height:100%;object-fit:cover;display:block}
+.sdt-profile-meta{min-width:0;flex:1;display:flex;flex-direction:column;gap:5px}
+.sdt-meta-line{font-size:12px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sdt-meta-badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sdt-badge{
+  font:500 11px/1 var(--mono,monospace);padding:4px 7px;border-radius:6px;
+  background:var(--code-bg);border:1px solid var(--border);color:var(--ink-2);
+}
+.sdt-avatar-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.sdt-footer-actions{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;
+  border-top:1px solid var(--border);flex-wrap:wrap;
+}
+.sdt-captcha-slot{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+
+@media (max-width:760px){
+  .nav-auth-btn{height:34px;padding:0 10px;font-size:12.5px}
+  .nav-auth-btn.is-authed{padding:3px 8px 3px 3px}
+  .nav-auth-name{max-width:64px}
+}
