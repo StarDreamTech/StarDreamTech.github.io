@@ -132,6 +132,24 @@ dialog.sdt-auth-dialog::backdrop{
 .sdt-pwd-box summary::-webkit-details-marker{display:none}
 .sdt-pwd-box[open] summary{margin-bottom:10px}
 .sdt-pwd-inner{display:flex;flex-direction:column;gap:10px}
+.sdt-oauth-sep{
+  display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-2);margin:2px 0;
+}
+.sdt-oauth-sep::before,.sdt-oauth-sep::after{content:"";flex:1;height:1px;background:var(--border)}
+.sdt-oauth-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.sdt-oauth-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 12px;
+  border-radius:11px;border:1px solid var(--border);background:var(--chip-bg);color:var(--ink);
+  font:500 13px/1 var(--sans);text-decoration:none;cursor:pointer;transition:border-color .18s,background .18s;
+}
+.sdt-oauth-btn:hover{border-color:var(--card-hover-border);background:var(--copy-hover-bg)}
+.sdt-oauth-btn svg{width:17px;height:17px;flex-shrink:0}
+.sdt-ident-list{display:flex;flex-direction:column;gap:8px}
+.sdt-ident-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;
+  border-radius:10px;border:1px solid var(--border);background:var(--bg,rgba(0,0,0,.15));font-size:13px;
+}
+.sdt-ident-name{display:inline-flex;align-items:center;gap:7px;font-weight:500}
 .sdt-captcha-slot{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
 
 @media (max-width:760px){

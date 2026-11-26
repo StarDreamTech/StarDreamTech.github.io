@@ -54,6 +54,24 @@
     pwdSectionChange: 'Change password',
     pwdSaveBtn: 'Update password',
     pwdSaved: 'Password updated.',
+    oauthSep: 'or continue with',
+    oauthGitHub: 'GitHub',
+    oauthGoogle: 'Google',
+    oauthSection: 'Connected accounts',
+    oauthBound: 'Connected',
+    oauthBind: 'Connect',
+    oauthUnbind: 'Disconnect',
+    oauthBoundMsg: 'Third-party account connected.',
+    oauthUnboundMsg: 'Third-party account disconnected.',
+    oauthErrMap: {
+      OAUTH_DENIED: 'Sign-in was cancelled.',
+      OAUTH_STATE_MISSING: 'Sign-in session expired. Please try again.',
+      OAUTH_STATE_INVALID: 'Sign-in session expired. Please try again.',
+      OAUTH_STATE_MISMATCH: 'Sign-in verification failed. Please try again.',
+      IDENTITY_ALREADY_BOUND: 'This third-party account is already linked to another StarDream account.',
+      PROVIDER_ALREADY_BOUND: 'Your account already has a linked account on this platform.',
+      PROVIDER_CONFLICT: 'The account with this email is already linked to a different profile on this platform.',
+    },
     signOut: 'Sign out',
     signOutAll: 'Sign out all devices',
     netErr: 'Network error. Please try again.',
@@ -110,17 +128,44 @@
     pwdSectionChange: '修改登录密码',
     pwdSaveBtn: '保存密码',
     pwdSaved: '密码已更新。',
+    oauthSep: '或使用以下方式登录',
+    oauthGitHub: 'GitHub 登录',
+    oauthGoogle: 'Google 登录',
+    oauthSection: '第三方账号绑定',
+    oauthBound: '已绑定',
+    oauthBind: '绑定',
+    oauthUnbind: '解绑',
+    oauthBoundMsg: '第三方账号绑定成功。',
+    oauthUnboundMsg: '已解除第三方账号绑定。',
+    oauthErrMap: {
+      OAUTH_DENIED: '已取消第三方授权登录。',
+      OAUTH_STATE_MISSING: '授权状态已过期，请重新点击登录。',
+      OAUTH_STATE_INVALID: '授权状态已过期，请重新点击登录。',
+      OAUTH_STATE_MISMATCH: '授权校验未通过，请重试。',
+      IDENTITY_ALREADY_BOUND: '该第三方账号已绑定其他星梦账号。',
+      PROVIDER_ALREADY_BOUND: '当前账号已绑定该平台，请先解绑。',
+      PROVIDER_CONFLICT: '该邮箱对应的星梦账号已绑定另一个同平台账号，请先用邮箱登录后管理绑定。',
+    },
     signOut: '退出登录',
     signOutAll: '退出全部设备',
     netErr: '网络请求失败，请稍后重试。',
   };
 
   let currentUser = null;
+  let oauthProviders = { github: false, google: false };
   let cooldownTimer = 0;
   let cooldownLeft = 0;
   let sdkLoadedPromise = null;
   let starlockWidget = null;
   let handleCheckTimer = 0;
+
+  const GITHUB_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.5.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>';
+  const GOOGLE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.54 5.54 0 0 1-2.4 3.64v3.02h3.88c2.27-2.09 3.54-5.17 3.54-8.9Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.88-3.02c-1.07.72-2.45 1.15-4.06 1.15-3.12 0-5.77-2.11-6.72-4.96H1.27v3.12A12 12 0 0 0 12 24Z"/><path fill="#FBBC05" d="M5.28 14.26A7.2 7.2 0 0 1 4.9 12c0-.79.14-1.56.38-2.26V6.62H1.27A12 12 0 0 0 0 12c0 1.94.46 3.77 1.27 5.38l4.01-3.12Z"/><path fill="#EA4335" d="M12 4.78c1.76 0 3.34.61 4.58 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.27 6.62l4.01 3.12C6.23 6.89 8.88 4.78 12 4.78Z"/></svg>';
+
+  function oauthStartURL(provider, mode = 'login') {
+    const ret = encodeURIComponent(window.location.origin + window.location.pathname);
+    return `${API_BASE}/v1/auth/oauth/${provider}/start?mode=${mode}&return_to=${ret}`;
+  }
 
   const navLinks = document.querySelector('.nav-links');
   if (!navLinks) return;
@@ -306,6 +351,13 @@
         <div class="sdt-msg" id="sdt-login-msg" role="status"></div>
         <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-login-submit">${esc(isPwd ? T.submitPwdLogin : T.submitLogin)}</button>
         ${!isPwd ? `<div class="sdt-link-row"><span></span><button type="button" class="sdt-text-btn" id="sdt-forgot-btn">${esc(T.forgotPwd)}</button></div>` : ''}
+        ${(oauthProviders.github || oauthProviders.google) ? `
+          <div class="sdt-oauth-sep">${esc(T.oauthSep)}</div>
+          <div class="sdt-oauth-grid">
+            ${oauthProviders.github ? `<a class="sdt-oauth-btn" href="${esc(oauthStartURL('github'))}">${GITHUB_SVG}<span>${esc(T.oauthGitHub)}</span></a>` : ''}
+            ${oauthProviders.google ? `<a class="sdt-oauth-btn" href="${esc(oauthStartURL('google'))}">${GOOGLE_SVG}<span>${esc(T.oauthGoogle)}</span></a>` : ''}
+          </div>
+        ` : ''}
       </form>`;
 
     dialog.querySelector('.sdt-modal-close').addEventListener('click', () => dialog.close());
@@ -531,7 +583,11 @@
         </div>
         <div class="sdt-msg" id="sdt-profile-msg" role="status"></div>
         <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-save-btn">${esc(T.save)}</button>
-        <details class="sdt-pwd-box">
+        <details class="sdt-pwd-box" id="sdt-ident-box">
+          <summary><span>${esc(T.oauthSection)}</span><span>▾</span></summary>
+          <div class="sdt-ident-list" id="sdt-ident-list"></div>
+        </details>
+        <details class="sdt-pwd-box" ${!u.has_password ? 'open' : ''}>
           <summary><span>${esc(u.has_password ? T.pwdSectionChange : T.pwdSectionSet)}</span><span>▾</span></summary>
           <div class="sdt-pwd-inner">
             ${u.has_password ? `
@@ -673,6 +729,45 @@
     dialog.querySelector('#sdt-logout-btn').addEventListener('click', () => doLogout('/v1/auth/logout'));
     dialog.querySelector('#sdt-logout-all-btn').addEventListener('click', () => doLogout('/v1/auth/logout-all'));
 
+    // Load bound third-party accounts (GitHub / Google)
+    const identListEl = dialog.querySelector('#sdt-ident-list');
+    if (identListEl) {
+      api('/v1/me/identities').then(res => {
+        const bound = new Set((res.identities || []).map(x => x.provider));
+        const rows = [
+          { id: 'github', label: 'GitHub', icon: GITHUB_SVG, enabled: oauthProviders.github },
+          { id: 'google', label: 'Google', icon: GOOGLE_SVG, enabled: oauthProviders.google },
+        ].filter(p => bound.has(p.id) || p.enabled);
+        if (!rows.length) {
+          dialog.querySelector('#sdt-ident-box')?.remove();
+          return;
+        }
+        identListEl.innerHTML = rows.map(p => {
+          const isBound = bound.has(p.id);
+          return `<div class="sdt-ident-row">
+            <span class="sdt-ident-name">${p.icon}<span>${p.label}</span>${isBound ? `<span class="sdt-badge">${esc(T.oauthBound)}</span>` : ''}</span>
+            ${isBound
+              ? `<button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" data-unbind="${p.id}">${esc(T.oauthUnbind)}</button>`
+              : `<a class="sdt-btn sdt-btn-sm" href="${esc(oauthStartURL(p.id, 'bind'))}">${esc(T.oauthBind)}</a>`}
+          </div>`;
+        }).join('');
+        identListEl.querySelectorAll('[data-unbind]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            btn.disabled = true;
+            showMsg(msgEl, '', false);
+            try {
+              await api('/v1/me/identities/' + btn.dataset.unbind, { method: 'DELETE' });
+              openProfileModal();
+              showMsg(dialog.querySelector('#sdt-profile-msg'), T.oauthUnboundMsg, false);
+            } catch (err) {
+              showMsg(msgEl, err.message || T.netErr, true);
+              btn.disabled = false;
+            }
+          });
+        });
+      }).catch(() => dialog.querySelector('#sdt-ident-box')?.remove());
+    }
+
     if (!dialog.open) dialog.showModal();
   }
 
@@ -680,7 +775,26 @@
   navBtn.addEventListener('click', () => currentUser ? openProfileModal() : openLoginModal());
 
   renderNav();
-  api('/v1/me').then(res => {
-    if (res && res.user) { currentUser = res.user; renderNav(); }
-  }).catch(() => {});
+  const params = new URLSearchParams(window.location.search);
+  const authStatus = params.get('auth');
+  const authErr = params.get('auth_err');
+  if (authStatus || authErr) {
+    params.delete('auth');
+    params.delete('auth_err');
+    const qs = params.toString();
+    history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+  }
+
+  Promise.all([
+    api('/v1/auth/providers').then(p => { oauthProviders = { github: !!p.github, google: !!p.google }; }).catch(() => {}),
+    api('/v1/me').then(res => { if (res && res.user) { currentUser = res.user; renderNav(); } }).catch(() => {}),
+  ]).then(() => {
+    if (authErr) {
+      openLoginModal('code');
+      showMsg(dialog.querySelector('#sdt-login-msg'), T.oauthErrMap[authErr] || T.netErr, true);
+    } else if ((authStatus === 'new' || authStatus === 'bound') && currentUser) {
+      openProfileModal();
+      if (authStatus === 'bound') showMsg(dialog.querySelector('#sdt-profile-msg'), T.oauthBoundMsg, false);
+    }
+  });
 })();
