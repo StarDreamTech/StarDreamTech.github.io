@@ -19,11 +19,11 @@ const home = await readFile(`${root}index.html`, 'utf8');
 const homeData = JSON.parse(home.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
 const catalog = homeData['@graph'].find(item => item['@type'] === 'ItemList').itemListElement;
 const projectSection = home.match(/<section id="projects"[\s\S]*?<\/section>/)[0];
-assert.equal(folders.length, 11, 'The public product catalog must contain 11 projects');
+assert.equal(folders.length, 10, 'The public product catalog must contain 10 projects');
 assert.equal(catalog.length, folders.length, 'Structured catalog must match project pages');
 assert.equal((projectSection.match(/<article\b/g) || []).length, folders.length, 'Every product must have one homepage card');
 assert.ok(home.includes(`<dt>公开产品项目</dt><dd>${folders.length}</dd>`), 'Homepage count must match the catalog');
-assert.doesNotMatch(projectSection + sitemap, /stargate|starscout/i, 'Private projects must stay out of the public catalog');
+assert.doesNotMatch(projectSection + sitemap, /stargate|starscout|starport/i, 'Private projects must stay out of the public catalog');
 for (const folder of folders) {
   assert.equal(catalog.filter(item => item.url === `${origin}/projects/${folder}/`).length, 1, folder);
   assert.ok(projectSection.includes(`href="projects/${folder}/"`), `${folder} needs an introduction link`);

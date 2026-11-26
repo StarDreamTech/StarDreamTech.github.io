@@ -5,7 +5,7 @@ import { pages } from './site-pages.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const translations = JSON.parse(await readFile(`${root}/scripts/translations.en.json`, 'utf8'));
-const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星口', '星码', '星搭子', '星相', '星盘']);
+const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星码', '星搭子', '星相', '星盘']);
 const origin = 'https://stardreamfly.com';
 const pagePaths = new Set(pages.map(page => `/${page.path}`));
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
@@ -109,7 +109,7 @@ const summaries = await Promise.all(pages.slice(1).map(async page => {
 
 await writeFile(`${root}/en/llms.txt`, `# StarDreamTech
 
-> 11 public product projects: desktop tools, AI assistants, monitoring and human verification. Includes released, developing and planned projects. Official site: ${origin}/en/ . Contact email: hi@stardreamfly.com . Source organization: https://github.com/StarDreamTech .
+> 10 public product projects: desktop tools, AI assistants, monitoring and human verification. Includes released, developing and planned projects. Official site: ${origin}/en/ . Contact email: hi@stardreamfly.com . Source organization: https://github.com/StarDreamTech .
 
 English: ${origin}/en/llms.txt
 中文: ${origin}/llms.txt

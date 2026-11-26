@@ -3,7 +3,7 @@
 中文: https://stardreamfly.com/llms.txt
 English: https://stardreamfly.com/en/llms.txt
 
-> 11 个公开产品项目，涵盖桌面工具、AI 助手、监控和人机验证；包含已发行、开发中与筹备项目。官方项目入口为 https://stardreamfly.com/ ，联系邮箱为 hi@stardreamfly.com ，源码组织为 https://github.com/StarDreamTech 。
+> 10 个公开产品项目，涵盖桌面工具、AI 助手、监控和人机验证；包含已发行、开发中与筹备项目。官方项目入口为 https://stardreamfly.com/ ，联系邮箱为 hi@stardreamfly.com ，源码组织为 https://github.com/StarDreamTech 。
 
 ## 项目
 
@@ -14,7 +14,6 @@ English: https://stardreamfly.com/en/llms.txt
 - [星锁 StarLock](https://stardreamfly.com/projects/starlock/): 开源验证码 SDK 与 FastAPI 验证服务。支持字符、数字、算术、直线拼图、曲线拼图、圆环旋转、文字点选与语义九宫格，以及普通网页、Vue 3、React 18.2+/19 接入。
 
 - [星使 StarEnvoy](https://stardreamfly.com/projects/starenvoy/): 按地区、关键词、薪资和经验筛选 BOSS 岗位，集中查看结果与沟通记录。已有功能源码，尚未发布独立安装包；使用时需在浏览器完成自己的登录与验证。
-- [星口 StarPort](https://stardreamfly.com/projects/starport/): 从本机 Clash 配置挑选少量节点，每个节点分配一个本地 SOCKS 端口，用页面管理启停。已有首版实现，尚无正式 Release；需自行构建并准备本机配置与 mihomo。
 - [星码 StarCode](https://stardreamfly.com/projects/starcode/): 基于 OpenCode 改造的开源 AI Agent 客户端，正在准备星梦自己的产品体验。尚无星码独立发行版；仓库中保留的 OpenCode 安装渠道属于上游。
 - [星搭子 StarBuddy](https://stardreamfly.com/projects/starbuddy/): 围绕原创角色星芽构建个人电脑助手，目前已有前端外壳与成长系统预览。当前预览使用内存演示数据，尚不能调度 Claude Code、Codex 等本机 Agent。
 - [星相 StarPersona](https://stardreamfly.com/projects/starpersona/): 规划中的开源指纹浏览器与多账号环境管理器，目前已建立公开仓库。目前仅有项目说明与许可证，核心代码和可安装版本尚未提供。
@@ -35,4 +34,4 @@ English: https://stardreamfly.com/en/llms.txt
 
 ## English overview
 
-StarDreamTech maintains 11 public product projects, including released desktop tools, monitoring and CAPTCHA services in development, AI clients, and planned applications. Project pages link to their source repositories, installation instructions, integration examples, and current development status.
+StarDreamTech maintains 10 public product projects, including released desktop tools, monitoring and CAPTCHA services in development, AI clients, and planned applications. Project pages link to their source repositories, installation instructions, integration examples, and current development status.

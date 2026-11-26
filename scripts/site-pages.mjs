@@ -5,7 +5,6 @@ export const projects = [
   ['starwatch', '星哨 StarWatch', 'StarWatch'],
   ['starlock', '星锁 StarLock'],
   ['starenvoy', '星使 StarEnvoy', 'StarEnvoy'],
-  ['starport', '星口 StarPort'],
   ['starcode', '星码 StarCode'],
   ['starbuddy', '星搭子 StarBuddy'],
   ['starpersona', '星相 StarPersona', 'StarPersona'],

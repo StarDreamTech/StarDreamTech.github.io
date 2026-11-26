@@ -14,7 +14,7 @@ for (const prefix of ['', 'en/']) {
     documents.set(path, await readFile(`${root}/${path}`, 'utf8'));
   }
 }
-const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星口', '星码', '星搭子', '星相', '星盘', '中文', '简体中文']);
+const brandNames = new Set(['星梦科技', '星笺', '星镜', '星匣', '星锁', '星哨', '星使', '星码', '星搭子', '星相', '星盘', '中文', '简体中文']);
 for (const [path, html] of documents) {
   const english = path.startsWith('en/');
   const pagePath = path.replace(/^en\//, '').replace(/index\.html$/, '');

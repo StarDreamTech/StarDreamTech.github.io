@@ -6,13 +6,13 @@ The StarDreamTech organization website, published at https://stardreamfly.com/ (
 
 This is a static site: `index.html`, `css/style.css`, `js/main.js` and `assets/`. No framework build is required to serve the committed files. Preview with `python3 -m http.server`, then visit http://localhost:8000 .
 
-Project information comes from repository descriptions, READMEs, releases and the StarDreamTech/homebrew-tap casks, checked on November 25, 2026. Contact email: `hi@stardreamfly.com`. Icons are taken from project repositories where available. StarWatch, StarBuddy, StarPort, StarPersona and StarDash use website display SVGs; StarLock uses its dedicated purple lock logo.
+Project information comes from repository descriptions, READMEs, releases and the StarDreamTech/homebrew-tap casks, checked on November 26, 2026. Contact email: `hi@stardreamfly.com`. Icons are taken from project repositories where available. StarWatch, StarBuddy, StarPersona and StarDash use website display SVGs; StarLock uses its dedicated purple lock logo.
 
 The site supports light and dark themes. The first visit follows `prefers-color-scheme`; manual choices are saved in `localStorage` under `sdt-theme`.
 
 ## Chinese and English pages
 
-The home page, 11 public project pages and StarLock playground each have English / 中文 links, for 26 static HTML pages. Switching preserves the current page. With JavaScript enabled, it also retains query parameters and anchors. English internal navigation, playground links and the documentation index stay under `/en/`. There is no browser-language redirect; existing URLs remain Chinese by default.
+The home page, 10 public project pages and StarLock playground each have English / 中文 links, for 24 static HTML pages. Switching preserves the current page. With JavaScript enabled, it also retains query parameters and anchors. English internal navigation, playground links and the documentation index stay under `/en/`. There is no browser-language redirect; existing URLs remain Chinese by default.
 
 English content is delivered in HTML and remains readable without JavaScript. After editing a Chinese page, maintain its entries in `scripts/translations.en.json` and run `node scripts/build-english.mjs`. Missing translations cause an error. The command generates `en/`, bilingual metadata and the sitemap. Images, styles and primary scripts remain shared.
 
@@ -22,7 +22,7 @@ After exporting the StarLock demo again, rerun the generator. If the upstream fi
 
 ## Project pages
 
-The home page lists 11 public product projects with their own description, status and repository links. GitHub Pages supports both trailing-slash and non-trailing-slash URLs.
+The home page lists 10 public product projects with their own description, status and repository links. GitHub Pages supports both trailing-slash and non-trailing-slash URLs.
 
 - [Starclip](https://stardreamfly.com/en/projects/starclip/)
 - [Starshot](https://stardreamfly.com/en/projects/starshot/)
@@ -30,13 +30,12 @@ The home page lists 11 public product projects with their own description, statu
 - [StarWatch](https://stardreamfly.com/en/projects/starwatch/)
 - [StarLock](https://stardreamfly.com/en/projects/starlock/)
 - [StarEnvoy](https://stardreamfly.com/en/projects/starenvoy/)
-- [StarPort](https://stardreamfly.com/en/projects/starport/)
 - [StarCode](https://stardreamfly.com/en/projects/starcode/)
 - [StarBuddy](https://stardreamfly.com/en/projects/starbuddy/)
 - [StarPersona](https://stardreamfly.com/en/projects/starpersona/)
 - [StarDash](https://stardreamfly.com/en/projects/stardash/)
 
-The catalog snapshot lists Starclip v0.2.7, Starshot v0.3.3 and StarVault v0.1.4 with installers. StarLock, StarWatch, StarEnvoy and StarPort have implementations without official releases; StarCode is an initialized fork, StarBuddy a Phase 0 frontend preview, and StarPersona and StarDash are listed as planning-stage projects. Planned capabilities are labeled accordingly. Private projects, the organization site and Homebrew distribution repositories are excluded from the product count.
+The catalog snapshot lists Starclip v0.2.7, Starshot v0.3.3 and StarVault v0.1.4 with installers. StarLock, StarWatch and StarEnvoy have implementations without official releases; StarCode is an initialized fork, StarBuddy a Phase 0 frontend preview, and StarPersona and StarDash are listed as planning-stage projects. Planned capabilities are labeled accordingly. Private projects, the organization site and Homebrew distribution repositories are excluded from the product count.
 
 StarLock information follows its 0.8.0 source and documentation: eight challenge types, a hosted SDK, Vue 3 and React 18/19 components, and Python / Go backend SDKs. Public verification APIs and npm packages have not been released.
 
@@ -61,9 +60,9 @@ Baidu Analytics and 51.la are not integrated. Add real public IDs and loader fun
 
 ## Search and AI discovery
 
-All 26 pages provide static content, unique titles and descriptions, canonical URLs, reciprocal `hreflang` links with Chinese as `x-default`, Open Graph / Twitter metadata, and Organization, WebSite, WebPage, SoftwareSourceCode and breadcrumb structured data. The StarLock page includes FAQs and original documentation links.
+All 24 pages provide static content, unique titles and descriptions, canonical URLs, reciprocal `hreflang` links with Chinese as `x-default`, Open Graph / Twitter metadata, and Organization, WebSite, WebPage, SoftwareSourceCode and breadcrumb structured data. The StarLock page includes FAQs and original documentation links.
 
-`robots.txt` permits public crawling. `sitemap.xml` lists all 26 canonical pages. `llms.txt` and `en/llms.txt` provide language-specific project and documentation indexes, also linked in page footers.
+`robots.txt` permits public crawling. `sitemap.xml` lists all 24 canonical pages. `llms.txt` and `en/llms.txt` provide language-specific project and documentation indexes, also linked in page footers.
 
 Generate and verify after content changes:
 

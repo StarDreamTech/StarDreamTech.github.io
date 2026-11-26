@@ -1,6 +1,6 @@
 # StarDreamTech
 
-> 11 public product projects: desktop tools, AI assistants, monitoring and human verification. Includes released, developing and planned projects. Official site: https://stardreamfly.com/en/ . Contact email: hi@stardreamfly.com . Source organization: https://github.com/StarDreamTech .
+> 10 public product projects: desktop tools, AI assistants, monitoring and human verification. Includes released, developing and planned projects. Official site: https://stardreamfly.com/en/ . Contact email: hi@stardreamfly.com . Source organization: https://github.com/StarDreamTech .
 
 English: https://stardreamfly.com/en/llms.txt
 中文: https://stardreamfly.com/llms.txt
@@ -13,7 +13,6 @@ English: https://stardreamfly.com/en/llms.txt
 - [StarWatch](https://stardreamfly.com/en/projects/starwatch/): A self-hosted scheduled platform for monitoring website and API fields and comparing historical content. Source and Docker Compose setup are available without an official release or installer.
 - [StarLock](https://stardreamfly.com/en/projects/starlock/): StarLock provides a hosted CAPTCHA SDK for plain HTML, Vue 3 and React 18/19, a FastAPI verification service and Python / Go backend SDKs, with eight challenge types, dialogs and single-use token verification.
 - [StarEnvoy](https://stardreamfly.com/en/projects/starenvoy/): Filter BOSS jobs by location, keywords, salary and experience. Working source code is available without an installer; sign in and complete verification yourself in the browser.
-- [StarPort](https://stardreamfly.com/en/projects/starport/): Assign local SOCKS ports to selected nodes from a local Clash configuration and manage them from a web page. An initial implementation is available without an official release; provide your own build, configuration and mihomo.
 - [StarCode](https://stardreamfly.com/en/projects/starcode/): An open-source AI agent client derived from OpenCode. StarCode has no independent release yet; retained OpenCode installation channels belong to upstream.
 - [StarBuddy](https://stardreamfly.com/en/projects/starbuddy/): A personal assistant built around the original Xingya character. The frontend and growth-system preview use in-memory demo data and cannot yet schedule local agents such as Claude Code or Codex.
 - [StarPersona](https://stardreamfly.com/en/projects/starpersona/): A planned open-source fingerprint browser and multi-account environment manager. A public repository exists with a project description and license; core code and installable versions are not available yet.
