@@ -93,6 +93,10 @@
 
     function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
     function fmtDate(iso){try{return new Date(iso).toLocaleDateString('zh-CN')}catch{return ''}}
+    const vid = (() => { try { let v = localStorage.getItem('sdt_vid'); if (!v) { v = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2)); localStorage.setItem('sdt_vid', v); } return v; } catch { return 'anon'; } })();
+    function track(eventType, target = '', meta = {}) {
+      fetch(API + '/v1/events', { method: 'POST', credentials: 'include', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ visitor_id: vid, site: 'stardreamfly.com/blog', event_type: eventType, target: String(target || ''), meta }) }).catch(()=>{});
+    }
 
     // Lightweight safe Markdown renderer (headings, code fences, inline code, links, images, lists, quotes)
     function renderMarkdown(md){
@@ -178,6 +182,7 @@
       document.getElementById('blog-search-form').onsubmit = e => {
         e.preventDefault();
         state.q = document.getElementById('blog-q').value.trim();
+        if (state.q) track('blog_search', state.q);
         state.page = 1;
         renderList();
       };
@@ -201,6 +206,7 @@
         const data = await fetchJSON('/v1/blog/posts/' + encodeURIComponent(id));
         const p = data.post;
         document.title = p.title + ' · 星梦技术博客';
+        track('blog_view', p.title, { post_id: p.id });
         app.innerHTML = `
           <div class="article">
             <div class="back" id="back-list">← 返回文章列表</div>
