@@ -74,6 +74,7 @@
         <a class="active" href="./">技术博客</a>
         <a href="https://start.stardreamfly.com/">星梦启航</a>
         <a href="https://lock.stardreamfly.com/console">星锁 Cloud</a>
+        <button class="btn" type="button" id="blog-theme-btn" style="height:32px;padding:0 10px;font-size:12.5px">☀️ 浅色</button>
       </nav>
     </div>
   </header>
@@ -243,6 +244,18 @@
       else renderList();
     });
     boot();
+    const tBtn = document.getElementById('blog-theme-btn');
+    function syncThemeBtn(){
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      tBtn.textContent = cur === 'light' ? '🌙 深色' : '☀️ 浅色';
+    }
+    syncThemeBtn();
+    tBtn.onclick = () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('sdt-theme', next); } catch {}
+      syncThemeBtn();
+    };
   })();
   </script>
 </body>

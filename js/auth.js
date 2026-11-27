@@ -581,6 +581,10 @@
           <label for="sdt-intro">${esc(T.introLabel)}</label>
           <textarea id="sdt-intro" class="sdt-textarea" maxlength="400" placeholder="${esc(T.introPlaceholder)}">${esc(u.introduction || '')}</textarea>
         </div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);cursor:pointer">
+          <input id="sdt-show-nsfw" type="checkbox" ${u.show_nsfw ? 'checked' : ''} style="width:auto;margin:0">
+          <span>${isEn ? 'I am 18+ and allow showing adult (18+) items on StarDream Start' : '我已年满 18 周岁，允许在星梦启航中显示 18+ 内容'}</span>
+        </label>
         <div class="sdt-msg" id="sdt-profile-msg" role="status"></div>
         <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-save-btn">${esc(T.save)}</button>
         <details class="sdt-pwd-box" id="sdt-ident-box">
@@ -707,6 +711,7 @@
             nickname: dialog.querySelector('#sdt-nick').value.trim(),
             signature: dialog.querySelector('#sdt-sig').value.trim(),
             introduction: dialog.querySelector('#sdt-intro').value.trim(),
+            show_nsfw: Boolean(dialog.querySelector('#sdt-show-nsfw')?.checked),
           }),
         });
         currentUser = res.user;
