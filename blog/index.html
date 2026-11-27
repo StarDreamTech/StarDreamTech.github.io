@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){var k='sdt-theme',t;try{t=localStorage.getItem(k)}catch(e){}t=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>html{background:#05060f}html[data-theme=light]{background:#f3f0f8}</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>技术博客 · 星梦科技 StarDreamTech</title>
+  <meta name="description" content="星梦科技技术博客：DrissionPage 自动化采集、Scrapy、PyQt6、Django、Python 实战与星梦开源项目专栏。">
+  <link rel="canonical" href="https://stardreamfly.com/blog/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <script src="../js/analytics.js" defer></script>
+  <link rel="stylesheet" href="../css/auth.css">
+  <style>
+    :root{
+      --bg:#060714;--glass:rgba(255,255,255,.05);--border:rgba(255,255,255,.1);--card-hover-border:rgba(139,115,255,.45);
+      --ink:#eef0ff;--ink-2:rgba(238,240,255,.68);--chip-bg:rgba(255,255,255,.04);--code-bg:rgba(255,255,255,.07);
+      --copy-hover-bg:rgba(255,255,255,.09);--accent-global:#8b73ff;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fc;--glass:rgba(255,255,255,.86);--border:rgba(24,20,56,.12);--card-hover-border:rgba(111,86,232,.45);
+      --ink:#14132a;--ink-2:rgba(20,19,42,.66);--chip-bg:rgba(24,20,56,.04);--code-bg:rgba(24,20,56,.06);
+      --copy-hover-bg:rgba(24,20,56,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(920px 520px at 85% -10%,rgba(139,115,255,.18),transparent 62%),var(--bg);color:var(--ink);font:15px/1.7 var(--sans)}
+    a{color:inherit;text-decoration:none}
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 82%,transparent)}
+    .nav-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+    .nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-2)}
+    .nav-links a:hover,.nav-links a.active{color:var(--ink)}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 72px}
+    .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+    .hero h1{margin:0;font-size:clamp(26px,4vw,34px);letter-spacing:-.02em}
+    .hero p{margin:6px 0 0;color:var(--ink-2);font-size:14px}
+    .search-box{display:flex;gap:8px;min-width:min(320px,100%)}
+    .search-box input{flex:1;height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:var(--glass);color:var(--ink);font:14px var(--sans);outline:none}
+    .search-box input:focus{border-color:var(--accent-global)}
+    .sets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+    .pill{padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:var(--chip-bg);color:var(--ink-2);font-size:13px;cursor:pointer;transition:.16s}
+    .pill:hover,.pill.is-active{border-color:var(--accent-global);color:var(--ink);background:rgba(139,115,255,.16)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+    .card{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:16px;border:1px solid var(--border);background:var(--glass);transition:.18s;cursor:pointer}
+    .card:hover{border-color:var(--card-hover-border);transform:translateY(-2px)}
+    .card h2{margin:0;font-size:17px;line-height:1.4}
+    .card p{margin:0;font-size:13.5px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .meta{margin-top:auto;display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);padding-top:8px;border-top:1px solid var(--border)}
+    .pager{display:flex;justify-content:center;gap:10px;margin-top:28px;align-items:center}
+    .btn{height:38px;padding:0 15px;border-radius:10px;border:1px solid var(--border);background:var(--glass);color:var(--ink);font:500 13.5px var(--sans);cursor:pointer}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .article{max-width:820px;margin:0 auto;padding:28px;border-radius:20px;border:1px solid var(--border);background:var(--glass)}
+    .article h1{margin:0 0 12px;font-size:clamp(22px,3.6vw,30px);line-height:1.35}
+    .article-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:22px}
+    .md{line-height:1.85;word-break:break-word}
+    .md h1,.md h2,.md h3{margin:24px 0 10px;line-height:1.4}
+    .md pre{background:#0b0c18;color:#e5e7ff;padding:14px 16px;border-radius:12px;overflow:auto;border:1px solid var(--border);font:13px/1.6 var(--mono)}
+    .md code{font-family:var(--mono);background:var(--code-bg);padding:2px 6px;border-radius:6px;font-size:13px}
+    .md pre code{background:transparent;padding:0}
+    .md img{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border);margin:10px 0}
+    .md blockquote{margin:14px 0;padding:8px 14px;border-left:3px solid var(--accent-global);background:var(--chip-bg);border-radius:0 10px 10px 0;color:var(--ink-2)}
+    .md a{color:#8b73ff;text-decoration:underline}
+    .back{display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;color:var(--ink-2);font-size:13.5px;cursor:pointer}
+    .back:hover{color:var(--ink)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-in">
+      <a class="brand" href="../">星梦科技 StarDreamTech</a>
+      <nav class="nav-links">
+        <a href="../">首页</a>
+        <a class="active" href="./">技术博客</a>
+        <a href="https://start.stardreamfly.com/">星梦启航</a>
+        <a href="https://lock.stardreamfly.com/console">星锁 Cloud</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="app">
+    <p style="color:var(--ink-2)">正在加载星梦技术博客…</p>
+  </main>
+
+  <script defer src="../js/auth.js"></script>
+  <script>
+  (() => {
+    const API = 'https://api.stardreamfly.com';
+    const app = document.getElementById('app');
+    let sets = [];
+    let state = { setId: 0, q: '', page: 1 };
+
+    function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function fmtDate(iso){try{return new Date(iso).toLocaleDateString('zh-CN')}catch{return ''}}
+
+    // Lightweight safe Markdown renderer (headings, code fences, inline code, links, images, lists, quotes)
+    function renderMarkdown(md){
+      const blocks = [];
+      let text = String(md || '').replace(/\r\n/g, '\n');
+      text = text.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (_, lang, code) => {
+        const idx = blocks.length;
+        blocks.push(`<pre><code class="lang-${esc(lang)}">${esc(code)}</code></pre>`);
+        return `\n@@CODE_${idx}@@\n`;
+      });
+      const lines = text.split('\n');
+      let html = '';
+      let inList = false;
+      for (const raw of lines) {
+        const line = raw.trimEnd();
+        const codeM = line.match(/^@@CODE_(\d+)@@$/);
+        if (codeM) { if(inList){html+='</ul>';inList=false;} html += blocks[Number(codeM[1])]; continue; }
+        if (!line.trim()) { if(inList){html+='</ul>';inList=false;} continue; }
+        const h = line.match(/^(#{1,4})\s+(.+)$/);
+        if (h) { if(inList){html+='</ul>';inList=false;} const lv=h[1].length; html += `<h${lv}>${inlineMd(h[2])}</h${lv}>`; continue; }
+        if (line.startsWith('> ')) { if(inList){html+='</ul>';inList=false;} html += `<blockquote>${inlineMd(line.slice(2))}</blockquote>`; continue; }
+        const li = line.match(/^[-*+]\s+(.+)$/);
+        if (li) { if(!inList){html+='<ul>';inList=true;} html += `<li>${inlineMd(li[1])}</li>`; continue; }
+        if(inList){html+='</ul>';inList=false;}
+        html += `<p>${inlineMd(line)}</p>`;
+      }
+      if (inList) html += '</ul>';
+      return html;
+    }
+    function inlineMd(s){
+      let out = esc(s);
+      out = out.replace(/!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+      out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+
+    async function fetchJSON(path){
+      const r = await fetch(API + path, { credentials: 'include' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }
+
+    async function renderList(){
+      const qs = new URLSearchParams({ page: state.page, page_size: 18 });
+      if (state.setId) qs.set('set_id', state.setId);
+      if (state.q) qs.set('q', state.q);
+      const data = await fetchJSON('/v1/blog/posts?' + qs.toString());
+      const totalPages = Math.max(1, Math.ceil((data.total || 0) / (data.page_size || 18)));
+
+      app.innerHTML = `
+        <section class="hero">
+          <div>
+            <h1>星梦技术博客</h1>
+            <p>已从旧版星梦启航完整迁移 ${data.total} 篇公开技术文章与 ${sets.length} 个实战专栏</p>
+          </div>
+          <form class="search-box" id="blog-search-form">
+            <input id="blog-q" type="search" value="${esc(state.q)}" placeholder="搜索文章标题或关键词…">
+            <button class="btn" type="submit">搜索</button>
+          </form>
+        </section>
+        <div class="sets">
+          <button class="pill ${state.setId===0?'is-active':''}" data-set="0">全部文章</button>
+          ${sets.map(s => `<button class="pill ${state.setId===s.id?'is-active':''}" data-set="${s.id}">${esc(s.title)} (${s.post_count})</button>`).join('')}
+        </div>
+        <div class="grid">
+          ${(data.posts || []).map(p => `
+            <article class="card" data-post="${p.id}">
+              <h2>${esc(p.title)}</h2>
+              <p>${esc(p.summary || '点击阅读全文…')}</p>
+              <div class="meta"><span>${fmtDate(p.created_at)} · ${esc(p.privacy === 'public' ? '公开' : (p.privacy || '公开'))}</span><span>阅读 ${p.visit_count || 0}</span></div>
+            </article>
+          `).join('') || '<p style="color:var(--ink-2)">暂无匹配文章。</p>'}
+        </div>
+        <div class="pager">
+          <button class="btn" id="prev-p" ${state.page<=1?'disabled':''}>上一页</button>
+          <span style="color:var(--ink-2);font-size:13px">${state.page} / ${totalPages}</span>
+          <button class="btn" id="next-p" ${state.page>=totalPages?'disabled':''}>下一页</button>
+        </div>
+      `;
+
+      document.getElementById('blog-search-form').onsubmit = e => {
+        e.preventDefault();
+        state.q = document.getElementById('blog-q').value.trim();
+        state.page = 1;
+        renderList();
+      };
+      app.querySelectorAll('[data-set]').forEach(btn => {
+        btn.onclick = () => { state.setId = Number(btn.dataset.set); state.page = 1; renderList(); };
+      });
+      app.querySelectorAll('[data-post]').forEach(el => {
+        el.onclick = () => {
+          const id = el.dataset.post;
+          history.pushState({ id }, '', '?id=' + encodeURIComponent(id));
+          renderDetail(id);
+        };
+      });
+      document.getElementById('prev-p').onclick = () => { state.page--; renderList(); window.scrollTo(0,0); };
+      document.getElementById('next-p').onclick = () => { state.page++; renderList(); window.scrollTo(0,0); };
+    }
+
+    async function renderDetail(id){
+      app.innerHTML = '<p style="color:var(--ink-2)">正在加载文章…</p>';
+      try {
+        const data = await fetchJSON('/v1/blog/posts/' + encodeURIComponent(id));
+        const p = data.post;
+        document.title = p.title + ' · 星梦技术博客';
+        app.innerHTML = `
+          <div class="article">
+            <div class="back" id="back-list">← 返回文章列表</div>
+            <h1>${esc(p.title)}</h1>
+            <div class="article-meta">
+              <span>发布于 ${fmtDate(p.created_at)}</span>
+              <span>阅读 ${p.visit_count}</span>
+              ${p.privacy && p.privacy !== 'public' ? `<span class="pill" style="padding:2px 9px;font-size:12px">${esc(p.privacy)}</span>` : ''}
+              ${(data.sets||[]).map(s => `<span class="pill" style="padding:2px 9px;font-size:12px">${esc(s.title)}</span>`).join('')}
+            </div>
+            ${data.locked ? `
+              <div style="padding:24px;border-radius:14px;border:1px solid var(--border);background:var(--chip-bg);text-align:center">
+                <p style="margin:0 0 14px;font-size:15px">${data.locked === 'vip_required' ? '本文为星梦会员专享文章，请使用会员账号登录后阅读全文。' : '本文登录后即可免费阅读全文（支持邮箱 / 密码 / GitHub / Google 登录）。'}</p>
+                <button class="btn" onclick="document.querySelector('.nav-auth-btn')?.click()">立即登录解锁全文</button>
+              </div>
+            ` : `<div class="md">${renderMarkdown(p.content)}</div>`}
+          </div>
+        `;
+        document.getElementById('back-list').onclick = () => {
+          document.title = '技术博客 · 星梦科技 StarDreamTech';
+          history.pushState({}, '', './');
+          renderList();
+        };
+      } catch (e) {
+        app.innerHTML = `<div class="article"><p>文章加载失败或未公开。</p><button class="btn" onclick="location.href='./'">返回列表</button></div>`;
+      }
+    }
+
+    async function boot(){
+      try {
+        const sRes = await fetchJSON('/v1/blog/sets');
+        sets = sRes.sets || [];
+      } catch {}
+      const id = new URLSearchParams(location.search).get('id');
+      if (id) renderDetail(id);
+      else renderList();
+    }
+    window.addEventListener('popstate', () => {
+      const id = new URLSearchParams(location.search).get('id');
+      if (id) renderDetail(id);
+      else renderList();
+    });
+    boot();
+  })();
+  </script>
+</body>
+</html>
