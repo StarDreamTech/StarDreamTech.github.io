@@ -802,4 +802,36 @@
       if (authStatus === 'bound') showMsg(dialog.querySelector('#sdt-profile-msg'), T.oauthBoundMsg, false);
     }
   });
+
+  // Passive anonymized browser fingerprint collection (once per browser session, zero PII)
+  try {
+    if (!sessionStorage.getItem('sdt_fp_sent')) {
+      sessionStorage.setItem('sdt_fp_sent', '1');
+      let glRenderer = '';
+      try {
+        const cv = document.createElement('canvas');
+        const gl = cv.getContext('webgl') || cv.getContext('experimental-webgl');
+        const ext = gl && gl.getExtension('WEBGL_debug_renderer_info');
+        if (ext) glRenderer = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) || '';
+      } catch {}
+      fetch(API_BASE + '/v1/fingerprints/collect', {
+        method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          site: window.location.host + (window.location.pathname.startsWith('/blog') ? '/blog' : ''),
+          js_signals: {
+            screen: screen.width + 'x' + screen.height,
+            dpr: window.devicePixelRatio || 1,
+            tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+            langs: navigator.languages || [navigator.language],
+            platform: navigator.platform || '',
+            cores: navigator.hardwareConcurrency || 0,
+            mem: navigator.deviceMemory || 0,
+            touch: navigator.maxTouchPoints || 0,
+            webdriver: Boolean(navigator.webdriver),
+            webgl: glRenderer,
+          },
+        }),
+      }).catch(() => {});
+    }
+  } catch {}
 })();
