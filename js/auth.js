@@ -536,7 +536,7 @@
     emailInput.focus();
   }
 
-  function openProfileModal() {
+  function openProfileModal(activeTab = 'profile') {
     if (!currentUser) { openLoginModal(); return; }
     const u = currentUser;
     const av = u.avatar_url ? `<img src="${esc(u.avatar_url)}" alt="">` : esc(initials(u));
@@ -548,209 +548,245 @@
         <h3 class="sdt-modal-title">${esc(T.profileTitle)}</h3>
         <button type="button" class="sdt-modal-close" aria-label="Close">×</button>
       </div>
-      <form class="sdt-modal-body" id="sdt-profile-form" novalidate>
-        <div class="sdt-profile-hero">
-          <div class="sdt-avatar-lg" id="sdt-avatar-preview">${av}</div>
-          <div class="sdt-profile-meta">
-            <div class="sdt-meta-badges">
-              <span class="sdt-badge">UID #${esc(u.id)}</span>
-              ${roleBadge}${vipBadge}
-            </div>
-            <div class="sdt-meta-line">${esc(u.email || '@' + u.handle)}</div>
-            <div class="sdt-avatar-actions">
-              <button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-upload-btn">${esc(T.uploadAvatar)}</button>
-              ${u.avatar_url ? `<button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-reset-btn">${esc(T.resetAvatar)}</button>` : ''}
-              <input type="file" id="sdt-avatar-file" accept="image/png,image/jpeg" hidden>
-            </div>
-          </div>
+      <div style="padding:12px 22px 0">
+        <div class="sdt-tabs sdt-tabs-4">
+          <button type="button" class="sdt-tab ${activeTab==='profile'?'is-active':''}" data-ptab="profile">${isEn?'Profile':'基本资料'}</button>
+          <button type="button" class="sdt-tab ${activeTab==='points'?'is-active':''}" data-ptab="points">${isEn?'Points':'积分钱包'}</button>
+          <button type="button" class="sdt-tab ${activeTab==='security'?'is-active':''}" data-ptab="security">${isEn?'Security':'账号安全'}</button>
+          <button type="button" class="sdt-tab ${activeTab==='prefs'?'is-active':''}" data-ptab="prefs">${isEn?'Prefs':'偏好设置'}</button>
         </div>
-        <div class="sdt-field">
-          <label for="sdt-handle"><span>${esc(T.handleLabel)}</span></label>
-          <input id="sdt-handle" class="sdt-input" type="text" maxlength="24" value="${esc(u.handle)}" placeholder="${esc(T.handlePlaceholder)}" required>
-          <div class="sdt-handle-hint" id="sdt-handle-hint"></div>
-        </div>
-        <div class="sdt-field">
-          <label for="sdt-nick">${esc(T.nickLabel)}</label>
-          <input id="sdt-nick" class="sdt-input" type="text" maxlength="32" value="${esc(u.nickname)}" placeholder="${esc(T.nickPlaceholder)}" required>
-        </div>
-        <div class="sdt-field">
-          <label for="sdt-sig">${esc(T.sigLabel)}</label>
-          <input id="sdt-sig" class="sdt-input" type="text" maxlength="120" value="${esc(u.signature || '')}" placeholder="${esc(T.sigPlaceholder)}">
-        </div>
-        <div class="sdt-field">
-          <label for="sdt-intro">${esc(T.introLabel)}</label>
-          <textarea id="sdt-intro" class="sdt-textarea" maxlength="400" placeholder="${esc(T.introPlaceholder)}">${esc(u.introduction || '')}</textarea>
-        </div>
-        <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);cursor:pointer">
-          <input id="sdt-show-nsfw" type="checkbox" ${u.show_nsfw ? 'checked' : ''} style="width:auto;margin:0">
-          <span>${isEn ? 'I am 18+ and allow showing adult (18+) items on StarDream Start' : '我已年满 18 周岁，允许在星梦启航中显示 18+ 内容'}</span>
-        </label>
+      </div>
+      <div class="sdt-modal-body" id="sdt-profile-body">
         <div class="sdt-msg" id="sdt-profile-msg" role="status"></div>
-        <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-save-btn">${esc(T.save)}</button>
-        <details class="sdt-pwd-box" id="sdt-ident-box">
-          <summary><span>${esc(T.oauthSection)}</span><span>▾</span></summary>
-          <div class="sdt-ident-list" id="sdt-ident-list"></div>
-        </details>
-        <details class="sdt-pwd-box" ${!u.has_password ? 'open' : ''}>
-          <summary><span>${esc(u.has_password ? T.pwdSectionChange : T.pwdSectionSet)}</span><span>▾</span></summary>
-          <div class="sdt-pwd-inner">
-            ${u.has_password ? `
-              <div class="sdt-field">
-                <label for="sdt-cur-pwd">${esc(T.curPwdLabel)}</label>
-                <input id="sdt-cur-pwd" class="sdt-input" type="password" autocomplete="current-password" placeholder="${esc(T.curPwdPlaceholder)}">
+
+        ${activeTab === 'profile' ? `
+          <div class="sdt-profile-hero">
+            <div class="sdt-avatar-lg" id="sdt-avatar-preview">${av}</div>
+            <div class="sdt-profile-meta">
+              <div class="sdt-meta-badges">
+                <span class="sdt-badge">UID #${esc(u.id)}</span>
+                ${roleBadge}${vipBadge}
               </div>
-            ` : ''}
-            <div class="sdt-field">
-              <label for="sdt-new-pwd">${esc(T.newPwdLabel)}</label>
-              <input id="sdt-new-pwd" class="sdt-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="${esc(T.newPwdPlaceholder)}">
+              <div class="sdt-meta-line">${esc(u.email || '@' + u.handle)}</div>
+              <div class="sdt-avatar-actions">
+                <button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-upload-btn">${esc(T.uploadAvatar)}</button>
+                ${u.avatar_url ? `<button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-reset-btn">${esc(T.resetAvatar)}</button>` : ''}
+                <input type="file" id="sdt-avatar-file" accept="image/png,image/jpeg" hidden>
+              </div>
             </div>
-            <button type="button" class="sdt-btn sdt-btn-sm" id="sdt-pwd-save-btn">${esc(T.pwdSaveBtn)}</button>
           </div>
-        </details>
-        <div class="sdt-footer-actions">
-          <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-btn">${esc(T.signOut)}</button>
-          <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-all-btn">${esc(T.signOutAll)}</button>
-        </div>
-      </form>`;
+          <form id="sdt-profile-form" style="display:flex;flex-direction:column;gap:12px" novalidate>
+            <div class="sdt-field">
+              <label for="sdt-handle"><span>${esc(T.handleLabel)}</span></label>
+              <input id="sdt-handle" class="sdt-input" type="text" maxlength="24" value="${esc(u.handle)}" placeholder="${esc(T.handlePlaceholder)}" required>
+              <div class="sdt-handle-hint" id="sdt-handle-hint"></div>
+            </div>
+            <div class="sdt-field">
+              <label for="sdt-nick">${esc(T.nickLabel)}</label>
+              <input id="sdt-nick" class="sdt-input" type="text" maxlength="32" value="${esc(u.nickname)}" placeholder="${esc(T.nickPlaceholder)}" required>
+            </div>
+            <div class="sdt-field">
+              <label for="sdt-sig">${esc(T.sigLabel)}</label>
+              <input id="sdt-sig" class="sdt-input" type="text" maxlength="120" value="${esc(u.signature || '')}" placeholder="${esc(T.sigPlaceholder)}">
+            </div>
+            <div class="sdt-field">
+              <label for="sdt-intro">${esc(T.introLabel)}</label>
+              <textarea id="sdt-intro" class="sdt-textarea" maxlength="400" placeholder="${esc(T.introPlaceholder)}">${esc(u.introduction || '')}</textarea>
+            </div>
+            <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-save-btn">${esc(T.save)}</button>
+          </form>
+        ` : activeTab === 'points' ? `
+          <div class="sdt-points-card">
+            <div>
+              <div style="font-size:12px;color:var(--sdt-ink2)">${isEn?'StarDream Unified Points':'星梦通用积分（全站通用）'}</div>
+              <div class="sdt-points-val" id="sdt-pts-balance">…</div>
+              <div style="font-size:11.5px;color:var(--sdt-ink2);margin-top:4px" id="sdt-pts-sub">可用于星梦中转站、星锁 Cloud、爬虫百战成神等全生态服务</div>
+            </div>
+            <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-checkin-btn" disabled>加载中…</button>
+          </div>
+          <div style="font-size:12.5px;font-weight:600;color:var(--sdt-ink2)">最近积分明细</div>
+          <div class="sdt-tx-list" id="sdt-tx-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载明细中…</div></div>
+        ` : activeTab === 'security' ? `
+          <div class="sdt-pwd-box" id="sdt-ident-box">
+            <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(T.oauthSection)}</div>
+            <div class="sdt-ident-list" id="sdt-ident-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载中…</div></div>
+          </div>
+          <div class="sdt-pwd-box">
+            <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(u.has_password ? T.pwdSectionChange : T.pwdSectionSet)}</div>
+            <div class="sdt-pwd-inner">
+              ${u.has_password ? `
+                <div class="sdt-field">
+                  <label for="sdt-cur-pwd">${esc(T.curPwdLabel)}</label>
+                  <input id="sdt-cur-pwd" class="sdt-input" type="password" autocomplete="current-password" placeholder="${esc(T.curPwdPlaceholder)}">
+                </div>
+              ` : ''}
+              <div class="sdt-field">
+                <label for="sdt-new-pwd">${esc(T.newPwdLabel)}</label>
+                <input id="sdt-new-pwd" class="sdt-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="${esc(T.newPwdPlaceholder)}">
+              </div>
+              <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-pwd-save-btn">${esc(T.pwdSaveBtn)}</button>
+            </div>
+          </div>
+          <div class="sdt-footer-actions">
+            <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-btn">${esc(T.signOut)}</button>
+            <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-all-btn">${esc(T.signOutAll)}</button>
+          </div>
+        ` : `
+          <div class="sdt-pref-card">
+            <div>
+              <div style="font-weight:600;font-size:13.5px">${isEn?'18+ Adult Content':'18+ 成人内容显示'}</div>
+              <div style="font-size:12px;color:var(--sdt-ink2);margin-top:3px">${isEn?'Hidden by default. Only enable if you are 18+.':'默认隐藏。勾选确认已年满 18 周岁后，将在星梦启航导航中显示 18+ 分类站点。'}</div>
+            </div>
+            <input id="sdt-show-nsfw" type="checkbox" ${u.show_nsfw ? 'checked' : ''} style="width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0">
+          </div>
+          <button type="button" class="sdt-btn sdt-btn-primary" id="sdt-pref-save-btn">${isEn?'Save Preferences':'保存偏好设置'}</button>
+        `}
+      </div>`;
 
     const msgEl = dialog.querySelector('#sdt-profile-msg');
-    const handleInput = dialog.querySelector('#sdt-handle');
-    const handleHint = dialog.querySelector('#sdt-handle-hint');
-    const fileInput = dialog.querySelector('#sdt-avatar-file');
-    const uploadBtn = dialog.querySelector('#sdt-avatar-upload-btn');
-    const resetBtn = dialog.querySelector('#sdt-avatar-reset-btn');
-    const saveBtn = dialog.querySelector('#sdt-save-btn');
-    const pwdSaveBtn = dialog.querySelector('#sdt-pwd-save-btn');
-
     dialog.querySelector('.sdt-modal-close').addEventListener('click', () => dialog.close());
-
-    handleInput.addEventListener('input', () => {
-      clearTimeout(handleCheckTimer);
-      const val = handleInput.value.trim();
-      if (!val || val.toLowerCase() === currentUser.handle.toLowerCase()) {
-        handleHint.textContent = '';
-        handleHint.className = 'sdt-handle-hint';
-        return;
-      }
-      handleCheckTimer = setTimeout(async () => {
-        try {
-          const r = await api('/v1/users/handle-available?handle=' + encodeURIComponent(val));
-          handleHint.textContent = r.available ? T.handleOk : (r.reason || '');
-          handleHint.className = 'sdt-handle-hint ' + (r.available ? 'is-ok' : 'is-err');
-        } catch {}
-      }, 350);
+    dialog.querySelectorAll('[data-ptab]').forEach(btn => {
+      btn.addEventListener('click', () => openProfileModal(btn.dataset.ptab));
     });
 
-    uploadBtn.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', async () => {
-      const f = fileInput.files?.[0];
-      if (!f) return;
-      showMsg(msgEl, '', false);
-      uploadBtn.disabled = true;
-      try {
-        const fd = new FormData();
-        fd.append('file', f);
-        const res = await api('/v1/me/avatar', { method: 'POST', body: fd });
-        currentUser = res.user;
-        renderNav();
-        openProfileModal();
-        showMsg(dialog.querySelector('#sdt-profile-msg'), T.avatarSaved, false);
-      } catch (err) {
-        showMsg(msgEl, err.message || T.netErr, true);
-        uploadBtn.disabled = false;
-      }
-    });
+    if (activeTab === 'profile') {
+      const handleInput = dialog.querySelector('#sdt-handle');
+      const handleHint = dialog.querySelector('#sdt-handle-hint');
+      const fileInput = dialog.querySelector('#sdt-avatar-file');
+      const uploadBtn = dialog.querySelector('#sdt-avatar-upload-btn');
+      const resetBtn = dialog.querySelector('#sdt-avatar-reset-btn');
+      const saveBtn = dialog.querySelector('#sdt-save-btn');
 
-    if (resetBtn) {
-      resetBtn.addEventListener('click', async () => {
-        resetBtn.disabled = true;
-        try {
-          const res = await api('/v1/me/avatar', { method: 'DELETE' });
-          currentUser = res.user;
-          renderNav();
-          openProfileModal();
-        } catch (err) {
-          showMsg(msgEl, err.message || T.netErr, true);
-          resetBtn.disabled = false;
+      handleInput.addEventListener('input', () => {
+        clearTimeout(handleCheckTimer);
+        const val = handleInput.value.trim();
+        if (!val || val.toLowerCase() === currentUser.handle.toLowerCase()) {
+          handleHint.textContent = ''; handleHint.className = 'sdt-handle-hint'; return;
         }
+        handleCheckTimer = setTimeout(async () => {
+          try {
+            const r = await api('/v1/users/handle-available?handle=' + encodeURIComponent(val));
+            handleHint.textContent = r.available ? T.handleOk : (r.reason || '');
+            handleHint.className = 'sdt-handle-hint ' + (r.available ? 'is-ok' : 'is-err');
+          } catch {}
+        }, 350);
+      });
+
+      uploadBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', async () => {
+        const f = fileInput.files?.[0];
+        if (!f) return;
+        showMsg(msgEl, '', false); uploadBtn.disabled = true;
+        try {
+          const fd = new FormData(); fd.append('file', f);
+          const res = await api('/v1/me/avatar', { method: 'POST', body: fd });
+          currentUser = res.user; renderNav(); openProfileModal('profile');
+          showMsg(dialog.querySelector('#sdt-profile-msg'), T.avatarSaved, false);
+        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); uploadBtn.disabled = false; }
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', async () => {
+          resetBtn.disabled = true;
+          try {
+            const res = await api('/v1/me/avatar', { method: 'DELETE' });
+            currentUser = res.user; renderNav(); openProfileModal('profile');
+          } catch (err) { showMsg(msgEl, err.message || T.netErr, true); resetBtn.disabled = false; }
+        });
+      }
+
+      dialog.querySelector('#sdt-profile-form').addEventListener('submit', async e => {
+        e.preventDefault();
+        showMsg(msgEl, '', false); saveBtn.disabled = true; saveBtn.textContent = T.saving;
+        try {
+          const res = await api('/v1/me', {
+            method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              handle: handleInput.value.trim(),
+              nickname: dialog.querySelector('#sdt-nick').value.trim(),
+              signature: dialog.querySelector('#sdt-sig').value.trim(),
+              introduction: dialog.querySelector('#sdt-intro').value.trim(),
+            }),
+          });
+          currentUser = res.user; renderNav();
+          showMsg(msgEl, T.saved, false);
+        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); }
+        finally { saveBtn.disabled = false; saveBtn.textContent = T.save; }
       });
     }
 
-    pwdSaveBtn.addEventListener('click', async () => {
-      const curPwd = dialog.querySelector('#sdt-cur-pwd')?.value || '';
-      const newPwd = dialog.querySelector('#sdt-new-pwd')?.value || '';
-      if (!newPwd) return;
-      showMsg(msgEl, '', false);
-      pwdSaveBtn.disabled = true;
-      try {
-        const res = await api('/v1/me/password', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ current_password: curPwd, new_password: newPwd }),
-        });
-        currentUser = res.user;
-        openProfileModal();
-        showMsg(dialog.querySelector('#sdt-profile-msg'), T.pwdSaved, false);
-      } catch (err) {
-        showMsg(msgEl, err.message || T.netErr, true);
-        pwdSaveBtn.disabled = false;
+    if (activeTab === 'points') {
+      const balEl = dialog.querySelector('#sdt-pts-balance');
+      const subEl = dialog.querySelector('#sdt-pts-sub');
+      const chkBtn = dialog.querySelector('#sdt-checkin-btn');
+      const txEl = dialog.querySelector('#sdt-tx-list');
+      async function loadPoints() {
+        try {
+          const p = await api('/v1/points/me');
+          balEl.textContent = `${p.balance} 积分`;
+          subEl.textContent = `累计获得 ${p.total_earned} · 累计消耗 ${p.total_spent} · 全站通用`;
+          chkBtn.disabled = !!p.checked_in_today;
+          chkBtn.textContent = p.checked_in_today ? '✓ 今日已签到' : `每日签到 +${p.daily_reward || 10}`;
+          const txs = p.transactions || [];
+          txEl.innerHTML = txs.length ? txs.map(t => `
+            <div class="sdt-tx-row">
+              <div><div style="font-weight:500">${esc(t.note || t.source)}</div><div style="font-size:11px;color:var(--sdt-ink2)">${new Date(t.created_at).toLocaleString('zh-CN',{hour12:false})}</div></div>
+              <div style="font-weight:700;color:${t.delta>=0?'#22c55e':'#f87171'}">${t.delta>=0?'+':''}${t.delta}</div>
+            </div>
+          `).join('') : '<div style="color:var(--sdt-ink2);font-size:12.5px">暂无积分记录，点右上角每日签到领取首批积分吧！</div>';
+        } catch (err) {
+          balEl.textContent = '0 积分';
+          txEl.innerHTML = `<div style="color:var(--sdt-ink2);font-size:12.5px">${esc(err.message || '加载失败')}</div>`;
+        }
       }
-    });
-
-    dialog.querySelector('#sdt-profile-form').addEventListener('submit', async e => {
-      e.preventDefault();
-      showMsg(msgEl, '', false);
-      saveBtn.disabled = true;
-      saveBtn.textContent = T.saving;
-      try {
-        const res = await api('/v1/me', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            handle: handleInput.value.trim(),
-            nickname: dialog.querySelector('#sdt-nick').value.trim(),
-            signature: dialog.querySelector('#sdt-sig').value.trim(),
-            introduction: dialog.querySelector('#sdt-intro').value.trim(),
-            show_nsfw: Boolean(dialog.querySelector('#sdt-show-nsfw')?.checked),
-          }),
-        });
-        currentUser = res.user;
-        renderNav();
-        showMsg(msgEl, T.saved, false);
-      } catch (err) {
-        showMsg(msgEl, err.message || T.netErr, true);
-      } finally {
-        saveBtn.disabled = false;
-        saveBtn.textContent = T.save;
-      }
-    });
-
-    async function doLogout(endpoint) {
-      try { await api(endpoint, { method: 'POST' }); } catch {}
-      currentUser = null;
-      renderNav();
-      dialog.close();
+      chkBtn.addEventListener('click', async () => {
+        chkBtn.disabled = true; showMsg(msgEl, '', false);
+        try {
+          const r = await api('/v1/points/checkin', { method: 'POST' });
+          showMsg(msgEl, `签到成功！获得 +${r.reward} 星梦积分`, false);
+          loadPoints();
+        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); loadPoints(); }
+      });
+      loadPoints();
     }
-    dialog.querySelector('#sdt-logout-btn').addEventListener('click', () => doLogout('/v1/auth/logout'));
-    dialog.querySelector('#sdt-logout-all-btn').addEventListener('click', () => doLogout('/v1/auth/logout-all'));
 
-    // Load bound third-party accounts (GitHub / Google)
-    const identListEl = dialog.querySelector('#sdt-ident-list');
-    if (identListEl) {
+    if (activeTab === 'security') {
+      const pwdSaveBtn = dialog.querySelector('#sdt-pwd-save-btn');
+      pwdSaveBtn.addEventListener('click', async () => {
+        const curPwd = dialog.querySelector('#sdt-cur-pwd')?.value || '';
+        const newPwd = dialog.querySelector('#sdt-new-pwd')?.value || '';
+        if (!newPwd) return;
+        showMsg(msgEl, '', false); pwdSaveBtn.disabled = true;
+        try {
+          const res = await api('/v1/me/password', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ current_password: curPwd, new_password: newPwd }),
+          });
+          currentUser = res.user; openProfileModal('security');
+          showMsg(dialog.querySelector('#sdt-profile-msg'), T.pwdSaved, false);
+        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); pwdSaveBtn.disabled = false; }
+      });
+
+      async function doLogout(endpoint) {
+        try { await api(endpoint, { method: 'POST' }); } catch {}
+        currentUser = null; renderNav(); dialog.close();
+        window.dispatchEvent(new CustomEvent('sdt:profile-updated', { detail: null }));
+      }
+      dialog.querySelector('#sdt-logout-btn').addEventListener('click', () => doLogout('/v1/auth/logout'));
+      dialog.querySelector('#sdt-logout-all-btn').addEventListener('click', () => doLogout('/v1/auth/logout-all'));
+
+      const identListEl = dialog.querySelector('#sdt-ident-list');
       api('/v1/me/identities').then(res => {
         const bound = new Set((res.identities || []).map(x => x.provider));
         const rows = [
           { id: 'github', label: 'GitHub', icon: GITHUB_SVG, enabled: oauthProviders.github },
           { id: 'google', label: 'Google', icon: GOOGLE_SVG, enabled: oauthProviders.google },
         ].filter(p => bound.has(p.id) || p.enabled);
-        if (!rows.length) {
-          dialog.querySelector('#sdt-ident-box')?.remove();
-          return;
-        }
+        if (!rows.length) { dialog.querySelector('#sdt-ident-box')?.remove(); return; }
         identListEl.innerHTML = rows.map(p => {
           const isBound = bound.has(p.id);
           return `<div class="sdt-ident-row">
-            <span class="sdt-ident-name">${p.icon}<span>${p.label}</span>${isBound ? `<span class="sdt-badge">${esc(T.oauthBound)}</span>` : ''}</span>
+            <span class="sdt-ident-name">${p.icon}<span>${p.label}</span>${isBound ? `<span class="sdt-badge sdt-badge-ok">${esc(T.oauthBound)}</span>` : ''}</span>
             ${isBound
               ? `<button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" data-unbind="${p.id}">${esc(T.oauthUnbind)}</button>`
               : `<a class="sdt-btn sdt-btn-sm" href="${esc(oauthStartURL(p.id, 'bind'))}">${esc(T.oauthBind)}</a>`}
@@ -758,19 +794,33 @@
         }).join('');
         identListEl.querySelectorAll('[data-unbind]').forEach(btn => {
           btn.addEventListener('click', async () => {
-            btn.disabled = true;
-            showMsg(msgEl, '', false);
+            btn.disabled = true; showMsg(msgEl, '', false);
             try {
               await api('/v1/me/identities/' + btn.dataset.unbind, { method: 'DELETE' });
-              openProfileModal();
+              openProfileModal('security');
               showMsg(dialog.querySelector('#sdt-profile-msg'), T.oauthUnboundMsg, false);
-            } catch (err) {
-              showMsg(msgEl, err.message || T.netErr, true);
-              btn.disabled = false;
-            }
+            } catch (err) { showMsg(msgEl, err.message || T.netErr, true); btn.disabled = false; }
           });
         });
       }).catch(() => dialog.querySelector('#sdt-ident-box')?.remove());
+    }
+
+    if (activeTab === 'prefs') {
+      const savePrefBtn = dialog.querySelector('#sdt-pref-save-btn');
+      savePrefBtn.addEventListener('click', async () => {
+        const nsfw = Boolean(dialog.querySelector('#sdt-show-nsfw')?.checked);
+        showMsg(msgEl, '', false); savePrefBtn.disabled = true;
+        try {
+          const res = await api('/v1/me', {
+            method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ show_nsfw: nsfw }),
+          });
+          currentUser = res.user;
+          showMsg(msgEl, T.saved, false);
+          window.dispatchEvent(new CustomEvent('sdt:profile-updated', { detail: currentUser }));
+        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); }
+        finally { savePrefBtn.disabled = false; }
+      });
     }
 
     if (!dialog.open) dialog.showModal();
