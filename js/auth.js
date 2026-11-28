@@ -538,6 +538,7 @@
 
   function openProfileModal(activeTab = 'profile') {
     if (!currentUser) { openLoginModal(); return; }
+    dialog.classList.add('is-wide');
     const u = currentUser;
     const av = u.avatar_url ? `<img src="${esc(u.avatar_url)}" alt="">` : esc(initials(u));
     const vipBadge = u.vip_tier && u.vip_tier !== 'none' ? `<span class="sdt-badge">${esc(u.vip_tier.toUpperCase())}</span>` : '';
@@ -548,129 +549,117 @@
         <h3 class="sdt-modal-title">${esc(T.profileTitle)}</h3>
         <button type="button" class="sdt-modal-close" aria-label="Close">×</button>
       </div>
-      <div style="padding:12px 22px 0">
-        <div class="sdt-tabs sdt-tabs-4">
-          <button type="button" class="sdt-tab ${activeTab==='profile'?'is-active':''}" data-ptab="profile">${isEn?'Profile':'基本资料'}</button>
-          <button type="button" class="sdt-tab ${activeTab==='points'?'is-active':''}" data-ptab="points">${isEn?'Points':'积分钱包'}</button>
-          <button type="button" class="sdt-tab ${activeTab==='security'?'is-active':''}" data-ptab="security">${isEn?'Security':'账号安全'}</button>
-          <button type="button" class="sdt-tab ${activeTab==='prefs'?'is-active':''}" data-ptab="prefs">${isEn?'Prefs':'偏好设置'}</button>
-        </div>
-      </div>
-      <div class="sdt-modal-body" id="sdt-profile-body">
-        <div class="sdt-msg" id="sdt-profile-msg" role="status"></div>
+      <div class="sdt-split">
+        <aside class="sdt-side">
+          <button type="button" class="sdt-side-tab ${activeTab==='profile'?'is-active':''}" data-ptab="profile">👤 ${isEn?'Profile':'基本资料'}</button>
+          <button type="button" class="sdt-side-tab ${activeTab==='points'?'is-active':''}" data-ptab="points">💎 ${isEn?'Points':'积分钱包'}</button>
+          <button type="button" class="sdt-side-tab ${activeTab==='security'?'is-active':''}" data-ptab="security">🔐 ${isEn?'Security':'账号安全'}</button>
+          <button type="button" class="sdt-side-tab ${activeTab==='prefs'?'is-active':''}" data-ptab="prefs">⚙️ ${isEn?'Prefs':'偏好设置'}</button>
+        </aside>
+        <div class="sdt-main" id="sdt-profile-body">
+          <div class="sdt-msg" id="sdt-profile-msg" role="status"></div>
 
-        ${activeTab === 'profile' ? `
-          <div class="sdt-profile-hero">
-            <div class="sdt-avatar-lg" id="sdt-avatar-preview">${av}</div>
-            <div class="sdt-profile-meta">
-              <div class="sdt-meta-badges">
-                <span class="sdt-badge">UID #${esc(u.id)}</span>
-                ${roleBadge}${vipBadge}
-              </div>
-              <div class="sdt-meta-line">${esc(u.email || '@' + u.handle)}</div>
-              <div class="sdt-avatar-actions">
-                <button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-upload-btn">${esc(T.uploadAvatar)}</button>
-                ${u.avatar_url ? `<button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-reset-btn">${esc(T.resetAvatar)}</button>` : ''}
-                <input type="file" id="sdt-avatar-file" accept="image/png,image/jpeg" hidden>
-              </div>
-            </div>
-          </div>
-          <form id="sdt-profile-form" style="display:flex;flex-direction:column;gap:12px" novalidate>
-            <div class="sdt-field">
-              <label for="sdt-handle"><span>${esc(T.handleLabel)}</span></label>
-              <input id="sdt-handle" class="sdt-input" type="text" maxlength="24" value="${esc(u.handle)}" placeholder="${esc(T.handlePlaceholder)}" required>
-              <div class="sdt-handle-hint" id="sdt-handle-hint"></div>
-            </div>
-            <div class="sdt-field">
-              <label for="sdt-nick">${esc(T.nickLabel)}</label>
-              <input id="sdt-nick" class="sdt-input" type="text" maxlength="32" value="${esc(u.nickname)}" placeholder="${esc(T.nickPlaceholder)}" required>
-            </div>
-            <div class="sdt-field">
-              <label for="sdt-sig">${esc(T.sigLabel)}</label>
-              <input id="sdt-sig" class="sdt-input" type="text" maxlength="120" value="${esc(u.signature || '')}" placeholder="${esc(T.sigPlaceholder)}">
-            </div>
-            <div class="sdt-field">
-              <label for="sdt-intro">${esc(T.introLabel)}</label>
-              <textarea id="sdt-intro" class="sdt-textarea" maxlength="400" placeholder="${esc(T.introPlaceholder)}">${esc(u.introduction || '')}</textarea>
-            </div>
-            <button type="submit" class="sdt-btn sdt-btn-primary" id="sdt-save-btn">${esc(T.save)}</button>
-          </form>
-        ` : activeTab === 'points' ? `
-          <div class="sdt-points-card">
-            <div>
-              <div style="font-size:12px;color:var(--sdt-ink2)">${isEn?'StarDream Unified Points':'星梦通用积分（全站通用）'}</div>
-              <div class="sdt-points-val" id="sdt-pts-balance">…</div>
-              <div style="font-size:11.5px;color:var(--sdt-ink2);margin-top:4px" id="sdt-pts-sub">可用于星梦中转站、星锁 Cloud、爬虫百战成神等全生态服务</div>
-            </div>
-            <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-checkin-btn" disabled>加载中…</button>
-          </div>
-          <div style="font-size:12.5px;font-weight:600;color:var(--sdt-ink2)">最近积分明细</div>
-          <div class="sdt-tx-list" id="sdt-tx-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载明细中…</div></div>
-        ` : activeTab === 'security' ? `
-          <div class="sdt-pwd-box" id="sdt-ident-box">
-            <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(T.oauthSection)}</div>
-            <div class="sdt-ident-list" id="sdt-ident-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载中…</div></div>
-          </div>
-          <div class="sdt-pwd-box">
-            <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(u.has_password ? T.pwdSectionChange : T.pwdSectionSet)}</div>
-            <div class="sdt-pwd-inner">
-              ${u.has_password ? `
-                <div class="sdt-field">
-                  <label for="sdt-cur-pwd">${esc(T.curPwdLabel)}</label>
-                  <input id="sdt-cur-pwd" class="sdt-input" type="password" autocomplete="current-password" placeholder="${esc(T.curPwdPlaceholder)}">
+          ${activeTab === 'profile' ? `
+            <div class="sdt-profile-hero">
+              <div class="sdt-avatar-lg" id="sdt-avatar-preview">${av}</div>
+              <div class="sdt-profile-meta">
+                <div class="sdt-meta-badges">
+                  <span class="sdt-badge">UID #${esc(u.id)}</span>
+                  ${roleBadge}${vipBadge}
                 </div>
-              ` : ''}
-              <div class="sdt-field">
-                <label for="sdt-new-pwd">${esc(T.newPwdLabel)}</label>
-                <input id="sdt-new-pwd" class="sdt-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="${esc(T.newPwdPlaceholder)}">
+                <div class="sdt-meta-line">${esc(u.email || '@' + u.handle)}</div>
+                <div class="sdt-avatar-actions">
+                  <button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-upload-btn">${esc(T.uploadAvatar)}</button>
+                  ${u.avatar_url ? `<button type="button" class="sdt-btn sdt-btn-sm" id="sdt-avatar-reset-btn">${esc(T.resetAvatar)}</button>` : ''}
+                  <input type="file" id="sdt-avatar-file" accept="image/png,image/jpeg" hidden>
+                </div>
               </div>
-              <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-pwd-save-btn">${esc(T.pwdSaveBtn)}</button>
             </div>
-          </div>
-          <div class="sdt-footer-actions">
-            <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-btn">${esc(T.signOut)}</button>
-            <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-all-btn">${esc(T.signOutAll)}</button>
-          </div>
-        ` : `
-          <div class="sdt-pref-card">
-            <div>
-              <div style="font-weight:600;font-size:13.5px">${isEn?'18+ Adult Content':'18+ 成人内容显示'}</div>
-              <div style="font-size:12px;color:var(--sdt-ink2);margin-top:3px">${isEn?'Hidden by default. Only enable if you are 18+.':'默认隐藏。勾选确认已年满 18 周岁后，将在星梦启航导航中显示 18+ 分类站点。'}</div>
+            <div style="display:flex;flex-direction:column;gap:10px" id="sdt-inline-fields">
+              ${[
+                { key: 'handle', label: T.handleLabel, val: u.handle, prefix: '@', max: 24, ph: T.handlePlaceholder },
+                { key: 'nickname', label: T.nickLabel, val: u.nickname, max: 32, ph: T.nickPlaceholder },
+                { key: 'signature', label: T.sigLabel, val: u.signature || '', max: 120, ph: T.sigPlaceholder },
+                { key: 'introduction', label: T.introLabel, val: u.introduction || '', max: 400, ph: T.introPlaceholder, area: true },
+              ].map(f => `
+                <div class="sdt-info-row" data-field-box="${f.key}">
+                  <div style="flex:1;min-width:0">
+                    <div class="sdt-info-label">${esc(f.label)}</div>
+                    <div class="sdt-info-val" data-view="${f.key}">${f.val ? esc((f.prefix||'') + f.val) : '<span style="color:var(--sdt-ink2);font-weight:400">未设置</span>'}</div>
+                    <div data-editor="${f.key}" style="display:none;margin-top:6px">
+                      ${f.area
+                        ? `<textarea class="sdt-textarea" data-inp="${f.key}" maxlength="${f.max}" placeholder="${esc(f.ph)}">${esc(f.val)}</textarea>`
+                        : `<input class="sdt-input" data-inp="${f.key}" type="text" maxlength="${f.max}" value="${esc(f.val)}" placeholder="${esc(f.ph)}">`}
+                      ${f.key==='handle' ? '<div class="sdt-handle-hint" id="sdt-handle-hint" style="margin-top:4px"></div>' : ''}
+                      <div style="display:flex;gap:8px;margin-top:8px">
+                        <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" data-save-field="${f.key}">${isEn?'Save':'保存'}</button>
+                        <button type="button" class="sdt-btn sdt-btn-sm" data-cancel-field="${f.key}">${isEn?'Cancel':'取消'}</button>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="sdt-edit-btn" data-edit-field="${f.key}">${isEn?'Edit':'编辑'}</button>
+                </div>
+              `).join('')}
             </div>
-            <input id="sdt-show-nsfw" type="checkbox" ${u.show_nsfw ? 'checked' : ''} style="width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0">
-          </div>
-          <button type="button" class="sdt-btn sdt-btn-primary" id="sdt-pref-save-btn">${isEn?'Save Preferences':'保存偏好设置'}</button>
-        `}
+          ` : activeTab === 'points' ? `
+            <div class="sdt-points-card">
+              <div>
+                <div style="font-size:12px;color:var(--sdt-ink2)">${isEn?'StarDream Unified Points':'星梦通用积分（全站通用）'}</div>
+                <div class="sdt-points-val" id="sdt-pts-balance">…</div>
+                <div style="font-size:11.5px;color:var(--sdt-ink2);margin-top:4px" id="sdt-pts-sub">可用于星门中转站、星锁 Cloud、爬虫百战成神等全生态服务</div>
+              </div>
+              <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-checkin-btn" disabled>加载中…</button>
+            </div>
+            <div style="font-size:12.5px;font-weight:600;color:var(--sdt-ink2)">最近积分明细</div>
+            <div class="sdt-tx-list" id="sdt-tx-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载明细中…</div></div>
+          ` : activeTab === 'security' ? `
+            <div class="sdt-pwd-box" id="sdt-ident-box">
+              <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(T.oauthSection)}</div>
+              <div class="sdt-ident-list" id="sdt-ident-list"><div style="color:var(--sdt-ink2);font-size:12.5px">加载中…</div></div>
+            </div>
+            <div class="sdt-pwd-box">
+              <div style="font-size:13.5px;font-weight:600;margin-bottom:10px">${esc(u.has_password ? T.pwdSectionChange : T.pwdSectionSet)}</div>
+              <div class="sdt-pwd-inner">
+                ${u.has_password ? `
+                  <div class="sdt-field">
+                    <label for="sdt-cur-pwd">${esc(T.curPwdLabel)}</label>
+                    <input id="sdt-cur-pwd" class="sdt-input" type="password" autocomplete="current-password" placeholder="${esc(T.curPwdPlaceholder)}">
+                  </div>
+                ` : ''}
+                <div class="sdt-field">
+                  <label for="sdt-new-pwd">${esc(T.newPwdLabel)}</label>
+                  <input id="sdt-new-pwd" class="sdt-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="${esc(T.newPwdPlaceholder)}">
+                </div>
+                <button type="button" class="sdt-btn sdt-btn-primary sdt-btn-sm" id="sdt-pwd-save-btn">${esc(T.pwdSaveBtn)}</button>
+              </div>
+            </div>
+            <div class="sdt-footer-actions">
+              <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-btn">${esc(T.signOut)}</button>
+              <button type="button" class="sdt-btn sdt-btn-sm sdt-btn-danger" id="sdt-logout-all-btn">${esc(T.signOutAll)}</button>
+            </div>
+          ` : `
+            <div class="sdt-pref-card">
+              <div>
+                <div style="font-weight:600;font-size:13.5px">${isEn?'18+ Adult Content':'18+ 成人内容显示'}</div>
+                <div style="font-size:12px;color:var(--sdt-ink2);margin-top:3px">${isEn?'Hidden by default. Only enable if you are 18+.':'默认隐藏。勾选确认已年满 18 周岁后，将在星梦启航导航中显示 18+ 分类站点。'}</div>
+              </div>
+              <input id="sdt-show-nsfw" type="checkbox" ${u.show_nsfw ? 'checked' : ''} style="width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0">
+            </div>
+            <button type="button" class="sdt-btn sdt-btn-primary" id="sdt-pref-save-btn">${isEn?'Save Preferences':'保存偏好设置'}</button>
+          `}
+        </div>
       </div>`;
 
     const msgEl = dialog.querySelector('#sdt-profile-msg');
-    dialog.querySelector('.sdt-modal-close').addEventListener('click', () => dialog.close());
+    dialog.querySelector('.sdt-modal-close').addEventListener('click', () => { dialog.classList.remove('is-wide'); dialog.close(); });
     dialog.querySelectorAll('[data-ptab]').forEach(btn => {
       btn.addEventListener('click', () => openProfileModal(btn.dataset.ptab));
     });
 
     if (activeTab === 'profile') {
-      const handleInput = dialog.querySelector('#sdt-handle');
-      const handleHint = dialog.querySelector('#sdt-handle-hint');
       const fileInput = dialog.querySelector('#sdt-avatar-file');
       const uploadBtn = dialog.querySelector('#sdt-avatar-upload-btn');
       const resetBtn = dialog.querySelector('#sdt-avatar-reset-btn');
-      const saveBtn = dialog.querySelector('#sdt-save-btn');
-
-      handleInput.addEventListener('input', () => {
-        clearTimeout(handleCheckTimer);
-        const val = handleInput.value.trim();
-        if (!val || val.toLowerCase() === currentUser.handle.toLowerCase()) {
-          handleHint.textContent = ''; handleHint.className = 'sdt-handle-hint'; return;
-        }
-        handleCheckTimer = setTimeout(async () => {
-          try {
-            const r = await api('/v1/users/handle-available?handle=' + encodeURIComponent(val));
-            handleHint.textContent = r.available ? T.handleOk : (r.reason || '');
-            handleHint.className = 'sdt-handle-hint ' + (r.available ? 'is-ok' : 'is-err');
-          } catch {}
-        }, 350);
-      });
 
       uploadBtn.addEventListener('click', () => fileInput.click());
       fileInput.addEventListener('change', async () => {
@@ -695,23 +684,64 @@
         });
       }
 
-      dialog.querySelector('#sdt-profile-form').addEventListener('submit', async e => {
-        e.preventDefault();
-        showMsg(msgEl, '', false); saveBtn.disabled = true; saveBtn.textContent = T.saving;
-        try {
-          const res = await api('/v1/me', {
-            method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              handle: handleInput.value.trim(),
-              nickname: dialog.querySelector('#sdt-nick').value.trim(),
-              signature: dialog.querySelector('#sdt-sig').value.trim(),
-              introduction: dialog.querySelector('#sdt-intro').value.trim(),
-            }),
+      dialog.querySelectorAll('[data-edit-field]').forEach(btn => {
+        const k = btn.dataset.editField;
+        const box = dialog.querySelector(`[data-field-box="${k}"]`);
+        const view = box.querySelector(`[data-view="${k}"]`);
+        const editor = box.querySelector(`[data-editor="${k}"]`);
+        const inp = box.querySelector(`[data-inp="${k}"]`);
+        const saveBtn = box.querySelector(`[data-save-field="${k}"]`);
+        const cancelBtn = box.querySelector(`[data-cancel-field="${k}"]`);
+
+        btn.addEventListener('click', () => {
+          view.style.display = 'none';
+          btn.style.display = 'none';
+          editor.style.display = 'block';
+          inp.focus();
+        });
+        cancelBtn.addEventListener('click', () => {
+          editor.style.display = 'none';
+          view.style.display = '';
+          btn.style.display = '';
+        });
+
+        if (k === 'handle') {
+          const handleHint = box.querySelector('#sdt-handle-hint');
+          inp.addEventListener('input', () => {
+            clearTimeout(handleCheckTimer);
+            const val = inp.value.trim();
+            if (!val || val.toLowerCase() === currentUser.handle.toLowerCase()) {
+              handleHint.textContent = ''; handleHint.className = 'sdt-handle-hint'; return;
+            }
+            handleHint.textContent = '正在检测可用性…';
+            handleHint.className = 'sdt-handle-hint';
+            handleCheckTimer = setTimeout(async () => {
+              try {
+                const r = await api('/v1/users/handle-available?handle=' + encodeURIComponent(val));
+                handleHint.textContent = r.available ? ('✓ ' + T.handleOk) : ('✕ ' + (r.reason || '不可用'));
+                handleHint.className = 'sdt-handle-hint ' + (r.available ? 'is-ok' : 'is-err');
+              } catch {}
+            }, 300);
           });
-          currentUser = res.user; renderNav();
-          showMsg(msgEl, T.saved, false);
-        } catch (err) { showMsg(msgEl, err.message || T.netErr, true); }
-        finally { saveBtn.disabled = false; saveBtn.textContent = T.save; }
+        }
+
+        saveBtn.addEventListener('click', async () => {
+          const val = inp.value.trim();
+          showMsg(msgEl, '', false); saveBtn.disabled = true;
+          try {
+            const payload = {};
+            payload[k] = val;
+            const res = await api('/v1/me', {
+              method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            currentUser = res.user; renderNav(); openProfileModal('profile');
+            showMsg(dialog.querySelector('#sdt-profile-msg'), T.saved, false);
+          } catch (err) {
+            showMsg(msgEl, err.message || T.netErr, true);
+            saveBtn.disabled = false;
+          }
+        });
       });
     }
 
